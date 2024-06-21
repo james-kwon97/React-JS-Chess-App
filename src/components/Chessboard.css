@@ -4,10 +4,17 @@
   grid-template-rows: repeat(8, 100px);
   width: 800px;
   height: 800px;
-  background-color: lightpink;
 }
 
 #chessboard .tile {
   width: 100px;
   height: 100px;
+}
+
+#chessboard .black-tile {
+  background-color: lightgray;
+}
+
+#chessboard .white-tile {
+  background-color: #fffff7;
 }
