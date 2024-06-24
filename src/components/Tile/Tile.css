@@ -1,4 +1,6 @@
 .tile {
+  display: grid;
+  place-content: center;
   width: 80px;
   height: 80px;
 }
@@ -9,4 +11,8 @@
 
 .white-tile {
   background-color: #fffff7;
+}
+
+.tile .chess-piece-image {
+  width: 60px;
 }
