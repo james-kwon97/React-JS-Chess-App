@@ -60,6 +60,12 @@ function movePiece(e: React.MouseEvent) {
   }
 }
 
+function dropPiece(e: React.MouseEvent) {
+  if (activePiece) {
+    activePiece = null
+  }
+}
+
 export default function Chessboard() {
   let board = []
 
@@ -81,6 +87,7 @@ export default function Chessboard() {
     <div
       onMouseMove={(e) => movePiece(e)}
       onMouseDown={(e) => grabPiece(e)}
+      onMouseUp={(e) => dropPiece(e)}
       id="chessboard"
     >
       {board}
