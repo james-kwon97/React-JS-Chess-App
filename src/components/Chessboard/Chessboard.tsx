@@ -33,6 +33,19 @@ for (let i = 0; i < 8; i++)
 for (let i = 0; i < 8; i++)
   pieces.push({ image: 'assets/images/whitepawn.png', x: i, y: 1 })
 
+function grabPiece(e: React.MouseEvent) {
+  const element = e.target as HTMLElement
+  if (element.classList.contains('chess-piece')) {
+    console.log(e)
+
+    const x = e.clientX - 40
+    const y = e.clientY - 40
+    element.style.position = 'absolute'
+    element.style.left = `${x}px`
+    element.style.top = `${y}px`
+  }
+}
+
 export default function Chessboard() {
   let board = []
 
@@ -50,5 +63,9 @@ export default function Chessboard() {
       board.push(<Tile key={`${j},${i}`} image={image} number={number} />)
     }
   }
-  return <div id="chessboard">{board}</div>
+  return (
+    <div onMouseDown={(e) => grabPiece(e)} id="chessboard">
+      {board}
+    </div>
+  )
 }
