@@ -56,16 +56,31 @@ export default function Chessboard() {
     if (activePiece && chessboard) {
       const minX = chessboard.offsetLeft - 20
       const minY = chessboard.offsetTop - 20
-
+      const maxX = chessboard.offsetLeft + chessboard.clientWidth - 60
+      const maxY = chessboard.offsetTop + chessboard.clientHeight - 60
       const x = e.clientX - 40
       const y = e.clientY - 40
       activePiece.style.position = 'absolute'
       // activePiece.style.left = `${x}px`
       // activePiece.style.top = `${y}px`
+      if (x < minX) {
+        activePiece.style.left = `${minX}px`
+      } else if (x > maxX) {
+        activePiece.style.left = `${maxX}px`
+      } else {
+        activePiece.style.left = `${x}px`
+      }
 
-      activePiece.style.left = x < minX ? `${minX}px` : `${x}px`
+      if (y < minY) {
+        activePiece.style.top = `${minY}px`
+      } else if (y > maxY) {
+        activePiece.style.top = `${maxY}px`
+      } else {
+        activePiece.style.top = `${y}px`
+      }
+      // activePiece.style.left = x < minX ? `${minX}px` : `${x}px`
 
-      activePiece.style.top = y < minY ? `${minY}px` : `${y}px`
+      // activePiece.style.top = y < minY ? `${minY}px` : `${y}px`
     }
   }
 
