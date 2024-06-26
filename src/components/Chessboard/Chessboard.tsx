@@ -34,15 +34,13 @@ for (let i = 0; i < 8; i++)
   pieces.push({ image: 'assets/images/whitepawn.png', x: i, y: 1 })
 
 export default function Chessboard() {
-  const chessboardRef = useRef(null)
+  const chessboardRef = useRef<HTMLDivElement>(null)
 
   let activePiece: HTMLElement | null = null
 
   function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement
     if (element.classList.contains('chess-piece')) {
-      console.log(e)
-
       const x = e.clientX - 40
       const y = e.clientY - 40
       element.style.position = 'absolute'
@@ -54,12 +52,21 @@ export default function Chessboard() {
   }
 
   function movePiece(e: React.MouseEvent) {
-    if (activePiece) {
+    const chessboard = chessboardRef.current
+    if (activePiece && chessboard) {
+      const minX = chessboard.offsetLeft - 20
+      const minY = chessboard.offsetTop
       const x = e.clientX - 40
       const y = e.clientY - 40
       activePiece.style.position = 'absolute'
-      activePiece.style.left = `${x}px`
-      activePiece.style.top = `${y}px`
+      // activePiece.style.left = `${x}px`
+      // activePiece.style.top = `${y}px`
+
+      if (x < minX) {
+        activePiece.style.left = `${minX}px`
+      } else {
+        activePiece.style.left = `${x}px`
+      }
     }
   }
 
