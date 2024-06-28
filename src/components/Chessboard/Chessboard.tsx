@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './Chessboard.css'
 import Tile from '../Tile/Tile'
 
@@ -36,6 +36,8 @@ for (let i = 0; i < 8; i++) {
 }
 
 export default function Chessboard() {
+  const [gridX, setGridX] = useState(0)
+  const [gridY, setGridY] = useState(0)
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   const chessboardRef = useRef<HTMLDivElement>(null)
 
@@ -43,7 +45,15 @@ export default function Chessboard() {
 
   function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement
-    if (element.classList.contains('chess-piece')) {
+    const chessboard = chessboardRef.current
+    if (element.classList.contains('chess-piece') && chessboard) {
+      const gridX = Math.floor((e.clientX - chessboard.offsetLeft) / 80)
+      const gridY = Math.abs(
+        Math.ceil((e.clientY - chessboard.offsetTop - 640) / 80)
+      )
+      setGridX(gridX)
+      setGridY(gridY)
+
       const x = e.clientX - 40
       const y = e.clientY - 40
       element.style.position = 'absolute'
@@ -99,7 +109,7 @@ export default function Chessboard() {
 
       setPieces((value) => {
         const pieces = value.map((p) => {
-          if (p.x === 1 && p.y === 0) {
+          if (p.x === gridX && p.y === gridY) {
             p.x = x
             p.y = y
           }
