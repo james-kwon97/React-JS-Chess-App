@@ -90,9 +90,19 @@ export default function Chessboard() {
   }
 
   function dropPiece(e: React.MouseEvent) {
-    if (activePiece) {
+    const chessboard = chessboardRef.current
+    if (activePiece && chessboard) {
+      const x = Math.floor((e.clientX - chessboard.offsetLeft) / 80)
+      const y = Math.abs(
+        Math.ceil((e.clientY - chessboard.offsetTop - 640) / 80)
+      )
+
       setPieces((value) => {
         const pieces = value.map((p) => {
+          if (p.x === 1 && p.y === 0) {
+            p.x = x
+            p.y = y
+          }
           return p
         })
         return pieces
