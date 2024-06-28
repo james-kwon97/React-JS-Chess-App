@@ -36,12 +36,11 @@ for (let i = 0; i < 8; i++) {
 }
 
 export default function Chessboard() {
+  const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
   const [gridX, setGridX] = useState(0)
   const [gridY, setGridY] = useState(0)
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   const chessboardRef = useRef<HTMLDivElement>(null)
-
-  let activePiece: HTMLElement | null = null
 
   function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement
@@ -60,7 +59,7 @@ export default function Chessboard() {
       element.style.left = `${x}px`
       element.style.top = `${y}px`
 
-      activePiece = element
+      setActivePiece(element)
     }
   }
 
@@ -117,7 +116,7 @@ export default function Chessboard() {
         })
         return pieces
       })
-      activePiece = null
+      setActivePiece(null)
     }
   }
 
