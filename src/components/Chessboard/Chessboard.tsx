@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './Chessboard.css'
 import Tile from '../Tile/Tile'
+import Referee from '../../Referee/Referee'
 
 const verticalAxis = ['1', '2', '3', '4', '5', '6', '7', '8']
 const horizontalAxis = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
@@ -41,6 +42,7 @@ export default function Chessboard() {
   const [gridY, setGridY] = useState(0)
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   const chessboardRef = useRef<HTMLDivElement>(null)
+  const referee = new Referee()
 
   function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement
@@ -105,6 +107,7 @@ export default function Chessboard() {
       const y = Math.abs(
         Math.ceil((e.clientY - chessboard.offsetTop - 640) / 80)
       )
+      referee.isValidMove()
 
       setPieces((value) => {
         const pieces = value.map((p) => {
