@@ -12,6 +12,15 @@ interface Piece {
   y: number
 }
 
+export enum PieceType {
+  PAWN,
+  BISHOP,
+  KNIGHT,
+  ROOK,
+  QUEEN,
+  KING,
+}
+
 const initialBoardState: Piece[] = []
 
 for (let p = 0; p < 2; p++) {
