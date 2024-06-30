@@ -11,6 +11,12 @@ interface Piece {
   x: number
   y: number
   type: PieceType
+  team: TeamType
+}
+
+export enum TeamType {
+  OPPONENT,
+  OUR,
 }
 
 export enum PieceType {
@@ -25,56 +31,65 @@ export enum PieceType {
 const initialBoardState: Piece[] = []
 
 for (let p = 0; p < 2; p++) {
-  const type = p === 0 ? 'black' : 'white'
-  const y = p === 0 ? 7 : 0
+  const teamType = p === 0 ? TeamType.OPPONENT : TeamType.OUR
+  const type = teamType === TeamType.OPPONENT ? 'black' : 'white'
+  const y = teamType === TeamType.OPPONENT ? 7 : 0
 
   initialBoardState.push({
     image: `assets/images/${type}rook.png`,
     x: 0,
     y,
     type: PieceType.ROOK,
+    team: teamType,
   })
   initialBoardState.push({
     image: `assets/images/${type}rook.png`,
     x: 7,
     y,
     type: PieceType.ROOK,
+    team: teamType,
   })
   initialBoardState.push({
     image: `assets/images/${type}knight.png`,
     x: 1,
     y,
     type: PieceType.KNIGHT,
+    team: teamType,
   })
   initialBoardState.push({
     image: `assets/images/${type}knight.png`,
     x: 6,
     y,
     type: PieceType.KNIGHT,
+    team: teamType,
   })
   initialBoardState.push({
     image: `assets/images/${type}bishop.png`,
     x: 2,
     y,
     type: PieceType.BISHOP,
+    team: teamType,
   })
   initialBoardState.push({
     image: `assets/images/${type}bishop.png`,
     x: 5,
     y,
     type: PieceType.BISHOP,
+    team: teamType,
   })
   initialBoardState.push({
     image: `assets/images/${type}queen.png`,
     x: 3,
     y,
     type: PieceType.QUEEN,
+    team: teamType,
   })
   initialBoardState.push({
     image: `assets/images/${type}king.png`,
     x: 4,
     y,
     type: PieceType.KING,
+    team: teamType,
   })
 }
 
@@ -84,6 +99,7 @@ for (let i = 0; i < 8; i++) {
     x: i,
     y: 6,
     type: PieceType.PAWN,
+    team: TeamType.OPPONENT,
   })
 }
 
@@ -93,6 +109,7 @@ for (let i = 0; i < 8; i++) {
     x: i,
     y: 1,
     type: PieceType.PAWN,
+    team: TeamType.OUR,
   })
 }
 
@@ -172,7 +189,7 @@ export default function Chessboard() {
       setPieces((value) => {
         const pieces = value.map((p) => {
           if (p.x === gridX && p.y === gridY) {
-            referee.isValidMove(gridX, gridY, x, y, p.type)
+            referee.isValidMove(gridX, gridY, x, y, p.type, p.team)
             p.x = x
             p.y = y
           }
