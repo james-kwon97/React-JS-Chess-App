@@ -28,6 +28,7 @@ export default class Referee {
       const specialRow = team === TeamType.OUR ? 1 : 6
       const pawnDirection = team === TeamType.OUR ? 1 : -1
 
+      // PAWN MOVEMENT LOGIC
       if (px === x && py === specialRow && y - py === 2 * pawnDirection) {
         if (
           !this.isTileOccupied(x, y, boardState) &&
@@ -39,6 +40,14 @@ export default class Referee {
         if (!this.isTileOccupied(x, y, boardState)) {
           return true
         }
+      }
+      // PAWN ATTACK LOGIC
+      else if (x - px === -1 && y - py === pawnDirection) {
+        //PAWN ATTACK IN THE UPPER OR BOTTOM LEFT CORNER
+        console.log('Upper/ bottom left corner')
+      } else if (x - px === 1 && y - py === pawnDirection) {
+        // PAWN ATTACK IN THE UPPER OR BOTTOM RIGHT CORNER
+        console.log('Upper/ lower right corner')
       }
     }
 
