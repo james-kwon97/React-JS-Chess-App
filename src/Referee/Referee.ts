@@ -25,45 +25,19 @@ export default class Referee {
     console.log(`Team: ${team}`)
 
     if (type === PieceType.PAWN) {
-      if (team === TeamType.OUR) {
-        if (py === 1) {
-          if (px === x && y - py === 1) {
-            if (!this.isTileOccupied(x, y, boardState)) {
-              return true
-            }
-          } else if (px === x && y - py === 2) {
-            if (
-              !this.isTileOccupied(x, y, boardState) &&
-              !this.isTileOccupied(x, y - 1, boardState)
-            ) {
-              return true
-            }
-          }
-        } else {
-          if (px === x && y - py === 1) {
-            if (!this.isTileOccupied(x, y, boardState)) {
-              return true
-            }
-          }
+      const specialRow = team === TeamType.OUR ? 1 : 6
+      const pawnDirection = team === TeamType.OUR ? 1 : -1
+
+      if (px === x && py === specialRow && y - py === 2 * pawnDirection) {
+        if (
+          !this.isTileOccupied(x, y, boardState) &&
+          !this.isTileOccupied(x, y - pawnDirection, boardState)
+        ) {
+          return true
         }
-      } else {
-        if (py === 6) {
-          if (px === x && y - py === -1) {
-            if (!this.isTileOccupied(x, y, boardState)) {
-              return true
-          } else if (px === x && y - py === -2) {
-            if (!this.isTileOccupied(x, y, boardState) && !this.isTileOccupied(x, y+1, boardState)){
-              return true
-            }
-     
-          }
-        } else {
-          if (px === x && y - py === -1) {
-            if (!this.isTileOccupied(x,y,boardState)) {
-              return true
-            }
-          
-          }
+      } else if (px === x && y - py === pawnDirection) {
+        if (!this.isTileOccupied(x, y, boardState)) {
+          return true
         }
       }
     }
