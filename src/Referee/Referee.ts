@@ -48,12 +48,21 @@ export default class Referee {
         }
       } else {
         if (py === 6) {
-          if (px === x && (y - py === -1 || y - py === -2)) {
-            return true
+          if (px === x && y - py === -1) {
+            if (!this.isTileOccupied(x, y, boardState)) {
+              return true
+          } else if (px === x && y - py === -2) {
+            if (!this.isTileOccupied(x, y, boardState) && !this.isTileOccupied(x, y+1, boardState)){
+              return true
+            }
+     
           }
         } else {
           if (px === x && y - py === -1) {
-            return true
+            if (!this.isTileOccupied(x,y,boardState)) {
+              return true
+            }
+          
           }
         }
       }
