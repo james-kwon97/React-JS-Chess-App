@@ -27,11 +27,17 @@ export default class Referee {
     if (type === PieceType.PAWN) {
       if (team === TeamType.OUR) {
         if (py === 1) {
-          if (px === x && (y - py === 1 || y - py === 2)) {
+          if (px === x && y - py === 1) {
             if (!this.isTileOccupied(x, y, boardState)) {
               return true
             }
-            return true
+          } else if (px === x && y - py === 2) {
+            if (
+              !this.isTileOccupied(x, y, boardState) &&
+              !this.isTileOccupied(x, y - 1, boardState)
+            ) {
+              return true
+            }
           }
         } else {
           if (px === x && y - py === 1) {
