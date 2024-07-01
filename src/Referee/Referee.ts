@@ -9,7 +9,7 @@ export default class Referee {
     type: PieceType,
     team: TeamType
   ) {
-    console.log('Referee is checking  the move..')
+    console.log('Referee is checking the move..')
     console.log(`Previous location: (${px},${py})`)
     console.log(`Current location: (${x},${y})`)
     console.log(`Piece Type: ${type}`)
@@ -19,14 +19,26 @@ export default class Referee {
       if (team === TeamType.OUR) {
         if (py === 1) {
           if (px === x && (y - py === 1 || y - py === 2)) {
-            console.log('Valid Move!')
             return true
           }
         } else {
-          if (px === x && y - py === 1) return true
+          if (px === x && y - py === 1) {
+            return true
+          }
+        }
+      } else {
+        if (py === 6) {
+          if (px === x && (y - py === -1 || y - py === -2)) {
+            return true
+          }
+        } else {
+          if (px === x && y - py === -1) {
+            return true
+          }
         }
       }
-      return false
     }
+
+    return false
   }
 }
