@@ -2,7 +2,12 @@ import { PieceType, TeamType, Piece } from '../components/Chessboard/Chessboard'
 
 export default class Referee {
   isTileOccupied(x: number, y: number, boardState: Piece[]): boolean {
-    return true
+    console.log('Checking if the tile is occupied')
+
+    const piece = boardState.find((p) => p.x === x && p.y === y)
+    if (piece) {
+      return true
+    } else return false
   }
   isValidMove(
     px: number,
