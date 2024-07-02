@@ -191,17 +191,26 @@ export default function Chessboard() {
       console.log(currentPiece)
       console.log(attackedPiece)
 
-      // if (currentPiece) {
-      //   const validMove = referee.isValidMove(
-      //     gridX,
-      //     gridY,
-      //     x,
-      //     y,
-      //     currentPiece.type,
-      //     currentPiece.team,
-      //     pieces
-      //   )
-      // }
+      if (currentPiece) {
+        const validMove = referee.isValidMove(
+          gridX,
+          gridY,
+          x,
+          y,
+          currentPiece.type,
+          currentPiece.team,
+          pieces
+        )
+
+        setPieces((value) => {
+          const pieces = value.reduce((results, piece) => {
+            results.push(piece)
+
+            return results
+          }, [] as Piece[])
+          return pieces
+        })
+      }
       // UPDATES THE PIECE POSITION
       setPieces((value) => {
         const pieces = value.map((p) => {
