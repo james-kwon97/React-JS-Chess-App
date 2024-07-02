@@ -202,10 +202,14 @@ export default function Chessboard() {
           pieces
         )
         const isEnPassantMove = referee.isEnPassantMove(
+          gridX,
+          gridY,
           x,
           y,
-          pieces,
-          currentPiece.team
+
+          currentPiece.type,
+          currentPiece.team,
+          pieces
         )
 
         if (validMove) {

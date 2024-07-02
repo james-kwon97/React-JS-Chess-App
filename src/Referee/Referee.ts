@@ -23,19 +23,34 @@ export default class Referee {
     return false
   }
 
-  isEnPassantMove(x: number, y: number, boardState: Piece[], team: TeamType) {
-    const pieceDirection = team === TeamType.OUR ? 1 : -1
+  isEnPassantMove(
+    px: number,
+    py: number,
+    x: number,
+    y: number,
+    type: PieceType,
+    team: TeamType,
+    boardState: Piece[]
+  ) {
+    const pawnDirection = team === TeamType.OUR ? 1 : -1
 
+    if (type === PieceType.PAWN) {
+      if (x - px === -1 && y - py === pawnDirection) {
+        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
+          return true
+        }
+      } else if (x - px === 1 && y - py === pawnDirection) {
+        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
+          return true
+        }
+      }
+    }
+    // IF THE ATTACKING PIECE IS A PAWN
     // UPPER LEFT / UPPER RIGHT || BOTTOM LEFT / BOTTOM RIGHT ATTACK
     // IF A PIECE IS UNDER OR ABOVE THE ATTACKED TILE
     // IF THE ATTACKED PIECE HAS MADE AN EN PASSANT MOVE IN THE PREVIOUS MOVE
-    const piece = boardState.find(
-      (p) => p.x === x && p.y === y + pieceDirection
-    )
-    if (piece) {
-      console.log('En Passant')
-    } else {
-    }
+    const piece = boardState.find((p) => p.x === x && p.y === y + pawnDirection)
+    return false
   }
 
   isValidMove(
