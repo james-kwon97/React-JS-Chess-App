@@ -185,6 +185,23 @@ export default function Chessboard() {
         Math.ceil((e.clientY - chessboard.offsetTop - 640) / 80)
       )
 
+      const currentPiece = pieces.find((p) => p.x === gridX && p.y === gridY)
+      const attackedPiece = pieces.find((p) => p.x === x && p.y === y)
+
+      console.log(currentPiece)
+      console.log(attackedPiece)
+
+      // if (currentPiece) {
+      //   const validMove = referee.isValidMove(
+      //     gridX,
+      //     gridY,
+      //     x,
+      //     y,
+      //     currentPiece.type,
+      //     currentPiece.team,
+      //     pieces
+      //   )
+      // }
       // UPDATES THE PIECE POSITION
       setPieces((value) => {
         const pieces = value.map((p) => {
