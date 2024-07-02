@@ -23,6 +23,21 @@ export default class Referee {
     return false
   }
 
+  isEnPassantMove(x: number, y: number, boardState: Piece[], team: TeamType) {
+    const pieceDirection = team === TeamType.OUR ? 1 : -1
+
+    // UPPER LEFT / UPPER RIGHT || BOTTOM LEFT / BOTTOM RIGHT ATTACK
+    // IF A PIECE IS UNDER OR ABOVE THE ATTACKED TILE
+    // IF THE ATTACKED PIECE HAS MADE AN EN PASSANT MOVE IN THE PREVIOUS MOVE
+    const piece = boardState.find(
+      (p) => p.x === x && p.y === y + pieceDirection
+    )
+    if (piece) {
+      console.log('En Passant')
+    } else {
+    }
+  }
+
   isValidMove(
     px: number,
     py: number,
