@@ -2,13 +2,27 @@ import { PieceType, TeamType, Piece } from '../components/Chessboard/Chessboard'
 
 export default class Referee {
   isTileOccupied(x: number, y: number, boardState: Piece[]): boolean {
-    console.log('Checking if the tile is occupied')
-
     const piece = boardState.find((p) => p.x === x && p.y === y)
     if (piece) {
       return true
     } else return false
   }
+
+  TileIsOccupiedByOpponent(
+    x: number,
+    y: number,
+    boardState: Piece[],
+    team: TeamType
+  ): boolean {
+    const piece = boardState.find(
+      (p) => p.x === x && p.y === y && p.team !== team
+    )
+    if (piece) {
+      return true
+    }
+    return false
+  }
+
   isValidMove(
     px: number,
     py: number,
@@ -45,12 +59,18 @@ export default class Referee {
       else if (x - px === -1 && y - py === pawnDirection) {
         //PAWN ATTACK IN THE UPPER OR BOTTOM LEFT CORNER
         console.log('Upper/ bottom left corner')
+        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
+          return true
+        }
       } else if (x - px === 1 && y - py === pawnDirection) {
         // PAWN ATTACK IN THE UPPER OR BOTTOM RIGHT CORNER
         console.log('Upper/ lower right corner')
+        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
+          return true
+        }
       }
-    }
 
-    return false
+      return false
+    }
   }
 }
