@@ -201,44 +201,45 @@ export default function Chessboard() {
           currentPiece.team,
           pieces
         )
-
-        setPieces((value) => {
-          const pieces = value.reduce((results, piece) => {
-            results.push(piece)
+        if (validMove) {
+          // UPDATES THE PIECE POSITION
+          // AND IF A PIECE IS ATTACKED, REMOVES IT
+          const updatedPieces = pieces.reduce((results, piece) => {
+            if (piece.x === currentPiece.x && piece.y === currentPiece.y) {
+              piece.x = x
+              piece.y = y
+              results.push(piece)
+            } else if (!(piece.x === x && piece.y === y)) {
+              results.push(piece)
+            }
 
             return results
           }, [] as Piece[])
-          return pieces
-        })
-      }
-      // UPDATES THE PIECE POSITION
-      setPieces((value) => {
-        const pieces = value.map((p) => {
-          if (p.x === gridX && p.y === gridY) {
-            const validMove = referee.isValidMove(
-              gridX,
-              gridY,
-              x,
-              y,
-              p.type,
-              p.team,
-              value
-            )
+          setPieces(updatedPieces)
 
-            if (validMove) {
-              p.x = x
-              p.y = y
-            } else {
-              activePiece.style.position = 'relative'
-              activePiece.style.removeProperty('top')
-              activePiece.style.removeProperty('left')
-            }
-          }
-          return p
-        })
-        return pieces
-      })
-      setActivePiece(null)
+          // setPieces((value) => {
+          //   const pieces = value.reduce((results, piece) => {
+          //     if (piece.x === currentPiece.x && piece.y === currentPiece.y) {
+          //       piece.x = x
+          //       piece.y = y
+          //       results.push(piece)
+          //     } else if (!(piece.x === x && piece.y === y)) {
+          //       results.push(piece)
+          //     }
+
+          //     return results
+          //   }, [] as Piece[])
+          //   return pieces
+          // })
+        } else {
+          // RESETS THE PIECE POSITION
+          activePiece.style.position = 'relative'
+          activePiece.style.removeProperty('top')
+          activePiece.style.removeProperty('left')
+        }
+
+        setActivePiece(null)
+      }
     }
   }
 
