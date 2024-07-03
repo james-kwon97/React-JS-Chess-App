@@ -36,13 +36,16 @@ export default class Referee {
 
     if (type === PieceType.PAWN) {
       if ((x - px === -1 || x - px === 1) && y - py === pawnDirection) {
+        const piece = boardState.find(
+          (p) => p.x === x && p.y === y - pawnDirection
+        )
+        console.log(piece)
       }
     }
     // IF THE ATTACKING PIECE IS A PAWN
     // UPPER LEFT / UPPER RIGHT || BOTTOM LEFT / BOTTOM RIGHT ATTACK
     // IF A PIECE IS UNDER OR ABOVE THE ATTACKED TILE
     // IF THE ATTACKED PIECE HAS MADE AN EN PASSANT MOVE IN THE PREVIOUS MOVE
-    const piece = boardState.find((p) => p.x === x && p.y === y + pawnDirection)
     return false
   }
 
