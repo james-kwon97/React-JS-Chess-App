@@ -35,14 +35,7 @@ export default class Referee {
     const pawnDirection = team === TeamType.OUR ? 1 : -1
 
     if (type === PieceType.PAWN) {
-      if (x - px === -1 && y - py === pawnDirection) {
-        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
-          return true
-        }
-      } else if (x - px === 1 && y - py === pawnDirection) {
-        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
-          return true
-        }
+      if ((x - px === -1 || x - px === 1) && y - py === pawnDirection) {
       }
     }
     // IF THE ATTACKING PIECE IS A PAWN
