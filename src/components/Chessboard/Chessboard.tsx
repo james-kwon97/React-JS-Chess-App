@@ -211,8 +211,25 @@ export default function Chessboard() {
           currentPiece.team,
           pieces
         )
+        const pawnDirection = currentPiece.team === TeamType.OUR ? 1 : -1
 
-        if (validMove) {
+        if (isEnPassantMove) {
+          const updatedPieces = pieces.reduce((results, piece) => {
+            if (piece.x === gridX && piece.y === gridY) {
+              piece.enPassant = false
+              piece.x = x
+              piece.y = y
+              results.push(piece)
+            } else if (!(piece.x === x && piece.y === y - pawnDirection)) {
+              if (piece.type === PieceType.PAWN) {
+                piece.enPassant = false
+              }
+              results.push(piece)
+            }
+            return results
+          }, [] as Piece[])
+          setPieces(updatedPieces)
+        } else if (validMove) {
           // UPDATES THE PIECE POSITION
           // AND IF A PIECE IS ATTACKED, REMOVES IT
           const updatedPieces = pieces.reduce((results, piece) => {

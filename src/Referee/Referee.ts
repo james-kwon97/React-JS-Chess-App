@@ -39,7 +39,9 @@ export default class Referee {
         const piece = boardState.find(
           (p) => p.x === x && p.y === y - pawnDirection && p.enPassant
         )
-        console.log(piece)
+        if (piece) {
+          return true
+        }
       }
     }
     // IF THE ATTACKING PIECE IS A PAWN
