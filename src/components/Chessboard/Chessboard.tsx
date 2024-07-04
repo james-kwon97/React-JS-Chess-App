@@ -2,30 +2,13 @@ import React, { useRef, useState } from 'react'
 import './Chessboard.css'
 import Tile from '../Tile/Tile'
 import Referee from '../../Referee/Referee'
-import { verticalAxis, horizontalAxis } from '../../Constants'
-
-export interface Piece {
-  image: string
-  x: number
-  y: number
-  type: PieceType
-  team: TeamType
-  enPassant?: boolean
-}
-
-export enum TeamType {
-  OPPONENT,
-  OUR,
-}
-
-export enum PieceType {
-  PAWN,
-  BISHOP,
-  KNIGHT,
-  ROOK,
-  QUEEN,
-  KING,
-}
+import {
+  verticalAxis,
+  horizontalAxis,
+  Piece,
+  TeamType,
+  PieceType,
+} from '../../Constants'
 
 const initialBoardState: Piece[] = []
 
