@@ -12,6 +12,7 @@ export interface Piece {
   y: number
   type: PieceType
   team: TeamType
+  enPassant?: boolean
 }
 
 export enum TeamType {
@@ -206,7 +207,6 @@ export default function Chessboard() {
           gridY,
           x,
           y,
-
           currentPiece.type,
           currentPiece.team,
           pieces
@@ -217,10 +217,20 @@ export default function Chessboard() {
           // AND IF A PIECE IS ATTACKED, REMOVES IT
           const updatedPieces = pieces.reduce((results, piece) => {
             if (piece.x === gridX && piece.y === gridY) {
+              if (Math.abs(gridY - y) === 2 && piece.type === PieceType.PAWN) {
+                // SPECIAL MOVE
+
+                piece.enPassant = true
+              } else {
+                piece.enPassant = false
+              }
               piece.x = x
               piece.y = y
               results.push(piece)
             } else if (!(piece.x === x && piece.y === y)) {
+              if (piece.type === PieceType.PAWN) {
+                piece.enPassant = false
+              }
               results.push(piece)
             }
 
