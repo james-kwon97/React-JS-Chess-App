@@ -14,8 +14,7 @@ import {
 
 export default function Chessboard() {
   const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
-  const [grabPosition, setGrabPosition] = useState<Position | null>(null)
-  const [gridY, setGridY] = useState(0)
+  const [grabPosition, setGrabPosition] = useState<Position>({ x: -1, y: -1 })
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   const chessboardRef = useRef<HTMLDivElement>(null)
   const referee = new Referee()
@@ -24,12 +23,14 @@ export default function Chessboard() {
     const element = e.target as HTMLElement
     const chessboard = chessboardRef.current
     if (element.classList.contains('chess-piece') && chessboard) {
-      const gridX = Math.floor((e.clientX - chessboard.offsetLeft) / 80)
-      const gridY = Math.abs(
+      const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / 80)
+      const grabY = Math.abs(
         Math.ceil((e.clientY - chessboard.offsetTop - 640) / 80)
       )
-      setGridX(gridX)
-      setGridY(gridY)
+      setGrabPosition({
+        x: grabX,
+        y: grabY,
+      })
 
       const x = e.clientX - 40
       const y = e.clientY - 40
@@ -85,7 +86,8 @@ export default function Chessboard() {
       )
 
       const currentPiece = pieces.find(
-        (p) => p.position.x === gridX && p.position.y === gridY
+        (p) =>
+          p.position.x === grabPosition.x && p.position.y === grabPosition.y
       )
       const attackedPiece = pieces.find(
         (p) => p.position.x === x && p.position.y === y
@@ -96,8 +98,8 @@ export default function Chessboard() {
 
       if (currentPiece) {
         const validMove = referee.isValidMove(
-          gridX,
-          gridY,
+          grabPosition.x,
+          grabPosition.y,
           x,
           y,
           currentPiece.type,
@@ -105,8 +107,8 @@ export default function Chessboard() {
           pieces
         )
         const isEnPassantMove = referee.isEnPassantMove(
-          gridX,
-          gridY,
+          grabPosition.x,
+          grabPosition.y,
           x,
           y,
           currentPiece.type,
@@ -117,7 +119,10 @@ export default function Chessboard() {
 
         if (isEnPassantMove) {
           const updatedPieces = pieces.reduce((results, piece) => {
-            if (piece.position.x === gridX && piece.position.y === gridY) {
+            if (
+              piece.position.x === grabPosition.x &&
+              piece.position.y === grabPosition.y
+            ) {
               piece.enPassant = false
               piece.position.x = x
               piece.position.y = y
@@ -139,8 +144,14 @@ export default function Chessboard() {
           // UPDATES THE PIECE POSITION
           // AND IF A PIECE IS ATTACKED, REMOVES IT
           const updatedPieces = pieces.reduce((results, piece) => {
-            if (piece.position.x === gridX && piece.position.y === gridY) {
-              if (Math.abs(gridY - y) === 2 && piece.type === PieceType.PAWN) {
+            if (
+              piece.position.x === grabPosition.x &&
+              piece.position.y === grabPosition.y
+            ) {
+              if (
+                Math.abs(grabPosition.y - y) === 2 &&
+                piece.type === PieceType.PAWN
+              ) {
                 // SPECIAL MOVE
 
                 piece.enPassant = true
