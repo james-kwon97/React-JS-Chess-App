@@ -24,17 +24,17 @@ export default function Chessboard() {
     const element = e.target as HTMLElement
     const chessboard = chessboardRef.current
     if (element.classList.contains('chess-piece') && chessboard) {
-      const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / 80)
+      const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / GRID_SIZE)
       const grabY = Math.abs(
-        Math.ceil((e.clientY - chessboard.offsetTop - 640) / 80)
+        Math.ceil((e.clientY - chessboard.offsetTop - 640) / GRID_SIZE)
       )
       setGrabPosition({
         x: grabX,
         y: grabY,
       })
 
-      const x = e.clientX - 40
-      const y = e.clientY - 40
+      const x = e.clientX - GRID_SIZE / 2
+      const y = e.clientY - GRID_SIZE / 2
       element.style.position = 'absolute'
       element.style.left = `${x}px`
       element.style.top = `${y}px`
@@ -186,16 +186,11 @@ export default function Chessboard() {
 
   let board = []
 
-  for (let j = verticalAxis.length - 1; j >= 0; j--) {
-    for (let i = 0; i < horizontalAxis.length; i++) {
+  for (let j = VERTICAL_AXIS.length - 1; j >= 0; j--) {
+    for (let i = 0; i < HORIZONTAL_AXIS.length; i++) {
       const number = j + i + 2
-      let image = undefined
-
-      pieces.forEach((p) => {
-        if (p.position.x === i && p.position.y === j) {
-          image = p.image
-        }
-      })
+      const piece = pieces.find((p) => p.position.x === i && p.position.y === j)
+      let image = piece ? piece.image : undefined
 
       board.push(<Tile key={`${j},${i}`} image={image} number={number} />)
     }
