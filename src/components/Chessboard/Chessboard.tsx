@@ -11,6 +11,7 @@ import {
   PieceType,
   initialBoardState,
   Position,
+  samePosition,
 } from '../../Constants'
 
 export default function Chessboard() {
