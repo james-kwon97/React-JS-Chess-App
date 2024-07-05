@@ -9,11 +9,12 @@ import {
   TeamType,
   PieceType,
   initialBoardState,
+  Position,
 } from '../../Constants'
 
 export default function Chessboard() {
   const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
-  const [gridX, setGridX] = useState(0)
+  const [grabPosition, setGrabPosition] = useState<Position | null>(null)
   const [gridY, setGridY] = useState(0)
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   const chessboardRef = useRef<HTMLDivElement>(null)
