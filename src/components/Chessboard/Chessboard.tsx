@@ -3,8 +3,9 @@ import './Chessboard.css'
 import Tile from '../Tile/Tile'
 import Referee from '../../Referee/Referee'
 import {
-  verticalAxis,
-  horizontalAxis,
+  VERTICAL_AXIS,
+  HORIZONTAL_AXIS,
+  GRID_SIZE,
   Piece,
   TeamType,
   PieceType,
