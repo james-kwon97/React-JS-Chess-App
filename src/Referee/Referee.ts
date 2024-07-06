@@ -10,7 +10,7 @@ export default class Referee {
     } else return false
   }
 
-  TileIsOccupiedByOpponent(
+  tileIsOccupiedByOpponent(
     x: number,
     y: number,
     boardState: Piece[],
@@ -103,7 +103,7 @@ export default class Referee {
         //PAWN ATTACK IN THE UPPER OR BOTTOM LEFT CORNER
         console.log('Upper/ bottom left corner')
         if (
-          this.TileIsOccupiedByOpponent(
+          this.tileIsOccupiedByOpponent(
             desiredPosition.x,
             desiredPosition.y,
             boardState,
