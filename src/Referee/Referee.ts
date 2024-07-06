@@ -119,7 +119,7 @@ export default class Referee {
         // PAWN ATTACK IN THE UPPER OR BOTTOM RIGHT CORNER
         console.log('Upper/ lower right corner')
         if (
-          this.TileIsOccupiedByOpponent(
+          this.tileIsOccupiedByOpponent(
             desiredPosition.x,
             desiredPosition.y,
             boardState,
