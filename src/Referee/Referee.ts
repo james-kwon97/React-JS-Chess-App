@@ -1,4 +1,4 @@
-import { PieceType, TeamType, Piece } from '../Constants'
+import { PieceType, TeamType, Piece, Position } from '../Constants'
 
 export default class Referee {
   isTileOccupied(x: number, y: number, boardState: Piece[]): boolean {
@@ -35,11 +35,15 @@ export default class Referee {
     const pawnDirection = team === TeamType.OUR ? 1 : -1
 
     if (type === PieceType.PAWN) {
-      if ((x - px === -1 || x - px === 1) && y - py === pawnDirection) {
+      if (
+        (desiredPosition.x - initialPosition.x === -1 ||
+          desiredPosition.x - initialPosition.x === 1) &&
+        desiredPosition.y - initialPosition.y === pawnDirection
+      ) {
         const piece = boardState.find(
           (p) =>
-            p.position.x === x &&
-            p.position.y === y - pawnDirection &&
+            p.position.x === desiredPosition.x &&
+            p.position.y === desiredPosition.y - pawnDirection &&
             p.enPassant
         )
         if (piece) {
@@ -57,40 +61,71 @@ export default class Referee {
     team: TeamType,
     boardState: Piece[]
   ) {
-    console.log('Referee is checking the move..')
-    console.log(`Previous location: (${px},${py})`)
-    console.log(`Current location: (${x},${y})`)
-    console.log(`Piece Type: ${type}`)
-    console.log(`Team: ${team}`)
-
     if (type === PieceType.PAWN) {
       const specialRow = team === TeamType.OUR ? 1 : 6
       const pawnDirection = team === TeamType.OUR ? 1 : -1
 
       // PAWN MOVEMENT LOGIC
-      if (px === x && py === specialRow && y - py === 2 * pawnDirection) {
+      if (
+        initialPosition.x === desiredPosition.x &&
+        initialPosition.y === specialRow &&
+        desiredPosition.y - initialPosition.y === 2 * pawnDirection
+      ) {
         if (
-          !this.isTileOccupied(x, y, boardState) &&
-          !this.isTileOccupied(x, y - pawnDirection, boardState)
+          !this.isTileOccupied(
+            desiredPosition.x,
+            desiredPosition.y,
+            boardState
+          ) &&
+          !this.isTileOccupied(
+            desiredPosition.x,
+            desiredPosition.y - pawnDirection,
+            boardState
+          )
         ) {
           return true
         }
-      } else if (px === x && y - py === pawnDirection) {
-        if (!this.isTileOccupied(x, y, boardState)) {
+      } else if (
+        initialPosition.x === desiredPosition.x &&
+        desiredPosition.y - initialPosition.y === pawnDirection
+      ) {
+        if (
+          !this.isTileOccupied(desiredPosition.x, desiredPosition.y, boardState)
+        ) {
           return true
         }
       }
       // PAWN ATTACK LOGIC
-      else if (x - px === -1 && y - py === pawnDirection) {
+      else if (
+        desiredPosition.x - initialPosition.x === -1 &&
+        desiredPosition.y - initialPosition.y === pawnDirection
+      ) {
         //PAWN ATTACK IN THE UPPER OR BOTTOM LEFT CORNER
         console.log('Upper/ bottom left corner')
-        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
+        if (
+          this.TileIsOccupiedByOpponent(
+            desiredPosition.x,
+            desiredPosition.y,
+            boardState,
+            team
+          )
+        ) {
           return true
         }
-      } else if (x - px === 1 && y - py === pawnDirection) {
+      } else if (
+        desiredPosition.x - initialPosition.x === 1 &&
+        desiredPosition.y - initialPosition.y === pawnDirection
+      ) {
         // PAWN ATTACK IN THE UPPER OR BOTTOM RIGHT CORNER
         console.log('Upper/ lower right corner')
-        if (this.TileIsOccupiedByOpponent(x, y, boardState, team)) {
+        if (
+          this.TileIsOccupiedByOpponent(
+            desiredPosition.x,
+            desiredPosition.y,
+            boardState,
+            team
+          )
+        ) {
           return true
         }
       }

@@ -204,13 +204,13 @@ export const initialBoardState: Piece[] = [
   },
   {
     image: `assets/images/white-knight.png`,
-    position: { x: 6, y: 7 },
+    position: { x: 6, y: 0 },
     type: PieceType.KNIGHT,
     team: TeamType.OUR,
   },
   {
     image: `assets/images/white-rook.png`,
-    position: { x: 7, y: 7 },
+    position: { x: 7, y: 0 },
     type: PieceType.ROOK,
     team: TeamType.OUR,
   },
