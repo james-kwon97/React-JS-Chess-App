@@ -26,10 +26,8 @@ export default class Referee {
   }
 
   isEnPassantMove(
-    px: number,
-    py: number,
-    x: number,
-    y: number,
+    initialPosition: Position,
+    desiredPosition: Position,
     type: PieceType,
     team: TeamType,
     boardState: Piece[]
@@ -53,10 +51,8 @@ export default class Referee {
   }
 
   isValidMove(
-    px: number,
-    py: number,
-    x: number,
-    y: number,
+    initialPosition: Position,
+    desiredPosition: Position,
     type: PieceType,
     team: TeamType,
     boardState: Piece[]
