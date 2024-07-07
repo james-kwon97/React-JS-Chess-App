@@ -163,6 +163,16 @@ export default class Referee {
           console.log('Bottom right knight movement')
         }
       }
+
+      // LEFT LINE
+      if (desiredPosition.x - initialPosition.x === -2) {
+        if (desiredPosition.y - initialPosition.y === 1) {
+          console.log('Left top knight movement')
+        }
+        if (desiredPosition.y - initialPosition.y === -1) {
+          console.log('Left bottom knight movement')
+        }
+      }
     }
     return false
   }
