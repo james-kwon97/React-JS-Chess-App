@@ -136,24 +136,34 @@ export default class Referee {
 
       //TOP LINE
       if (desiredPosition.y - initialPosition.y === 2) {
-        if(desiredPosition.x - initialPosition.x === -1) {
+        if (desiredPosition.x - initialPosition.x === -1) {
           console.log('Top left knight movement')
         }
-        if(desiredPosition.x - initialPosition.x === 1) {
+        if (desiredPosition.x - initialPosition.x === 1) {
           console.log('Top right knight movement')
         }
       }
 
       // RIGHT LINE
-      if(desiredPosition.x - initialPosition.x ===2 ) {
-        if(desiredPosition.y-initialPosition.y === 1) {
+      if (desiredPosition.x - initialPosition.x === 2) {
+        if (desiredPosition.y - initialPosition.y === 1) {
           console.log('Right top knight movement')
         }
-        if(desiredPosition.y - initialPosition.y === -1) {
+        if (desiredPosition.y - initialPosition.y === -1) {
           console.log('Right bottom knight movement')
         }
       }
-      
+
+      // BOTTOM LINE
+      if (desiredPosition.y - initialPosition.y === -2) {
+        if (desiredPosition.x - initialPosition.x === -1) {
+          console.log('Bottom left knight movement')
+        }
+        if (desiredPosition.x - initialPosition.x === 1) {
+          console.log('Bottom right knight movement')
+        }
+      }
+    }
     return false
   }
 }
