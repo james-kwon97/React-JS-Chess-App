@@ -134,46 +134,28 @@ export default class Referee {
       // MOVING LOGIC FOR THE KNIGHT
       // 8 different moving patterns
 
-      //TOP LINE
-      if (desiredPosition.y - initialPosition.y === 2) {
-        if (desiredPosition.x - initialPosition.x === -1) {
-          console.log('Top left knight movement')
+      for (let i = -1; i < 2; i += 2) {
+        // TOP/BOTTOM LINE
+        if (desiredPosition.y - initialPosition.y === 2 * i) {
+          if (desiredPosition.x - initialPosition.x === -1) {
+            console.log('Top/bottom left knight movement')
+          }
+          if (desiredPosition.x - initialPosition.x === 1) {
+            console.log('Top/bottom right knight movement')
+          }
         }
-        if (desiredPosition.x - initialPosition.x === 1) {
-          console.log('Top right knight movement')
-        }
-      }
-
-      // RIGHT LINE
-      if (desiredPosition.x - initialPosition.x === 2) {
-        if (desiredPosition.y - initialPosition.y === 1) {
-          console.log('Right top knight movement')
-        }
-        if (desiredPosition.y - initialPosition.y === -1) {
-          console.log('Right bottom knight movement')
-        }
-      }
-
-      // BOTTOM LINE
-      if (desiredPosition.y - initialPosition.y === -2) {
-        if (desiredPosition.x - initialPosition.x === -1) {
-          console.log('Bottom left knight movement')
-        }
-        if (desiredPosition.x - initialPosition.x === 1) {
-          console.log('Bottom right knight movement')
-        }
-      }
-
-      // LEFT LINE
-      if (desiredPosition.x - initialPosition.x === -2) {
-        if (desiredPosition.y - initialPosition.y === 1) {
-          console.log('Left top knight movement')
-        }
-        if (desiredPosition.y - initialPosition.y === -1) {
-          console.log('Left bottom knight movement')
+        // RIGHT/LEFT LINE
+        if (desiredPosition.x - initialPosition.x === 2 * i) {
+          if (desiredPosition.y - initialPosition.y === 1) {
+            console.log('Right/left top knight movement')
+          }
+          if (desiredPosition.y - initialPosition.y === -1) {
+            console.log('Right/left bottom knight movement')
+          }
         }
       }
     }
+
     return false
   }
 }
