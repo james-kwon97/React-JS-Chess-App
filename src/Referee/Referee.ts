@@ -135,22 +135,19 @@ export default class Referee {
       // 8 different moving patterns
 
       for (let i = -1; i < 2; i += 2) {
-        // TOP/BOTTOM LINE
-        if (desiredPosition.y - initialPosition.y === 2 * i) {
-          if (desiredPosition.x - initialPosition.x === -1) {
-            console.log('Top/bottom left knight movement')
+        for (let j = -1; j < 2; j += 2) {
+          // TOP AND BOTTOM SIDE MOVEMENT
+          if (desiredPosition.y - initialPosition.y === 2 * i) {
+            if (desiredPosition.x - initialPosition.x === j) {
+              console.log('Top/bottom left/right knight movement')
+            }
           }
-          if (desiredPosition.x - initialPosition.x === 1) {
-            console.log('Top/bottom right knight movement')
-          }
-        }
-        // RIGHT/LEFT LINE
-        if (desiredPosition.x - initialPosition.x === 2 * i) {
-          if (desiredPosition.y - initialPosition.y === 1) {
-            console.log('Right/left top knight movement')
-          }
-          if (desiredPosition.y - initialPosition.y === -1) {
-            console.log('Right/left bottom knight movement')
+
+          // LEFT AND RIGHT SIDE MOVEMENT
+          if (desiredPosition.x - initialPosition.x === 2 * i) {
+            if (desiredPosition.y - initialPosition.y === j) {
+              console.log('Right/left top/bottom knight movement')
+            }
           }
         }
       }
