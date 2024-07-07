@@ -129,8 +129,29 @@ export default class Referee {
           return true
         }
       }
+    } else if (type === PieceType.KNIGHT) {
+      console.log('Knight')
+      // MOVING LOGIC FOR THE KNIGHT
+      // 8 different moving patterns
 
-      return false
-    }
+      //TOP LINE
+      if (desiredPosition.y - initialPosition.y === 2) {
+        if(desiredPosition.x - initialPosition.x === -1) {
+          console.log('Upper left knight movement')
+        }
+        if(desiredPosition.x - initialPosition.x === 1) {
+          console.log('Upper right knight movement')
+        }
+      }
+
+      // RIGHT LINE
+      // if(desiredPosition.x - initialPosition.x ===2 ) {
+      //   if(desiredPosition.y-initialPosition.y === -1) {
+      //     console.log('Bottom right knight movement')
+      //   }
+      //   if
+      // }
+      
+    return false
   }
 }
