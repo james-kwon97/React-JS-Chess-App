@@ -85,8 +85,8 @@ export default class Referee {
         desiredPosition.y - initialPosition.y === 2 * pawnDirection
       ) {
         if (
-          !this.isTileOccupied(desiredPosition, boardState) &&
-          !this.isTileOccupied(
+          !this.tileIsOccupied(desiredPosition, boardState) &&
+          !this.tileIsOccupied(
             { x: desiredPosition.x, y: desiredPosition.y - pawnDirection },
             boardState
           )
@@ -128,7 +128,7 @@ export default class Referee {
           if (desiredPosition.y - initialPosition.y === 2 * i) {
             if (desiredPosition.x - initialPosition.x === j) {
               if (
-                !this.tileIsEmptyOrOccupiedByOpponent(
+                this.tileIsEmptyOrOccupiedByOpponent(
                   desiredPosition,
                   boardState,
                   team
@@ -136,20 +136,26 @@ export default class Referee {
               ) {
                 return true
               }
-              console.log('Top/bottom left/right knight movement')
             }
           }
 
           // LEFT AND RIGHT SIDE MOVEMENT
           if (desiredPosition.x - initialPosition.x === 2 * i) {
             if (desiredPosition.y - initialPosition.y === j) {
-              console.log('Right/left top/bottom knight movement')
+              if (
+                this.tileIsEmptyOrOccupiedByOpponent(
+                  desiredPosition,
+                  boardState,
+                  team
+                )
+              ) {
+                return true
+              }
             }
           }
         }
       }
     }
-
     return false
   }
 }
