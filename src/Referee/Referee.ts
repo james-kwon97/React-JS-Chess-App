@@ -178,6 +178,17 @@ export default class Referee {
           break
         }
       }
+
+      // BOTTOM LEFT MOVEMENT
+      for (let i = 1; i < 8; i++) {
+        if (
+          desiredPosition.x - initialPosition.x === -i &&
+          desiredPosition.y - initialPosition.y === -i
+        ) {
+          console.log(`Moving down right ${i} squares`)
+          break
+        }
+      }
     }
     return false
   }
