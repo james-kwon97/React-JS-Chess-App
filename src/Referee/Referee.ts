@@ -168,6 +168,18 @@ export default class Referee {
           break
         }
       }
+
+      // UP LEFT MOVEMENT
+      for (let i = 1; i < 8; i++) {
+        if (
+          desiredPosition.x - initialPosition.x === -i &&
+          desiredPosition.y - initialPosition.y === i
+        ) {
+          console.log(`Moving up left ${i} squares`)
+          break
+        }
+      }
+
       // BOTTOM RIGHT MOVEMENT
       for (let i = 1; i < 8; i++) {
         if (
@@ -185,7 +197,7 @@ export default class Referee {
           desiredPosition.x - initialPosition.x === -i &&
           desiredPosition.y - initialPosition.y === -i
         ) {
-          console.log(`Moving down right ${i} squares`)
+          console.log(`Moving down left ${i} squares`)
           break
         }
       }
