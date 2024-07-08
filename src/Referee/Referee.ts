@@ -164,6 +164,16 @@ export default class Referee {
         desiredPosition.y - initialPosition.y === 1
       ) {
         console.log('Trying to move to the up right position')
+      } else if (
+        desiredPosition.x - initialPosition.x === 2 &&
+        desiredPosition.y - initialPosition.y === 2
+      ) {
+        console.log('Trying to move 2 tiles')
+      } else if (
+        desiredPosition.x - initialPosition.x === 3 &&
+        desiredPosition.y - initialPosition.y === 3
+      ) {
+        console.log('Trying to move 3 tiles')
       }
     }
     return false
