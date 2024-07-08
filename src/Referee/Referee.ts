@@ -159,21 +159,13 @@ export default class Referee {
       // MOVEMENT AND ATTACK LOGIC FOR THE BISHOP
 
       // UP RIGHT MOVEMENT
-      if (
-        desiredPosition.x - initialPosition.x === 1 &&
-        desiredPosition.y - initialPosition.y === 1
-      ) {
-        console.log('Trying to move to the up right position')
-      } else if (
-        desiredPosition.x - initialPosition.x === 2 &&
-        desiredPosition.y - initialPosition.y === 2
-      ) {
-        console.log('Trying to move 2 tiles')
-      } else if (
-        desiredPosition.x - initialPosition.x === 3 &&
-        desiredPosition.y - initialPosition.y === 3
-      ) {
-        console.log('Trying to move 3 tiles')
+      for (let i = 0; i < 8; i++) {
+        if (
+          desiredPosition.x - initialPosition.x === i &&
+          desiredPosition.y - initialPosition.y === i
+        ) {
+          console.log(`Moving ${i} squares`)
+        }
       }
     }
     return false
