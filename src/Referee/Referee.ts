@@ -160,12 +160,21 @@ export default class Referee {
 
       // UP RIGHT MOVEMENT
       for (let i = 1; i < 8; i++) {
-        console.log('Looping through the array!')
         if (
           desiredPosition.x - initialPosition.x === i &&
           desiredPosition.y - initialPosition.y === i
         ) {
-          console.log(`Moving ${i} squares`)
+          console.log(`Moving up right ${i} squares`)
+          break
+        }
+      }
+      // BOTTOM RIGHT MOVEMENT
+      for (let i = 1; i < 8; i++) {
+        if (
+          desiredPosition.x - initialPosition.x === i &&
+          desiredPosition.y - initialPosition.y === -i
+        ) {
+          console.log(`Moving down right ${i} squares`)
           break
         }
       }
