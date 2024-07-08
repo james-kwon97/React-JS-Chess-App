@@ -159,12 +159,14 @@ export default class Referee {
       // MOVEMENT AND ATTACK LOGIC FOR THE BISHOP
 
       // UP RIGHT MOVEMENT
-      for (let i = 0; i < 8; i++) {
+      for (let i = 1; i < 8; i++) {
+        console.log('Looping through the array!')
         if (
           desiredPosition.x - initialPosition.x === i &&
           desiredPosition.y - initialPosition.y === i
         ) {
           console.log(`Moving ${i} squares`)
+          break
         }
       }
     }
