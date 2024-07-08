@@ -155,6 +155,16 @@ export default class Referee {
           }
         }
       }
+    } else if (type === PieceType.BISHOP) {
+      // MOVEMENT AND ATTACK LOGIC FOR THE BISHOP
+
+      // UP RIGHT MOVEMENT
+      if (
+        desiredPosition.x - initialPosition.x === 1 &&
+        desiredPosition.y - initialPosition.y === 1
+      ) {
+        console.log('Trying to move to the up right position')
+      }
     }
     return false
   }
