@@ -168,6 +168,12 @@ export default class Referee {
             x: initialPosition.x + i,
             y: initialPosition.y + i,
           }
+          console.log(
+            `Passed position: ${passedPosition.x}, ${passedPosition.y}`
+          )
+          console.log(
+            `Desired position: ${desiredPosition.x}, ${desiredPosition.y}`
+          )
           if (this.tileIsOccupied(passedPosition, boardState)) {
             console.log('Illegal move')
             break
