@@ -283,6 +283,8 @@ export default class Referee {
           }
         }
       }
+    } else if (type === PieceType.ROOK) {
+      console.log('ROOK!')
     }
     return false
   }
