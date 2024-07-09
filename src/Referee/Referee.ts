@@ -168,25 +168,26 @@ export default class Referee {
             x: initialPosition.x + i,
             y: initialPosition.y + i,
           }
-          // CHECK IF THE PASSED TILE IS OCCUPIED
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            // IS IT OCCUPIED BY THE OPPONENT?
-            if (
-              this.tileIsOccupiedByOpponent(passedPosition, boardState, team) &&
-              passedPosition.x === desiredPosition.x &&
-              passedPosition.y === desiredPosition.y
-            ) {
-              return true
-            } else {
-              break
-            }
-          }
-
+          // CHECK IF THE TILE IS THE DESTINATION TILE
           if (
             passedPosition.x === desiredPosition.x &&
             passedPosition.y === desiredPosition.y
           ) {
-            return true
+            // DEALING WITH DESTINATION TILE
+            if (
+              this.tileIsEmptyOrOccupiedByOpponent(
+                passedPosition,
+                boardState,
+                team
+              )
+            ) {
+              return true
+            }
+          } else {
+            // DEALING WITH PASSING TILE
+            if (this.tileIsOccupied(passedPosition, boardState)) {
+              break
+            }
           }
         }
         // TOP LEFT MOVEMENT
