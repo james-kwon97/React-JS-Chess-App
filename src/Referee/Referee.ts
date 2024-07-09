@@ -164,13 +164,14 @@ export default class Referee {
           desiredPosition.x > initialPosition.x &&
           desiredPosition.y > initialPosition.y
         ) {
-          // let passedPosition: Position = {
-          //   x: initialPosition.x + i,
-          //   y: initialPosition.y + i,
-          // }
-          // console.log(
-          //   `Passed position: ${passedPosition.x}, ${passedPosition.y}`
-          // )
+          let passedPosition: Position = {
+            x: initialPosition.x + i,
+            y: initialPosition.y + i,
+          }
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            console.log('Illegal move')
+            break
+          }
         }
         if (
           desiredPosition.x - initialPosition.x === i &&
