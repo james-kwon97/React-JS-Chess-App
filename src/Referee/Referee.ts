@@ -185,8 +185,7 @@ export default class Referee {
           desiredPosition.x - initialPosition.x === -i &&
           desiredPosition.y - initialPosition.y === i
         ) {
-          console.log(`Moving up left ${i} squares`)
-          break
+          return true
         }
         // BOTTOM RIGHT MOVEMENT
         if (
