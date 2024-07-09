@@ -199,17 +199,28 @@ export default class Referee {
             x: initialPosition.x - i,
             y: initialPosition.y + i,
           }
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            console.log('Illegal move')
-            break
+          // CHECK IF THE TILE IS THE DESTINATION TILE
+          if (
+            passedPosition.x === desiredPosition.x &&
+            passedPosition.y === desiredPosition.y
+          ) {
+            // DEALING WITH DESTINATION TILE
+            if (
+              this.tileIsEmptyOrOccupiedByOpponent(
+                passedPosition,
+                boardState,
+                team
+              )
+            ) {
+              return true
+            }
+          } else {
+            if (this.tileIsOccupied(passedPosition, boardState)) {
+              break
+            }
           }
         }
-        if (
-          desiredPosition.x - initialPosition.x === -i &&
-          desiredPosition.y - initialPosition.y === i
-        ) {
-          return true
-        }
+
         // BOTTOM RIGHT MOVEMENT
         if (
           desiredPosition.x > initialPosition.x &&
@@ -219,17 +230,28 @@ export default class Referee {
             x: initialPosition.x + i,
             y: initialPosition.y - i,
           }
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            console.log('Illegal move')
+          // CHECK IF THE TILE IS THE DESTINATION TILE
+          if (
+            passedPosition.x === desiredPosition.x &&
+            passedPosition.y === desiredPosition.y
+          ) {
+            // DEALING WITH DESTINATION TILE
+            if (
+              this.tileIsEmptyOrOccupiedByOpponent(
+                passedPosition,
+                boardState,
+                team
+              )
+            ) {
+              return true
+            }
+          }
+          // DEALING WITH PASSING TILE
+          else if (this.tileIsOccupied(passedPosition, boardState)) {
             break
           }
         }
-        if (
-          desiredPosition.x - initialPosition.x === i &&
-          desiredPosition.y - initialPosition.y === -i
-        ) {
-          return true
-        }
+
         // BOTTOM LEFT MOVEMENT
         if (
           desiredPosition.x < initialPosition.x &&
@@ -239,16 +261,26 @@ export default class Referee {
             x: initialPosition.x - i,
             y: initialPosition.y - i,
           }
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            console.log('Illegal move')
+          // CHECK IF THE TILE IS THE DESTINATION TILE
+          if (
+            passedPosition.x === desiredPosition.x &&
+            passedPosition.y === desiredPosition.y
+          ) {
+            // DEALING WITH DESTINATION TILE
+            if (
+              this.tileIsEmptyOrOccupiedByOpponent(
+                passedPosition,
+                boardState,
+                team
+              )
+            ) {
+              return true
+            }
+          }
+          // DEALING WITH PASSING TILE
+          else if (this.tileIsOccupied(passedPosition, boardState)) {
             break
           }
-        }
-        if (
-          desiredPosition.x - initialPosition.x === -i &&
-          desiredPosition.y - initialPosition.y === -i
-        ) {
-          return true
         }
       }
     }
