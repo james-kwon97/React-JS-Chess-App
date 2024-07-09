@@ -215,6 +215,7 @@ export default class Referee {
               return true
             }
           } else {
+            // DEALING WITH PASSING TILE
             if (this.tileIsOccupied(passedPosition, boardState)) {
               break
             }
@@ -245,10 +246,11 @@ export default class Referee {
             ) {
               return true
             }
-          }
-          // DEALING WITH PASSING TILE
-          else if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
+          } else {
+            // DEALING WITH PASSING TILE
+            if (this.tileIsOccupied(passedPosition, boardState)) {
+              break
+            }
           }
         }
 
@@ -276,10 +278,11 @@ export default class Referee {
             ) {
               return true
             }
-          }
-          // DEALING WITH PASSING TILE
-          else if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
+          } else {
+            // DEALING WITH PASSING TILE
+            if (this.tileIsOccupied(passedPosition, boardState)) {
+              break
+            }
           }
         }
       }
