@@ -161,6 +161,18 @@ export default class Referee {
       // UP RIGHT MOVEMENT
       for (let i = 1; i < 8; i++) {
         if (
+          desiredPosition.x > initialPosition.x &&
+          desiredPosition.y > initialPosition.y
+        ) {
+          // let passedPosition: Position = {
+          //   x: initialPosition.x + i,
+          //   y: initialPosition.y + i,
+          // }
+          // console.log(
+          //   `Passed position: ${passedPosition.x}, ${passedPosition.y}`
+          // )
+        }
+        if (
           desiredPosition.x - initialPosition.x === i &&
           desiredPosition.y - initialPosition.y === i
         ) {
