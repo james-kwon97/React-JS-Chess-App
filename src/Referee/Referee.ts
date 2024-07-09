@@ -167,10 +167,7 @@ export default class Referee {
           console.log(`Moving up right ${i} squares`)
           break
         }
-      }
-
-      // UP LEFT MOVEMENT
-      for (let i = 1; i < 8; i++) {
+        // UP LEFT MOVEMENT
         if (
           desiredPosition.x - initialPosition.x === -i &&
           desiredPosition.y - initialPosition.y === i
@@ -178,10 +175,7 @@ export default class Referee {
           console.log(`Moving up left ${i} squares`)
           break
         }
-      }
-
-      // BOTTOM RIGHT MOVEMENT
-      for (let i = 1; i < 8; i++) {
+        // BOTTOM RIGHT MOVEMENT
         if (
           desiredPosition.x - initialPosition.x === i &&
           desiredPosition.y - initialPosition.y === -i
@@ -189,10 +183,7 @@ export default class Referee {
           console.log(`Moving down right ${i} squares`)
           break
         }
-      }
-
-      // BOTTOM LEFT MOVEMENT
-      for (let i = 1; i < 8; i++) {
+        // BOTTOM LEFT MOVEMENT
         if (
           desiredPosition.x - initialPosition.x === -i &&
           desiredPosition.y - initialPosition.y === -i
