@@ -158,8 +158,8 @@ export default class Referee {
     } else if (type === PieceType.BISHOP) {
       // MOVEMENT AND ATTACK LOGIC FOR THE BISHOP
 
-      // UP RIGHT MOVEMENT
       for (let i = 1; i < 8; i++) {
+        // TOP RIGHT MOVEMENT
         if (
           desiredPosition.x > initialPosition.x &&
           desiredPosition.y > initialPosition.y
@@ -177,10 +177,22 @@ export default class Referee {
           desiredPosition.x - initialPosition.x === i &&
           desiredPosition.y - initialPosition.y === i
         ) {
-          console.log(`Moving up right ${i} squares`)
-          break
+          return true
         }
-        // UP LEFT MOVEMENT
+        // TOP LEFT MOVEMENT
+        if (
+          desiredPosition.x < initialPosition.x &&
+          desiredPosition.y > initialPosition.y
+        ) {
+          let passedPosition: Position = {
+            x: initialPosition.x - i,
+            y: initialPosition.y + i,
+          }
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            console.log('Illegal move')
+            break
+          }
+        }
         if (
           desiredPosition.x - initialPosition.x === -i &&
           desiredPosition.y - initialPosition.y === i
@@ -189,19 +201,43 @@ export default class Referee {
         }
         // BOTTOM RIGHT MOVEMENT
         if (
+          desiredPosition.x > initialPosition.x &&
+          desiredPosition.y < initialPosition.y
+        ) {
+          let passedPosition: Position = {
+            x: initialPosition.x + i,
+            y: initialPosition.y - i,
+          }
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            console.log('Illegal move')
+            break
+          }
+        }
+        if (
           desiredPosition.x - initialPosition.x === i &&
           desiredPosition.y - initialPosition.y === -i
         ) {
-          console.log(`Moving down right ${i} squares`)
-          break
+          return true
         }
         // BOTTOM LEFT MOVEMENT
+        if (
+          desiredPosition.x < initialPosition.x &&
+          desiredPosition.y < initialPosition.y
+        ) {
+          let passedPosition: Position = {
+            x: initialPosition.x - i,
+            y: initialPosition.y - i,
+          }
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            console.log('Illegal move')
+            break
+          }
+        }
         if (
           desiredPosition.x - initialPosition.x === -i &&
           desiredPosition.y - initialPosition.y === -i
         ) {
-          console.log(`Moving down left ${i} squares`)
-          break
+          return true
         }
       }
     }
