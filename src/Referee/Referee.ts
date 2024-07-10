@@ -299,6 +299,7 @@ export default class Referee {
               passedPosition.y === desiredPosition.y
             ) {
               console.log('Arrived!')
+              break
             }
           }
         } else if (desiredPosition.y > initialPosition.y) {
