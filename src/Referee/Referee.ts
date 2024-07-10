@@ -284,7 +284,12 @@ export default class Referee {
         }
       }
     } else if (type === PieceType.ROOK) {
-      console.log('ROOK!')
+      if (initialPosition.x === desiredPosition.x) {
+        console.log('Moving vertically')
+      }
+      if (initialPosition.y === desiredPosition.y) {
+        console.log('Moving horizontally')
+      }
     }
     return false
   }
