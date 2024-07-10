@@ -306,6 +306,24 @@ export default class Referee {
       }
       if (initialPosition.y === desiredPosition.y) {
         console.log('Moving horizontally')
+
+        for (let i = 1; i < 8; i++) {
+          let multiplier = desiredPosition.x < initialPosition.x ? -1 : 1
+
+          let passedPosition: Position = {
+            x: initialPosition.x + i * multiplier,
+            y: initialPosition.y,
+          }
+          console.log(passedPosition)
+          if (
+            passedPosition.x === desiredPosition.x &&
+            passedPosition.y === desiredPosition.y
+          ) {
+            console.log('Arrived!')
+            break
+          }
+        }
+      }
       }
     }
     return false
