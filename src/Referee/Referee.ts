@@ -286,6 +286,24 @@ export default class Referee {
     } else if (type === PieceType.ROOK) {
       if (initialPosition.x === desiredPosition.x) {
         console.log('Moving vertically')
+        if (desiredPosition.y < initialPosition.y) {
+          console.log('Down!')
+          for (let i = 1; i < 8; i++) {
+            let passedPosition: Position = {
+              x: initialPosition.x,
+              y: initialPosition.y - i,
+            }
+            console.log(passedPosition)
+            if (
+              passedPosition.x === desiredPosition.x &&
+              passedPosition.y === desiredPosition.y
+            ) {
+              console.log('Arrived!')
+            }
+          }
+        } else if (desiredPosition.y > initialPosition.y) {
+          console.log('Up!')
+        }
       }
       if (initialPosition.y === desiredPosition.y) {
         console.log('Moving horizontally')
