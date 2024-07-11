@@ -322,8 +322,19 @@ export default class Referee {
             passedPosition.x === desiredPosition.x &&
             passedPosition.y === desiredPosition.y
           ) {
-            console.log('Arrived!')
-            return true
+            if (
+              this.tileIsEmptyOrOccupiedByOpponent(
+                passedPosition,
+                boardState,
+                team
+              )
+            ) {
+              return true
+            }
+          } else {
+            if (this.tileIsOccupied(passedPosition, boardState)) {
+              break
+            }
           }
         }
       }
