@@ -67,6 +67,61 @@ export default class Referee {
     return false
   }
 
+  pawnMove(
+    initialPosition: Position,
+    desiredPosition: Position,
+    team: TeamType,
+    boardState: Piece[]
+  ): boolean {
+    const specialRow = team === TeamType.OUR ? 1 : 6
+    const pawnDirection = team === TeamType.OUR ? 1 : -1
+
+    // PAWN MOVEMENT LOGIC
+    if (
+      initialPosition.x === desiredPosition.x &&
+      initialPosition.y === specialRow &&
+      desiredPosition.y - initialPosition.y === 2 * pawnDirection
+    ) {
+      if (
+        !this.tileIsOccupied(desiredPosition, boardState) &&
+        !this.tileIsOccupied(
+          { x: desiredPosition.x, y: desiredPosition.y - pawnDirection },
+          boardState
+        )
+      ) {
+        return true
+      }
+    } else if (
+      initialPosition.x === desiredPosition.x &&
+      desiredPosition.y - initialPosition.y === pawnDirection
+    ) {
+      if (!this.tileIsOccupied(desiredPosition, boardState)) {
+        return true
+      }
+    }
+    // PAWN ATTACK LOGIC
+    else if (
+      desiredPosition.x - initialPosition.x === -1 &&
+      desiredPosition.y - initialPosition.y === pawnDirection
+    ) {
+      //PAWN ATTACK IN THE UPPER OR BOTTOM LEFT CORNER
+      console.log('Upper/ bottom left corner')
+      if (this.tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
+        return true
+      }
+    } else if (
+      desiredPosition.x - initialPosition.x === 1 &&
+      desiredPosition.y - initialPosition.y === pawnDirection
+    ) {
+      // PAWN ATTACK IN THE UPPER OR BOTTOM RIGHT CORNER
+      console.log('Upper/ lower right corner')
+      if (this.tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
+        return true
+      }
+    }
+    return false
+  }
+
   isValidMove(
     initialPosition: Position,
     desiredPosition: Position,
@@ -74,9 +129,15 @@ export default class Referee {
     team: TeamType,
     boardState: Piece[]
   ) {
+    let validMove = false
     switch (type) {
       case PieceType.PAWN:
-        console.log('Pawn')
+        validMove = this.pawnMove(
+          initialPosition,
+          desiredPosition,
+          team,
+          boardState
+        )
         break
       case PieceType.KNIGHT:
         console.log('KNIGHT')
@@ -87,54 +148,9 @@ export default class Referee {
       case PieceType.ROOK:
         console.log('Rook')
     }
-    if (type === PieceType.PAWN) {
-      const specialRow = team === TeamType.OUR ? 1 : 6
-      const pawnDirection = team === TeamType.OUR ? 1 : -1
+    return validMove
 
-      // PAWN MOVEMENT LOGIC
-      if (
-        initialPosition.x === desiredPosition.x &&
-        initialPosition.y === specialRow &&
-        desiredPosition.y - initialPosition.y === 2 * pawnDirection
-      ) {
-        if (
-          !this.tileIsOccupied(desiredPosition, boardState) &&
-          !this.tileIsOccupied(
-            { x: desiredPosition.x, y: desiredPosition.y - pawnDirection },
-            boardState
-          )
-        ) {
-          return true
-        }
-      } else if (
-        initialPosition.x === desiredPosition.x &&
-        desiredPosition.y - initialPosition.y === pawnDirection
-      ) {
-        if (!this.tileIsOccupied(desiredPosition, boardState)) {
-          return true
-        }
-      }
-      // PAWN ATTACK LOGIC
-      else if (
-        desiredPosition.x - initialPosition.x === -1 &&
-        desiredPosition.y - initialPosition.y === pawnDirection
-      ) {
-        //PAWN ATTACK IN THE UPPER OR BOTTOM LEFT CORNER
-        console.log('Upper/ bottom left corner')
-        if (this.tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
-          return true
-        }
-      } else if (
-        desiredPosition.x - initialPosition.x === 1 &&
-        desiredPosition.y - initialPosition.y === pawnDirection
-      ) {
-        // PAWN ATTACK IN THE UPPER OR BOTTOM RIGHT CORNER
-        console.log('Upper/ lower right corner')
-        if (this.tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
-          return true
-        }
-      }
-    } else if (type === PieceType.KNIGHT) {
+    if (type === PieceType.KNIGHT) {
       for (let i = -1; i < 2; i += 2) {
         for (let j = -1; j < 2; j += 2) {
           // TOP AND BOTTOM SIDE MOVEMENT
