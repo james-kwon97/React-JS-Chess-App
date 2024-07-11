@@ -37,8 +37,8 @@ export const initialBoardState: Piece[] = [
   {
     image: `assets/images/black-rook.png`,
     position: {
-      x: 0,
-      y: 7,
+      x: 3,
+      y: 4,
     },
     type: PieceType.ROOK,
     team: TeamType.OPPONENT,
