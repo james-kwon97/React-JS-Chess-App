@@ -74,6 +74,19 @@ export default class Referee {
     team: TeamType,
     boardState: Piece[]
   ) {
+    switch (type) {
+      case PieceType.PAWN:
+        console.log('Pawn')
+        break
+      case PieceType.KNIGHT:
+        console.log('KNIGHT')
+        break
+      case PieceType.BISHOP:
+        console.log('Bishop')
+        break
+      case PieceType.ROOK:
+        console.log('Rook')
+    }
     if (type === PieceType.PAWN) {
       const specialRow = team === TeamType.OUR ? 1 : 6
       const pawnDirection = team === TeamType.OUR ? 1 : -1
