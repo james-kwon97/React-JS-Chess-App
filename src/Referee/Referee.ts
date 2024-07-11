@@ -164,6 +164,145 @@ export default class Referee {
     return false
   }
 
+  bishopMove(
+    initialPosition: Position,
+    desiredPosition: Position,
+    team: TeamType,
+    boardState: Piece[]
+  ): boolean {
+    // MOVEMENT AND ATTACK LOGIC FOR THE BISHOP
+
+    for (let i = 1; i < 8; i++) {
+      // TOP RIGHT MOVEMENT
+      if (
+        desiredPosition.x > initialPosition.x &&
+        desiredPosition.y > initialPosition.y
+      ) {
+        let passedPosition: Position = {
+          x: initialPosition.x + i,
+          y: initialPosition.y + i,
+        }
+        // CHECK IF THE TILE IS THE DESTINATION TILE
+        if (
+          passedPosition.x === desiredPosition.x &&
+          passedPosition.y === desiredPosition.y
+        ) {
+          // DEALING WITH DESTINATION TILE
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          // DEALING WITH PASSING TILE
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
+      }
+      // TOP LEFT MOVEMENT
+      if (
+        desiredPosition.x < initialPosition.x &&
+        desiredPosition.y > initialPosition.y
+      ) {
+        let passedPosition: Position = {
+          x: initialPosition.x - i,
+          y: initialPosition.y + i,
+        }
+        // CHECK IF THE TILE IS THE DESTINATION TILE
+        if (
+          passedPosition.x === desiredPosition.x &&
+          passedPosition.y === desiredPosition.y
+        ) {
+          // DEALING WITH DESTINATION TILE
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          // DEALING WITH PASSING TILE
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
+      }
+
+      // BOTTOM RIGHT MOVEMENT
+      if (
+        desiredPosition.x > initialPosition.x &&
+        desiredPosition.y < initialPosition.y
+      ) {
+        let passedPosition: Position = {
+          x: initialPosition.x + i,
+          y: initialPosition.y - i,
+        }
+        // CHECK IF THE TILE IS THE DESTINATION TILE
+        if (
+          passedPosition.x === desiredPosition.x &&
+          passedPosition.y === desiredPosition.y
+        ) {
+          // DEALING WITH DESTINATION TILE
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          // DEALING WITH PASSING TILE
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
+      }
+
+      // BOTTOM LEFT MOVEMENT
+      if (
+        desiredPosition.x < initialPosition.x &&
+        desiredPosition.y < initialPosition.y
+      ) {
+        let passedPosition: Position = {
+          x: initialPosition.x - i,
+          y: initialPosition.y - i,
+        }
+        // CHECK IF THE TILE IS THE DESTINATION TILE
+        if (
+          passedPosition.x === desiredPosition.x &&
+          passedPosition.y === desiredPosition.y
+        ) {
+          // DEALING WITH DESTINATION TILE
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          // DEALING WITH PASSING TILE
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
+      }
+    }
+    return false
+  }
+
   isValidMove(
     initialPosition: Position,
     desiredPosition: Position,
@@ -190,145 +329,19 @@ export default class Referee {
         )
         break
       case PieceType.BISHOP:
-        console.log('Bishop')
+        validMove = this.bishopMove(
+          initialPosition,
+          desiredPosition,
+          team,
+          boardState
+        )
         break
       case PieceType.ROOK:
         console.log('Rook')
     }
     return validMove
 
-    if (type === PieceType.BISHOP) {
-      // MOVEMENT AND ATTACK LOGIC FOR THE BISHOP
-
-      for (let i = 1; i < 8; i++) {
-        // TOP RIGHT MOVEMENT
-        if (
-          desiredPosition.x > initialPosition.x &&
-          desiredPosition.y > initialPosition.y
-        ) {
-          let passedPosition: Position = {
-            x: initialPosition.x + i,
-            y: initialPosition.y + i,
-          }
-          // CHECK IF THE TILE IS THE DESTINATION TILE
-          if (
-            passedPosition.x === desiredPosition.x &&
-            passedPosition.y === desiredPosition.y
-          ) {
-            // DEALING WITH DESTINATION TILE
-            if (
-              this.tileIsEmptyOrOccupiedByOpponent(
-                passedPosition,
-                boardState,
-                team
-              )
-            ) {
-              return true
-            }
-          } else {
-            // DEALING WITH PASSING TILE
-            if (this.tileIsOccupied(passedPosition, boardState)) {
-              break
-            }
-          }
-        }
-        // TOP LEFT MOVEMENT
-        if (
-          desiredPosition.x < initialPosition.x &&
-          desiredPosition.y > initialPosition.y
-        ) {
-          let passedPosition: Position = {
-            x: initialPosition.x - i,
-            y: initialPosition.y + i,
-          }
-          // CHECK IF THE TILE IS THE DESTINATION TILE
-          if (
-            passedPosition.x === desiredPosition.x &&
-            passedPosition.y === desiredPosition.y
-          ) {
-            // DEALING WITH DESTINATION TILE
-            if (
-              this.tileIsEmptyOrOccupiedByOpponent(
-                passedPosition,
-                boardState,
-                team
-              )
-            ) {
-              return true
-            }
-          } else {
-            // DEALING WITH PASSING TILE
-            if (this.tileIsOccupied(passedPosition, boardState)) {
-              break
-            }
-          }
-        }
-
-        // BOTTOM RIGHT MOVEMENT
-        if (
-          desiredPosition.x > initialPosition.x &&
-          desiredPosition.y < initialPosition.y
-        ) {
-          let passedPosition: Position = {
-            x: initialPosition.x + i,
-            y: initialPosition.y - i,
-          }
-          // CHECK IF THE TILE IS THE DESTINATION TILE
-          if (
-            passedPosition.x === desiredPosition.x &&
-            passedPosition.y === desiredPosition.y
-          ) {
-            // DEALING WITH DESTINATION TILE
-            if (
-              this.tileIsEmptyOrOccupiedByOpponent(
-                passedPosition,
-                boardState,
-                team
-              )
-            ) {
-              return true
-            }
-          } else {
-            // DEALING WITH PASSING TILE
-            if (this.tileIsOccupied(passedPosition, boardState)) {
-              break
-            }
-          }
-        }
-
-        // BOTTOM LEFT MOVEMENT
-        if (
-          desiredPosition.x < initialPosition.x &&
-          desiredPosition.y < initialPosition.y
-        ) {
-          let passedPosition: Position = {
-            x: initialPosition.x - i,
-            y: initialPosition.y - i,
-          }
-          // CHECK IF THE TILE IS THE DESTINATION TILE
-          if (
-            passedPosition.x === desiredPosition.x &&
-            passedPosition.y === desiredPosition.y
-          ) {
-            // DEALING WITH DESTINATION TILE
-            if (
-              this.tileIsEmptyOrOccupiedByOpponent(
-                passedPosition,
-                boardState,
-                team
-              )
-            ) {
-              return true
-            }
-          } else {
-            // DEALING WITH PASSING TILE
-            if (this.tileIsOccupied(passedPosition, boardState)) {
-              break
-            }
-          }
-        }
-      }
-    } else if (type === PieceType.ROOK) {
+    if (type === PieceType.ROOK) {
       if (initialPosition.x === desiredPosition.x) {
         console.log('Moving vertically')
 
