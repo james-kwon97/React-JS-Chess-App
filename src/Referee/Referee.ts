@@ -323,7 +323,7 @@ export default class Referee {
             passedPosition.y === desiredPosition.y
           ) {
             console.log('Arrived!')
-            break
+            return true
           }
         }
       }
