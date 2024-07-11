@@ -122,6 +122,48 @@ export default class Referee {
     return false
   }
 
+  knightMove(
+    initialPosition: Position,
+    desiredPosition: Position,
+    team: TeamType,
+    boardState: Piece[]
+  ): boolean {
+    for (let i = -1; i < 2; i += 2) {
+      for (let j = -1; j < 2; j += 2) {
+        // TOP AND BOTTOM SIDE MOVEMENT
+        if (desiredPosition.y - initialPosition.y === 2 * i) {
+          if (desiredPosition.x - initialPosition.x === j) {
+            if (
+              this.tileIsEmptyOrOccupiedByOpponent(
+                desiredPosition,
+                boardState,
+                team
+              )
+            ) {
+              return true
+            }
+          }
+        }
+
+        // LEFT AND RIGHT SIDE MOVEMENT
+        if (desiredPosition.x - initialPosition.x === 2 * i) {
+          if (desiredPosition.y - initialPosition.y === j) {
+            if (
+              this.tileIsEmptyOrOccupiedByOpponent(
+                desiredPosition,
+                boardState,
+                team
+              )
+            ) {
+              return true
+            }
+          }
+        }
+      }
+    }
+    return false
+  }
+
   isValidMove(
     initialPosition: Position,
     desiredPosition: Position,
@@ -140,7 +182,12 @@ export default class Referee {
         )
         break
       case PieceType.KNIGHT:
-        console.log('KNIGHT')
+        validMove = this.knightMove(
+          initialPosition,
+          desiredPosition,
+          team,
+          boardState
+        )
         break
       case PieceType.BISHOP:
         console.log('Bishop')
@@ -150,41 +197,7 @@ export default class Referee {
     }
     return validMove
 
-    if (type === PieceType.KNIGHT) {
-      for (let i = -1; i < 2; i += 2) {
-        for (let j = -1; j < 2; j += 2) {
-          // TOP AND BOTTOM SIDE MOVEMENT
-          if (desiredPosition.y - initialPosition.y === 2 * i) {
-            if (desiredPosition.x - initialPosition.x === j) {
-              if (
-                this.tileIsEmptyOrOccupiedByOpponent(
-                  desiredPosition,
-                  boardState,
-                  team
-                )
-              ) {
-                return true
-              }
-            }
-          }
-
-          // LEFT AND RIGHT SIDE MOVEMENT
-          if (desiredPosition.x - initialPosition.x === 2 * i) {
-            if (desiredPosition.y - initialPosition.y === j) {
-              if (
-                this.tileIsEmptyOrOccupiedByOpponent(
-                  desiredPosition,
-                  boardState,
-                  team
-                )
-              ) {
-                return true
-              }
-            }
-          }
-        }
-      }
-    } else if (type === PieceType.BISHOP) {
+    if (type === PieceType.BISHOP) {
       // MOVEMENT AND ATTACK LOGIC FOR THE BISHOP
 
       for (let i = 1; i < 8; i++) {
