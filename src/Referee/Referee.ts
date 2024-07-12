@@ -380,6 +380,16 @@ export default class Referee {
     team: TeamType,
     boardState: Piece[]
   ): boolean {
+    // TOP
+    if (
+      desiredPosition.y > initialPosition.y &&
+      desiredPosition.x === initialPosition.x
+    ) {
+      console.log('We are moving up')
+    }
+    // RIGHT
+    // BOTTOM
+    //LEFT
     return false
   }
 
@@ -432,6 +442,8 @@ export default class Referee {
           boardState
         )
         break
+      case PieceType.KING:
+      //KING MOVE
     }
     return validMove
   }
