@@ -388,10 +388,7 @@ export default class Referee {
           x: initialPosition.x,
           y: initialPosition.y + i * multiplier,
         }
-        if (
-          passedPosition.x === desiredPosition.x &&
-          passedPosition.y === desiredPosition.y
-        ) {
+        if (samePosition(passedPosition, desiredPosition)) {
           if (
             this.tileIsEmptyOrOccupiedByOpponent(
               passedPosition,
@@ -415,10 +412,7 @@ export default class Referee {
           y: initialPosition.y,
         }
 
-        if (
-          passedPosition.x === desiredPosition.x &&
-          passedPosition.y === desiredPosition.y
-        ) {
+        if (samePosition(passedPosition, desiredPosition)) {
           if (
             this.tileIsEmptyOrOccupiedByOpponent(
               passedPosition,
