@@ -408,6 +408,35 @@ export default class Referee {
     ) {
       console.log('We are moving left')
     }
+    // TOP RIGHT
+    if (
+      desiredPosition.y > initialPosition.y &&
+      desiredPosition.x > initialPosition.x
+    ) {
+      console.log('We are moving top right')
+    }
+    // BOTTOM RIGHT
+    if (
+      desiredPosition.y < initialPosition.y &&
+      desiredPosition.x > initialPosition.x
+    ) {
+      console.log('We are moving bottom right')
+    }
+
+    // BOTTOM LEFT
+    if (
+      desiredPosition.y < initialPosition.y &&
+      desiredPosition.x < initialPosition.x
+    ) {
+      console.log('We are moving bottom left')
+    }
+    // TOP LEFT
+    if (
+      desiredPosition.y > initialPosition.y &&
+      desiredPosition.x < initialPosition.x
+    ) {
+      console.log('We are moving top left')
+    }
     return false
   }
 
