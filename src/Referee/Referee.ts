@@ -415,21 +415,87 @@ export default class Referee {
         desiredPosition.y === initialPosition.y &&
         desiredPosition.x > initialPosition.x
       ) {
-        console.log('We are moving right')
+        let passedPosition: Position = {
+          x: initialPosition.x + i,
+          y: initialPosition.y,
+        }
+
+        if (
+          passedPosition.x === desiredPosition.x &&
+          passedPosition.y === desiredPosition.y
+        ) {
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
       }
       // BOTTOM
       if (
         desiredPosition.y < initialPosition.y &&
         desiredPosition.x === initialPosition.x
       ) {
-        console.log('We are moving down')
+        let passedPosition: Position = {
+          x: initialPosition.x,
+          y: initialPosition.y - i,
+        }
+
+        if (
+          passedPosition.x === desiredPosition.x &&
+          passedPosition.y === desiredPosition.y
+        ) {
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
       }
       //LEFT
       if (
         desiredPosition.y === initialPosition.y &&
         desiredPosition.x < initialPosition.x
       ) {
-        console.log('We are moving left')
+        let passedPosition: Position = {
+          x: initialPosition.x - i,
+          y: initialPosition.y,
+        }
+
+        if (
+          passedPosition.x === desiredPosition.x &&
+          passedPosition.y === desiredPosition.y
+        ) {
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
       }
       // TOP RIGHT
       if (
