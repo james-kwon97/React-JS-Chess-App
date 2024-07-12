@@ -380,62 +380,64 @@ export default class Referee {
     team: TeamType,
     boardState: Piece[]
   ): boolean {
-    // TOP
-    if (
-      desiredPosition.y > initialPosition.y &&
-      desiredPosition.x === initialPosition.x
-    ) {
-      console.log('We are moving up')
-    }
-    // RIGHT
-    if (
-      desiredPosition.y === initialPosition.y &&
-      desiredPosition.x > initialPosition.x
-    ) {
-      console.log('We are moving right')
-    }
-    // BOTTOM
-    if (
-      desiredPosition.y < initialPosition.y &&
-      desiredPosition.x === initialPosition.x
-    ) {
-      console.log('We are moving down')
-    }
-    //LEFT
-    if (
-      desiredPosition.y === initialPosition.y &&
-      desiredPosition.x < initialPosition.x
-    ) {
-      console.log('We are moving left')
-    }
-    // TOP RIGHT
-    if (
-      desiredPosition.y > initialPosition.y &&
-      desiredPosition.x > initialPosition.x
-    ) {
-      console.log('We are moving top right')
-    }
-    // BOTTOM RIGHT
-    if (
-      desiredPosition.y < initialPosition.y &&
-      desiredPosition.x > initialPosition.x
-    ) {
-      console.log('We are moving bottom right')
-    }
+    for (let i = 1; i < 8; i++) {
+      // TOP
+      if (
+        desiredPosition.y > initialPosition.y &&
+        desiredPosition.x === initialPosition.x
+      ) {
+        console.log('We are moving up')
+      }
+      // RIGHT
+      if (
+        desiredPosition.y === initialPosition.y &&
+        desiredPosition.x > initialPosition.x
+      ) {
+        console.log('We are moving right')
+      }
+      // BOTTOM
+      if (
+        desiredPosition.y < initialPosition.y &&
+        desiredPosition.x === initialPosition.x
+      ) {
+        console.log('We are moving down')
+      }
+      //LEFT
+      if (
+        desiredPosition.y === initialPosition.y &&
+        desiredPosition.x < initialPosition.x
+      ) {
+        console.log('We are moving left')
+      }
+      // TOP RIGHT
+      if (
+        desiredPosition.y > initialPosition.y &&
+        desiredPosition.x > initialPosition.x
+      ) {
+        console.log('We are moving top right')
+      }
+      // BOTTOM RIGHT
+      if (
+        desiredPosition.y < initialPosition.y &&
+        desiredPosition.x > initialPosition.x
+      ) {
+        console.log('We are moving bottom right')
+      }
 
-    // BOTTOM LEFT
-    if (
-      desiredPosition.y < initialPosition.y &&
-      desiredPosition.x < initialPosition.x
-    ) {
-      console.log('We are moving bottom left')
-    }
-    // TOP LEFT
-    if (
-      desiredPosition.y > initialPosition.y &&
-      desiredPosition.x < initialPosition.x
-    ) {
-      console.log('We are moving top left')
+      // BOTTOM LEFT
+      if (
+        desiredPosition.y < initialPosition.y &&
+        desiredPosition.x < initialPosition.x
+      ) {
+        console.log('We are moving bottom left')
+      }
+      // TOP LEFT
+      if (
+        desiredPosition.y > initialPosition.y &&
+        desiredPosition.x < initialPosition.x
+      ) {
+        console.log('We are moving top left')
+      }
     }
     return false
   }
