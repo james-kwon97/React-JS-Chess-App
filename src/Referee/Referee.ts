@@ -388,8 +388,26 @@ export default class Referee {
       console.log('We are moving up')
     }
     // RIGHT
+    if (
+      desiredPosition.y === initialPosition.y &&
+      desiredPosition.x > initialPosition.x
+    ) {
+      console.log('We are moving right')
+    }
     // BOTTOM
+    if (
+      desiredPosition.y < initialPosition.y &&
+      desiredPosition.x === initialPosition.x
+    ) {
+      console.log('We are moving down')
+    }
     //LEFT
+    if (
+      desiredPosition.y === initialPosition.y &&
+      desiredPosition.x < initialPosition.x
+    ) {
+      console.log('We are moving left')
+    }
     return false
   }
 
