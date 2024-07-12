@@ -374,6 +374,15 @@ export default class Referee {
     return false
   }
 
+  queenMove(
+    initialPosition: Position,
+    desiredPosition: Position,
+    team: TeamType,
+    boardState: Piece[]
+  ): boolean {
+    return false
+  }
+
   isValidMove(
     initialPosition: Position,
     desiredPosition: Position,
@@ -414,6 +423,15 @@ export default class Referee {
           team,
           boardState
         )
+        break
+      case PieceType.QUEEN:
+        validMove = this.queenMove(
+          initialPosition,
+          desiredPosition,
+          team,
+          boardState
+        )
+        break
     }
     return validMove
   }
