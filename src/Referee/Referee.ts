@@ -381,16 +381,13 @@ export default class Referee {
     boardState: Piece[]
   ): boolean {
     for (let i = 1; i < 8; i++) {
-      // TOP
-      if (
-        desiredPosition.y > initialPosition.y &&
-        desiredPosition.x === initialPosition.x
-      ) {
+      // VERTICAL MOVEMENT
+      if (desiredPosition.x === initialPosition.x) {
+        let multiplier = desiredPosition.y < initialPosition.y ? -1 : 1
         let passedPosition: Position = {
           x: initialPosition.x,
-          y: initialPosition.y + i,
+          y: initialPosition.y + i * multiplier,
         }
-
         if (
           passedPosition.x === desiredPosition.x &&
           passedPosition.y === desiredPosition.y
@@ -439,35 +436,7 @@ export default class Referee {
           }
         }
       }
-      // BOTTOM
-      if (
-        desiredPosition.y < initialPosition.y &&
-        desiredPosition.x === initialPosition.x
-      ) {
-        let passedPosition: Position = {
-          x: initialPosition.x,
-          y: initialPosition.y - i,
-        }
 
-        if (
-          passedPosition.x === desiredPosition.x &&
-          passedPosition.y === desiredPosition.y
-        ) {
-          if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
-          ) {
-            return true
-          }
-        } else {
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
-        }
-      }
       //LEFT
       if (
         desiredPosition.y === initialPosition.y &&
