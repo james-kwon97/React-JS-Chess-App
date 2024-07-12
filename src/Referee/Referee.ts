@@ -407,43 +407,11 @@ export default class Referee {
           }
         }
       }
-      // RIGHT
-      if (
-        desiredPosition.y === initialPosition.y &&
-        desiredPosition.x > initialPosition.x
-      ) {
+      // HORIZONTAL MOVEMENT
+      if (desiredPosition.y === initialPosition.y) {
+        let multiplier = desiredPosition.x < initialPosition.x ? -1 : 1
         let passedPosition: Position = {
-          x: initialPosition.x + i,
-          y: initialPosition.y,
-        }
-
-        if (
-          passedPosition.x === desiredPosition.x &&
-          passedPosition.y === desiredPosition.y
-        ) {
-          if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
-          ) {
-            return true
-          }
-        } else {
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
-        }
-      }
-
-      //LEFT
-      if (
-        desiredPosition.y === initialPosition.y &&
-        desiredPosition.x < initialPosition.x
-      ) {
-        let passedPosition: Position = {
-          x: initialPosition.x - i,
+          x: initialPosition.x + i * multiplier,
           y: initialPosition.y,
         }
 
