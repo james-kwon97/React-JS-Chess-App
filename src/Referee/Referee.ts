@@ -434,21 +434,25 @@ export default class Referee {
         desiredPosition.x > initialPosition.x
       ) {
         console.log('We are moving top right')
-      }
-      let passedPosition: Position = {
-        x: initialPosition.x + i,
-        y: initialPosition.y + i,
-      }
-
-      if (samePosition(passedPosition, desiredPosition)) {
-        if (
-          this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
-        ) {
-          return true
+        let passedPosition: Position = {
+          x: initialPosition.x + i,
+          y: initialPosition.y + i,
         }
-      } else {
-        if (this.tileIsOccupied(passedPosition, boardState)) {
-          break
+
+        if (samePosition(passedPosition, desiredPosition)) {
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
         }
       }
 
@@ -458,6 +462,26 @@ export default class Referee {
         desiredPosition.x > initialPosition.x
       ) {
         console.log('We are moving bottom right')
+        let passedPosition: Position = {
+          x: initialPosition.x + i,
+          y: initialPosition.y - i,
+        }
+
+        if (samePosition(passedPosition, desiredPosition)) {
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
       }
 
       // BOTTOM LEFT
@@ -466,6 +490,26 @@ export default class Referee {
         desiredPosition.x < initialPosition.x
       ) {
         console.log('We are moving bottom left')
+        let passedPosition: Position = {
+          x: initialPosition.x - i,
+          y: initialPosition.y - i,
+        }
+
+        if (samePosition(passedPosition, desiredPosition)) {
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
       }
       // TOP LEFT
       if (
@@ -473,6 +517,26 @@ export default class Referee {
         desiredPosition.x < initialPosition.x
       ) {
         console.log('We are moving top left')
+        let passedPosition: Position = {
+          x: initialPosition.x - i,
+          y: initialPosition.y + i,
+        }
+
+        if (samePosition(passedPosition, desiredPosition)) {
+          if (
+            this.tileIsEmptyOrOccupiedByOpponent(
+              passedPosition,
+              boardState,
+              team
+            )
+          ) {
+            return true
+          }
+        } else {
+          if (this.tileIsOccupied(passedPosition, boardState)) {
+            break
+          }
+        }
       }
     }
     return false
