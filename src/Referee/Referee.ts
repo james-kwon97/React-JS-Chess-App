@@ -428,114 +428,25 @@ export default class Referee {
           }
         }
       }
-      // TOP RIGHT
-      if (
-        desiredPosition.y > initialPosition.y &&
-        desiredPosition.x > initialPosition.x
-      ) {
-        console.log('We are moving top right')
-        let passedPosition: Position = {
-          x: initialPosition.x + i,
-          y: initialPosition.y + i,
-        }
+      // DIAGONAL MOVEMENT
 
-        if (samePosition(passedPosition, desiredPosition)) {
-          if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
-          ) {
-            return true
-          }
-        } else {
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
-        }
+      console.log('We are moving top right')
+      let multiplierX = desiredPosition.x < initialPosition.x ? -1 : 1
+      let multiplierY = desiredPosition.y < initialPosition.y ? -1 : 1
+      let passedPosition: Position = {
+        x: initialPosition.x + i * multiplierX,
+        y: initialPosition.y + i * multiplierY,
       }
 
-      // BOTTOM RIGHT
-      if (
-        desiredPosition.y < initialPosition.y &&
-        desiredPosition.x > initialPosition.x
-      ) {
-        console.log('We are moving bottom right')
-        let passedPosition: Position = {
-          x: initialPosition.x + i,
-          y: initialPosition.y - i,
+      if (samePosition(passedPosition, desiredPosition)) {
+        if (
+          this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
+        ) {
+          return true
         }
-
-        if (samePosition(passedPosition, desiredPosition)) {
-          if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
-          ) {
-            return true
-          }
-        } else {
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
-        }
-      }
-
-      // BOTTOM LEFT
-      if (
-        desiredPosition.y < initialPosition.y &&
-        desiredPosition.x < initialPosition.x
-      ) {
-        console.log('We are moving bottom left')
-        let passedPosition: Position = {
-          x: initialPosition.x - i,
-          y: initialPosition.y - i,
-        }
-
-        if (samePosition(passedPosition, desiredPosition)) {
-          if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
-          ) {
-            return true
-          }
-        } else {
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
-        }
-      }
-      // TOP LEFT
-      if (
-        desiredPosition.y > initialPosition.y &&
-        desiredPosition.x < initialPosition.x
-      ) {
-        console.log('We are moving top left')
-        let passedPosition: Position = {
-          x: initialPosition.x - i,
-          y: initialPosition.y + i,
-        }
-
-        if (samePosition(passedPosition, desiredPosition)) {
-          if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
-          ) {
-            return true
-          }
-        } else {
-          if (this.tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
+      } else {
+        if (this.tileIsOccupied(passedPosition, boardState)) {
+          break
         }
       }
     }
