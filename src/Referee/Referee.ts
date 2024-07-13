@@ -435,6 +435,23 @@ export default class Referee {
       ) {
         console.log('We are moving top right')
       }
+      let passedPosition: Position = {
+        x: initialPosition.x + i,
+        y: initialPosition.y + i,
+      }
+
+      if (samePosition(passedPosition, desiredPosition)) {
+        if (
+          this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
+        ) {
+          return true
+        }
+      } else {
+        if (this.tileIsOccupied(passedPosition, boardState)) {
+          break
+        }
+      }
+
       // BOTTOM RIGHT
       if (
         desiredPosition.y < initialPosition.y &&
