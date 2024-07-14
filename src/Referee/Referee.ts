@@ -382,17 +382,13 @@ export default class Referee {
   ): boolean {
     for (let i = 1; i < 8; i++) {
       // DIAGONAL MOVEMENT
-      let multiplierX //= desiredPosition.x < initialPosition.x ? -1 : 1
+      let multiplierX =
+        desiredPosition.x < initialPosition.x
+          ? -1
+          : desiredPosition.x > initialPosition.x
+          ? 1
+          : 0
       let multiplierY //= desiredPosition.y < initialPosition.y ? -1 : 1
-
-      if (desiredPosition.x < initialPosition.x) {
-        multiplierX = -1
-      } else if (desiredPosition.x > initialPosition.x) {
-        multiplierX = 1
-      } else {
-        // X value is unchanged
-        multiplierX = 0
-      }
 
       if (desiredPosition.y < initialPosition.y) {
         multiplierY = -1
