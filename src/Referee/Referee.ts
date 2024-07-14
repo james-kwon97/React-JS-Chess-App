@@ -388,24 +388,17 @@ export default class Referee {
           : desiredPosition.x > initialPosition.x
           ? 1
           : 0
-      let multiplierY //= desiredPosition.y < initialPosition.y ? -1 : 1
+      let multiplierY =
+        desiredPosition.y < initialPosition.y
+          ? -1
+          : desiredPosition.y > initialPosition.y
+          ? 1
+          : 0
 
-      if (desiredPosition.y < initialPosition.y) {
-        multiplierY = -1
-      } else if (desiredPosition.y > initialPosition.y) {
-        multiplierY = 1
-      } else {
-        // Y value is unchanged
-        multiplierY = 0
-      }
       let passedPosition: Position = {
         x: initialPosition.x + i * multiplierX,
         y: initialPosition.y + i * multiplierY,
       }
-
-      // LEFT initialPosition.x + i * -1
-      // RIGHT initialPosition.x + i * 1
-      // MIDDLE initialPosition.x + i * 0
 
       if (samePosition(passedPosition, desiredPosition)) {
         if (
