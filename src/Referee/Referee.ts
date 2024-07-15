@@ -105,7 +105,7 @@ export default class Referee {
       desiredPosition.y - initialPosition.y === pawnDirection
     ) {
       //PAWN ATTACK IN THE UPPER OR BOTTOM LEFT CORNER
-      console.log('Upper/ bottom left corner')
+
       if (this.tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
         return true
       }
@@ -114,7 +114,7 @@ export default class Referee {
       desiredPosition.y - initialPosition.y === pawnDirection
     ) {
       // PAWN ATTACK IN THE UPPER OR BOTTOM RIGHT CORNER
-      console.log('Upper/ lower right corner')
+
       if (this.tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
         return true
       }
@@ -310,8 +310,6 @@ export default class Referee {
     boardState: Piece[]
   ): boolean {
     if (initialPosition.x === desiredPosition.x) {
-      console.log('Moving vertically')
-
       for (let i = 1; i < 8; i++) {
         let multiplier = desiredPosition.y < initialPosition.y ? -1 : 1
 
@@ -319,7 +317,7 @@ export default class Referee {
           x: initialPosition.x,
           y: initialPosition.y + i * multiplier,
         }
-        console.log(passedPosition)
+
         if (
           passedPosition.x === desiredPosition.x &&
           passedPosition.y === desiredPosition.y
@@ -341,8 +339,6 @@ export default class Referee {
       }
     }
     if (initialPosition.y === desiredPosition.y) {
-      console.log('Moving horizontally')
-
       for (let i = 1; i < 8; i++) {
         let multiplier = desiredPosition.x < initialPosition.x ? -1 : 1
 
@@ -350,7 +346,7 @@ export default class Referee {
           x: initialPosition.x + i * multiplier,
           y: initialPosition.y,
         }
-        console.log(passedPosition)
+
         if (
           passedPosition.x === desiredPosition.x &&
           passedPosition.y === desiredPosition.y
@@ -381,7 +377,6 @@ export default class Referee {
     boardState: Piece[]
   ): boolean {
     for (let i = 1; i < 8; i++) {
-      // DIAGONAL MOVEMENT
       let multiplierX =
         desiredPosition.x < initialPosition.x
           ? -1
