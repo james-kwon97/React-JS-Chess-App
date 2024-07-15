@@ -5,22 +5,16 @@ import {
   Position,
   samePosition,
 } from '../Constants'
-import { tileIsOccupied, tileIsOccupiedByOpponent } from './rules/GeneralRules'
+import {
+  tileIsEmptyOrOccupiedByOpponent,
+  tileIsOccupied,
+  tileIsOccupiedByOpponent,
+} from './rules/GeneralRules'
+import { knightMove } from './rules/KnightRules'
 
 import { pawnMove } from './rules/PawnRules'
 
 export default class Referee {
-  tileIsEmptyOrOccupiedByOpponent(
-    position: Position,
-    boardState: Piece[],
-    team: TeamType
-  ) {
-    return (
-      !tileIsOccupied(position, boardState) ||
-      tileIsOccupiedByOpponent(position, boardState, team)
-    )
-  }
-
   isEnPassantMove(
     initialPosition: Position,
     desiredPosition: Position,
@@ -44,48 +38,6 @@ export default class Referee {
         )
         if (piece) {
           return true
-        }
-      }
-    }
-    return false
-  }
-
-  knightMove(
-    initialPosition: Position,
-    desiredPosition: Position,
-    team: TeamType,
-    boardState: Piece[]
-  ): boolean {
-    for (let i = -1; i < 2; i += 2) {
-      for (let j = -1; j < 2; j += 2) {
-        // TOP AND BOTTOM SIDE MOVEMENT
-        if (desiredPosition.y - initialPosition.y === 2 * i) {
-          if (desiredPosition.x - initialPosition.x === j) {
-            if (
-              this.tileIsEmptyOrOccupiedByOpponent(
-                desiredPosition,
-                boardState,
-                team
-              )
-            ) {
-              return true
-            }
-          }
-        }
-
-        // LEFT AND RIGHT SIDE MOVEMENT
-        if (desiredPosition.x - initialPosition.x === 2 * i) {
-          if (desiredPosition.y - initialPosition.y === j) {
-            if (
-              this.tileIsEmptyOrOccupiedByOpponent(
-                desiredPosition,
-                boardState,
-                team
-              )
-            ) {
-              return true
-            }
-          }
         }
       }
     }
@@ -117,11 +69,7 @@ export default class Referee {
         ) {
           // DEALING WITH DESTINATION TILE
           if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
+            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
           ) {
             return true
           }
@@ -148,11 +96,7 @@ export default class Referee {
         ) {
           // DEALING WITH DESTINATION TILE
           if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
+            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
           ) {
             return true
           }
@@ -180,11 +124,7 @@ export default class Referee {
         ) {
           // DEALING WITH DESTINATION TILE
           if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
+            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
           ) {
             return true
           }
@@ -212,11 +152,7 @@ export default class Referee {
         ) {
           // DEALING WITH DESTINATION TILE
           if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
+            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
           ) {
             return true
           }
@@ -251,11 +187,7 @@ export default class Referee {
           passedPosition.y === desiredPosition.y
         ) {
           if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
+            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
           ) {
             return true
           }
@@ -280,11 +212,7 @@ export default class Referee {
           passedPosition.y === desiredPosition.y
         ) {
           if (
-            this.tileIsEmptyOrOccupiedByOpponent(
-              passedPosition,
-              boardState,
-              team
-            )
+            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
           ) {
             return true
           }
@@ -324,9 +252,7 @@ export default class Referee {
       }
 
       if (samePosition(passedPosition, desiredPosition)) {
-        if (
-          this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
-        ) {
+        if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
         }
       } else {
@@ -364,9 +290,7 @@ export default class Referee {
       }
 
       if (samePosition(passedPosition, desiredPosition)) {
-        if (
-          this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
-        ) {
+        if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
         }
       } else {
@@ -399,7 +323,7 @@ export default class Referee {
         validMove = pawnMove(initialPosition, desiredPosition, team, boardState)
         break
       case PieceType.KNIGHT:
-        validMove = this.knightMove(
+        validMove = knightMove(
           initialPosition,
           desiredPosition,
           team,
