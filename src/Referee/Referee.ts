@@ -450,6 +450,14 @@ export default class Referee {
     return false
   }
 
+  // TO DOS
+  // Pawn needs to be promoted
+  // Prevent the king from moving into danger
+  // King castling
+  // Add checks
+  // Add checkmate
+  // Add stalemate
+
   isValidMove(
     initialPosition: Position,
     desiredPosition: Position,
