@@ -1,22 +1,12 @@
+import { PieceType, TeamType, Piece, Position } from '../Constants'
 import {
-  PieceType,
-  TeamType,
-  Piece,
-  Position,
-  samePosition,
-} from '../Constants'
-import { bishopMove } from './rules/BishopRules'
-import {
-  tileIsEmptyOrOccupiedByOpponent,
-  tileIsOccupied,
-  tileIsOccupiedByOpponent,
-} from './rules/GeneralRules'
-import { kingMove } from './rules/KingRules'
-import { knightMove } from './rules/KnightRules'
-
-import { pawnMove } from './rules/PawnRules'
-import { queenMove } from './rules/QueenRules'
-import { rookMove } from './rules/RookRules'
+  pawnMove,
+  bishopMove,
+  knightMove,
+  rookMove,
+  queenMove,
+  kingMove,
+} from './rules'
 
 export default class Referee {
   isEnPassantMove(
