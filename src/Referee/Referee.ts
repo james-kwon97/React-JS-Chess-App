@@ -14,6 +14,7 @@ import {
 import { knightMove } from './rules/KnightRules'
 
 import { pawnMove } from './rules/PawnRules'
+import { rookMove } from './rules/RookRules'
 
 export default class Referee {
   isEnPassantMove(
@@ -39,65 +40,6 @@ export default class Referee {
         )
         if (piece) {
           return true
-        }
-      }
-    }
-    return false
-  }
-
-  rookMove(
-    initialPosition: Position,
-    desiredPosition: Position,
-    team: TeamType,
-    boardState: Piece[]
-  ): boolean {
-    if (initialPosition.x === desiredPosition.x) {
-      for (let i = 1; i < 8; i++) {
-        let multiplier = desiredPosition.y < initialPosition.y ? -1 : 1
-
-        let passedPosition: Position = {
-          x: initialPosition.x,
-          y: initialPosition.y + i * multiplier,
-        }
-
-        if (
-          passedPosition.x === desiredPosition.x &&
-          passedPosition.y === desiredPosition.y
-        ) {
-          if (
-            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
-          ) {
-            return true
-          }
-        } else {
-          if (tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
-        }
-      }
-    }
-    if (initialPosition.y === desiredPosition.y) {
-      for (let i = 1; i < 8; i++) {
-        let multiplier = desiredPosition.x < initialPosition.x ? -1 : 1
-
-        let passedPosition: Position = {
-          x: initialPosition.x + i * multiplier,
-          y: initialPosition.y,
-        }
-
-        if (
-          passedPosition.x === desiredPosition.x &&
-          passedPosition.y === desiredPosition.y
-        ) {
-          if (
-            tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
-          ) {
-            return true
-          }
-        } else {
-          if (tileIsOccupied(passedPosition, boardState)) {
-            break
-          }
         }
       }
     }
@@ -217,12 +159,7 @@ export default class Referee {
         )
         break
       case PieceType.ROOK:
-        validMove = this.rookMove(
-          initialPosition,
-          desiredPosition,
-          team,
-          boardState
-        )
+        validMove = rookMove(initialPosition, desiredPosition, team, boardState)
         break
       case PieceType.QUEEN:
         validMove = this.queenMove(
