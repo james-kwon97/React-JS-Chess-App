@@ -11,6 +11,7 @@ import {
   tileIsOccupied,
   tileIsOccupiedByOpponent,
 } from './rules/GeneralRules'
+import { kingMove } from './rules/KingRules'
 import { knightMove } from './rules/KnightRules'
 
 import { pawnMove } from './rules/PawnRules'
@@ -41,44 +42,6 @@ export default class Referee {
         )
         if (piece) {
           return true
-        }
-      }
-    }
-    return false
-  }
-
-  kingMove(
-    initialPosition: Position,
-    desiredPosition: Position,
-    team: TeamType,
-    boardState: Piece[]
-  ): boolean {
-    for (let i = 1; i < 2; i++) {
-      let multiplierX =
-        desiredPosition.x < initialPosition.x
-          ? -1
-          : desiredPosition.x > initialPosition.x
-          ? 1
-          : 0
-      let multiplierY =
-        desiredPosition.y < initialPosition.y
-          ? -1
-          : desiredPosition.y > initialPosition.y
-          ? 1
-          : 0
-
-      let passedPosition: Position = {
-        x: initialPosition.x + i * multiplierX,
-        y: initialPosition.y + i * multiplierY,
-      }
-
-      if (samePosition(passedPosition, desiredPosition)) {
-        if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
-          return true
-        }
-      } else {
-        if (tileIsOccupied(passedPosition, boardState)) {
-          break
         }
       }
     }
@@ -133,12 +96,7 @@ export default class Referee {
         )
         break
       case PieceType.KING:
-        validMove = this.kingMove(
-          initialPosition,
-          desiredPosition,
-          team,
-          boardState
-        )
+        validMove = kingMove(initialPosition, desiredPosition, team, boardState)
     }
     return validMove
   }
