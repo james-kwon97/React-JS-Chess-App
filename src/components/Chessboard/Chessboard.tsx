@@ -138,6 +138,13 @@ export default function Chessboard() {
 
               piece.position.x = x
               piece.position.y = y
+
+              let promotionRow = piece.team === TeamType.OUR ? 7 : 0
+
+              if (y === promotionRow) {
+                console.log('This piece is up for promotion!')
+              }
+
               results.push(piece)
             } else if (!samePosition(piece.position, { x, y })) {
               if (piece.type === PieceType.PAWN) {
