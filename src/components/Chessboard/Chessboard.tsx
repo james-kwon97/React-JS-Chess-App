@@ -168,6 +168,10 @@ export default function Chessboard() {
     }
   }
 
+  function promotePawn() {
+    console.log('Promoting pawn')
+  }
+
   let board = []
 
   for (let j = VERTICAL_AXIS.length - 1; j >= 0; j--) {
@@ -182,10 +186,22 @@ export default function Chessboard() {
   return (
     <>
       <div id="pawn-promotion-modal">
-        <img src="/assets/images/white-rook.png" />
-        <img src="/assets/images/white-bishop.png" />
-        <img src="/assets/images/white-knight.png" />
-        <img src="/assets/images/white-queen.png" />
+        <img
+          onClick={() => promotePawn()}
+          src="/assets/images/white-rook.png"
+        />
+        <img
+          onClick={() => promotePawn()}
+          src="/assets/images/white-knight.png"
+        />
+        <img
+          onClick={() => promotePawn()}
+          src="/assets/images/white-bishop.png"
+        />
+        <img
+          onClick={() => promotePawn()}
+          src="/assets/images/white-queen.png"
+        />
       </div>
       <div
         onMouseMove={(e) => movePiece(e)}
