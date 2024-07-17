@@ -181,7 +181,12 @@ export default function Chessboard() {
   }
   return (
     <>
-      <div id="pawn-promotion-modal">Pawn promotion modal!</div>
+      <div id="pawn-promotion-modal">
+        <img src="/assets/images/white-rook.png" />
+        <img src="/assets/images/white-bishop.png" />
+        <img src="/assets/images/white-knight.png" />
+        <img src="/assets/images/white-queen.png" />
+      </div>
       <div
         onMouseMove={(e) => movePiece(e)}
         onMouseDown={(e) => grabPiece(e)}
