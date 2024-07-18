@@ -172,8 +172,20 @@ export default function Chessboard() {
   }
 
   function promotePawn(pieceType: PieceType) {
-    console.log(`Promoting pawn! Into ${pieceType}`)
-    console.log(promotionPawn)
+    if (promotionPawn === undefined) {
+      return
+    }
+    const updatedPieces = pieces.reduce((results, piece) => {
+      if (samePosition(piece.position, promotionPawn.position)) {
+        piece.type = pieceType
+      }
+      results.push(piece)
+      return results
+    }, [] as Piece[])
+
+    setPieces(updatedPieces)
+
+    modalRef.current?.classList.add('hidden')
   }
 
   let board = []
