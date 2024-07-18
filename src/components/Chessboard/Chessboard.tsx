@@ -210,6 +210,10 @@ export default function Chessboard() {
     modalRef.current?.classList.add('hidden')
   }
 
+  function promotionTeamType() {
+    return promotionPawn?.team === TeamType.OUR ? 'white' : 'black'
+  }
+
   let board = []
 
   for (let j = VERTICAL_AXIS.length - 1; j >= 0; j--) {
@@ -227,22 +231,22 @@ export default function Chessboard() {
         <div className="modal-body">
           <img
             onClick={() => promotePawn(PieceType.ROOK)}
-            src="/assets/images/white-rook.png"
+            src={`/assets/images/${promotionTeamType()}-rook.png`}
             alt="Rook piece"
           />
           <img
             onClick={() => promotePawn(PieceType.KNIGHT)}
-            src="/assets/images/white-knight.png"
+            src={`/assets/images/${promotionTeamType()}-knight.png`}
             alt="Knight piece"
           />
           <img
             onClick={() => promotePawn(PieceType.BISHOP)}
-            src="/assets/images/white-bishop.png"
-            alt="Rook piece"
+            src={`/assets/images/${promotionTeamType()}-bishop.png`}
+            alt="Bishop piece"
           />
           <img
             onClick={() => promotePawn(PieceType.QUEEN)}
-            src="/assets/images/white-queen.png"
+            src={`/assets/images/${promotionTeamType()}-queen.png`}
             alt="Queen piece"
           />
         </div>
