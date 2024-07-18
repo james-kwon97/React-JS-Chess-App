@@ -27,7 +27,7 @@
   justify-content: space-around;
   height: 240px;
   width: 640px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(127, 127, 127, 0.7);
 }
 
 #pawn-promotion-modal > .modal-body > img {
