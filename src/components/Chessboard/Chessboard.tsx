@@ -143,7 +143,7 @@ export default function Chessboard() {
 
               let promotionRow = piece.team === TeamType.OUR ? 7 : 0
 
-              if (y === promotionRow) {
+              if (y === promotionRow && piece.type === PieceType.PAWN) {
                 modalRef.current?.classList.remove('hidden')
                 setPromotionPawn(piece)
               }
