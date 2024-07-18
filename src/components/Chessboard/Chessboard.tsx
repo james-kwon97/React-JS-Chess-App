@@ -187,7 +187,7 @@ export default function Chessboard() {
   }
   return (
     <>
-      <div id="pawn-promotion-modal">
+      <div id="pawn-promotion-modal" className="hidden">
         <div className="modal-body">
           <img
             onClick={() => promotePawn(PieceType.ROOK)}
