@@ -6,7 +6,7 @@ import {
   rookMove,
   queenMove,
   kingMove,
-  GetPossiblePawnMoves,
+  getPossiblePawnMoves,
 } from './rules'
 
 export default class Referee {
@@ -95,7 +95,7 @@ export default class Referee {
   getValidMoves(piece: Piece, boardState: Piece[]): Position[] {
     switch (piece.type) {
       case PieceType.PAWN:
-        return GetPossiblePawnMoves(piece, boardState)
+        return getPossiblePawnMoves(piece, boardState)
 
       default:
         return []
