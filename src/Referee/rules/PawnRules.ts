@@ -65,28 +65,38 @@ export const getPossiblePawnMoves = (
   const specialRow = pawn.team === TeamType.OUR ? 1 : 6
   const pawnDirection = pawn.team === TeamType.OUR ? 1 : -1
 
-  if (
-    !tileIsOccupied(
-      { x: pawn.position.x, y: pawn.position.y + pawnDirection },
-      boardState
-    )
-  ) {
-    possibleMoves.push({
-      x: pawn.position.x,
-      y: pawn.position.y + pawnDirection,
-    })
+  const normalMove: Position = {
+    x: pawn.position.x,
+    y: pawn.position.y + pawnDirection,
+  }
+  const specialMove: Position = {
+    x: normalMove.x,
+    y: normalMove.y + pawnDirection,
+  }
+  const upperLeftAttack: Position = {
+    x: pawn.position.x - 1,
+    y: pawn.position.y + pawnDirection,
+  }
+  const upperRightAttack: Position = {
+    x: pawn.position.x + 1,
+    y: pawn.position.y + pawnDirection,
+  }
+
+  if (!tileIsOccupied(normalMove, boardState)) {
+    possibleMoves.push(normalMove)
     if (
       pawn.position.y === specialRow &&
-      !tileIsOccupied(
-        { x: pawn.position.x, y: pawn.position.y + pawnDirection * 2 },
-        boardState
-      )
+      !tileIsOccupied(specialMove, boardState)
     ) {
-      possibleMoves.push({
-        x: pawn.position.x,
-        y: pawn.position.y + pawnDirection * 2,
-      })
+      possibleMoves.push(specialMove)
     }
+  }
+
+  if (tileIsOccupiedByOpponent(upperLeftAttack, boardState, pawn.team)) {
+    possibleMoves.push(upperLeftAttack)
+  }
+  if (tileIsOccupiedByOpponent(upperRightAttack, boardState, pawn.team)) {
+    possibleMoves.push(upperRightAttack)
   }
   return possibleMoves
 }
