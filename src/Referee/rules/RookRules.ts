@@ -92,5 +92,31 @@ export const getPossibleRookMoves = (
       break
     }
   }
+  // Left movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = { x: rook.position.x - i, y: rook.position.y }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, rook.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
+  // Right movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = { x: rook.position.x + i, y: rook.position.y }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, rook.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
   return possibleMoves
 }
