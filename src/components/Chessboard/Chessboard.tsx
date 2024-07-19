@@ -23,13 +23,18 @@ export default function Chessboard() {
   const modalRef = useRef<HTMLDivElement>(null)
   const referee = new Referee()
 
-  function grabPiece(e: React.MouseEvent) {
+  function updateValidMoves() {
     setPieces((currentPieces) => {
       return currentPieces.map((p) => {
         p.possibleMoves = referee.getValidMoves(p, currentPieces)
         return p
       })
     })
+  }
+
+  function grabPiece(e: React.MouseEvent) {
+    updateValidMoves()
+
     const element = e.target as HTMLElement
     const chessboard = chessboardRef.current
     if (element.classList.contains('chess-piece') && chessboard) {
