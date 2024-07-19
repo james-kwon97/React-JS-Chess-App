@@ -175,5 +175,21 @@ export const getPossibleBishopMoves = (
       break
     }
   }
+  // Top left movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = {
+      x: bishop.position.x - i,
+      y: bishop.position.y + i,
+    }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, bishop.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
   return possibleMoves
 }
