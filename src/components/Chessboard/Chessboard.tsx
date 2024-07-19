@@ -242,7 +242,14 @@ export default function Chessboard() {
           )
         : false
 
-      board.push(<Tile key={`${j},${i}`} image={image} number={number} />)
+      board.push(
+        <Tile
+          key={`${j},${i}`}
+          image={image}
+          number={number}
+          highlight={highlight}
+        />
+      )
     }
   }
   return (

@@ -3,12 +3,22 @@ import './Tile.css'
 interface Props {
   image?: string
   number: number
+  highlight: boolean
 }
 
-export default function Tile({ number, image }: Props) {
+export default function Tile({ number, image, highlight }: Props) {
+  const className: string = [
+    'tile',
+    number % 2 === 0 && 'black-tile',
+    number % 2 !== 0 && 'white-tile',
+    highlight && 'tile-highlight',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   if (number % 2 === 0) {
     return (
-      <div className="tile black-tile">
+      <div className={className}>
         {image && (
           <div
             style={{ backgroundImage: `url(${image})` }}
@@ -19,7 +29,7 @@ export default function Tile({ number, image }: Props) {
     )
   } else {
     return (
-      <div className="tile white-tile">
+      <div className={className}>
         {image && (
           <div
             style={{ backgroundImage: `url(${image})` }}
