@@ -65,7 +65,7 @@ export const GetPossiblePawnMoves = (
   const pawnDirection = pawn.team === TeamType.OUR ? 1 : -1
 
   if (
-    tileIsOccupied(
+    !tileIsOccupied(
       { x: pawn.position.x, y: pawn.position.y + pawnDirection },
       boardState
     )

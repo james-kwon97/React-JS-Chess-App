@@ -233,9 +233,11 @@ export default function Chessboard() {
       const piece = pieces.find((p) => samePosition(p.position, { x: i, y: j }))
       let image = piece ? piece.image : undefined
 
-      let currentPiece = pieces.find((p) =>
-        samePosition(p.position, grabPosition)
-      )
+      let currentPiece =
+        activePiece != null
+          ? pieces.find((p) => samePosition(p.position, grabPosition))
+          : undefined
+
       let highlight = currentPiece?.possibleMoves
         ? currentPiece.possibleMoves.some((p) =>
             samePosition(p, { x: i, y: j })
