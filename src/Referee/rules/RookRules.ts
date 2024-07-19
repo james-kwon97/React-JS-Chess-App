@@ -55,3 +55,10 @@ export const rookMove = (
   }
   return false
 }
+
+export const getPossibleRookMoves = (
+  rook: Piece,
+  boardState: Piece[]
+): Position[] => {
+  const possibleMoves: Position[] = []
+}
