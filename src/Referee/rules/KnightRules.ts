@@ -64,6 +64,5 @@ export const getPossibleKnightMoves = (
       }
     }
   }
-
   return possibleMoves
 }

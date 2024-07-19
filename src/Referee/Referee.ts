@@ -8,6 +8,7 @@ import {
   kingMove,
   getPossiblePawnMoves,
   getPossibleKnightMoves,
+  getPossibleBishopMoves,
 } from './rules'
 
 export default class Referee {
@@ -99,6 +100,8 @@ export default class Referee {
         return getPossiblePawnMoves(piece, boardState)
       case PieceType.KNIGHT:
         return getPossibleKnightMoves(piece, boardState)
+      case PieceType.BISHOP:
+        return getPossibleBishopMoves(piece, boardState)
 
       default:
         return []
