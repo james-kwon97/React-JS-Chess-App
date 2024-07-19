@@ -55,3 +55,12 @@ export const pawnMove = (
   }
   return false
 }
+
+export const GetPossiblePawnMoves = (
+  piece: Piece,
+  boardState: Piece[]
+): Position[] => {
+  const possibleMoves: Position[] = []
+
+  return possibleMoves
+}
