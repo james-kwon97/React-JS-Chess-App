@@ -24,6 +24,12 @@ export default function Chessboard() {
   const referee = new Referee()
 
   function grabPiece(e: React.MouseEvent) {
+    setPieces((currentPieces) => {
+      return currentPieces.map((p) => {
+        p.possibleMoves = referee.getValidMoves(p, currentPieces)
+        return p
+      })
+    })
     const element = e.target as HTMLElement
     const chessboard = chessboardRef.current
     if (element.classList.contains('chess-piece') && chessboard) {
