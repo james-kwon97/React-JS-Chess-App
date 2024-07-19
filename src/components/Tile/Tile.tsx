@@ -16,27 +16,14 @@ export default function Tile({ number, image, highlight }: Props) {
     .filter(Boolean)
     .join(' ')
 
-  if (number % 2 === 0) {
-    return (
-      <div className={className}>
-        {image && (
-          <div
-            style={{ backgroundImage: `url(${image})` }}
-            className="chess-piece"
-          ></div>
-        )}
-      </div>
-    )
-  } else {
-    return (
-      <div className={className}>
-        {image && (
-          <div
-            style={{ backgroundImage: `url(${image})` }}
-            className="chess-piece"
-          ></div>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className={className}>
+      {image && (
+        <div
+          style={{ backgroundImage: `url(${image})` }}
+          className="chess-piece"
+        ></div>
+      )}
+    </div>
+  )
 }
