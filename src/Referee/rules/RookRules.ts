@@ -1,5 +1,9 @@
 import { Piece, Position, TeamType } from '../../Constants'
-import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied } from './GeneralRules'
+import {
+  tileIsEmptyOrOccupiedByOpponent,
+  tileIsOccupied,
+  tileIsOccupiedByOpponent,
+} from './GeneralRules'
 
 export const rookMove = (
   initialPosition: Position,
@@ -61,4 +65,19 @@ export const getPossibleRookMoves = (
   boardState: Piece[]
 ): Position[] => {
   const possibleMoves: Position[] = []
+
+  // Top movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = { x: rook.position.x, y: rook.position.y + i }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, rook.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
+  return possibleMoves
 }
