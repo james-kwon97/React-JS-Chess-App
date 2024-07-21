@@ -14,6 +14,11 @@ import {
   samePosition,
 } from '../../Constants'
 
+interface Props {
+  getPossibleMoves: () => Position
+  playMove: () => void
+}
+
 export default function Chessboard() {
   const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
   const [promotionPawn, setPromotionPawn] = useState<Piece>()
