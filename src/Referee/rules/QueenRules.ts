@@ -1,5 +1,9 @@
 import { Piece, Position, TeamType, samePosition } from '../../Constants'
-import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied } from './GeneralRules'
+import {
+  tileIsEmptyOrOccupiedByOpponent,
+  tileIsOccupied,
+  tileIsOccupiedByOpponent,
+} from './GeneralRules'
 
 export const queenMove = (
   initialPosition: Position,
@@ -44,6 +48,74 @@ export const getPossibleQueenMoves = (
   boardState: Piece[]
 ): Position[] => {
   const possibleMoves: Position[] = []
+
+  // Top movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = {
+      x: queen.position.x,
+      y: queen.position.y + i,
+    }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, queen.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
+
+  // Bottom movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = {
+      x: queen.position.x,
+      y: queen.position.y - i,
+    }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, queen.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
+
+  // Left movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = {
+      x: queen.position.x - i,
+      y: queen.position.y,
+    }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, queen.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
+
+  // Right movement
+  for (let i = 1; i < 8; i++) {
+    const destination: Position = {
+      x: queen.position.x + i,
+      y: queen.position.y,
+    }
+
+    if (!tileIsOccupied(destination, boardState)) {
+      possibleMoves.push(destination)
+    } else if (tileIsOccupiedByOpponent(destination, boardState, queen.team)) {
+      possibleMoves.push(destination)
+      break
+    } else {
+      break
+    }
+  }
 
   return possibleMoves
 }
