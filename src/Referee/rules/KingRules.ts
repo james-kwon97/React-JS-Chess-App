@@ -38,3 +38,12 @@ export const kingMove = (
   }
   return false
 }
+
+export const getPossibleKingMoves = (
+  king: Piece,
+  boardState: Piece[]
+): Position[] => {
+  const possibleMoves: Position[] = []
+
+  return possibleMoves
+}
