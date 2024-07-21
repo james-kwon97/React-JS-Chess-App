@@ -38,3 +38,12 @@ export const queenMove = (
   }
   return false
 }
+
+export const getPossibleQueenMoves = (
+  queen: Piece,
+  boardState: Piece[]
+): Position[] => {
+  const possibleMoves: Position[] = []
+
+  return possibleMoves
+}
