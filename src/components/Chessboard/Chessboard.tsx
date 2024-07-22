@@ -15,11 +15,11 @@ import {
 } from '../../Constants'
 
 interface Props {
-  getPossibleMoves: () => Position
+  getPossibleMoves: () => Position[]
   playMove: () => void
 }
 
-export default function Chessboard() {
+export default function Chessboard({ getPossibleMoves, playMove }: Props) {
   const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
   const [promotionPawn, setPromotionPawn] = useState<Piece>()
   const [grabPosition, setGrabPosition] = useState<Position>({ x: -1, y: -1 })
@@ -38,8 +38,9 @@ export default function Chessboard() {
   }
 
   function grabPiece(e: React.MouseEvent) {
+    getPossibleMoves()
+    playMove()
     updateValidMoves()
-
     const element = e.target as HTMLElement
     const chessboard = chessboardRef.current
     if (element.classList.contains('chess-piece') && chessboard) {
