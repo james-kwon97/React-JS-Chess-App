@@ -9,7 +9,6 @@ import {
   Piece,
   TeamType,
   PieceType,
-  initialBoardState,
   Position,
   samePosition,
 } from '../../Constants'
@@ -17,13 +16,17 @@ import {
 interface Props {
   getPossibleMoves: () => Position[]
   playMove: () => void
+  pieces: Piece[]
 }
 
-export default function Chessboard({ getPossibleMoves, playMove }: Props) {
+export default function Chessboard({
+  getPossibleMoves,
+  playMove,
+  pieces,
+}: Props) {
   const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
   const [promotionPawn, setPromotionPawn] = useState<Piece>()
   const [grabPosition, setGrabPosition] = useState<Position>({ x: -1, y: -1 })
-  const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   const chessboardRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const referee = new Referee()
@@ -38,8 +41,6 @@ export default function Chessboard({ getPossibleMoves, playMove }: Props) {
   }
 
   function grabPiece(e: React.MouseEvent) {
-    getPossibleMoves()
-    playMove()
     updateValidMoves()
     const element = e.target as HTMLElement
     const chessboard = chessboardRef.current

@@ -1,15 +1,14 @@
-import { Position } from '../../Constants'
+import { useState } from 'react'
+import { Piece, Position, initialBoardState } from '../../Constants'
 import Chessboard from '../Chessboard/Chessboard'
 
 export default function Referee() {
+  const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   function getPossibleMoves(): Position[] {
-    console.log('Getting moves')
     return []
   }
 
-  function playMove() {
-    console.log('Playing move')
-  }
+  function playMove() {}
 
   return (
     <>
