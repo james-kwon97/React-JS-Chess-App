@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   Piece,
   PieceType,
@@ -25,6 +25,9 @@ import {
 
 export default function Referee() {
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
+  const [promotionPawn, setPromotionPawn] = useState<Piece>()
+  const modalRef = useRef<HTMLDivElement>(null)
+
   function updatePossibleMoves() {
     setPieces((currentPieces) => {
       return currentPieces.map((p) => {
@@ -91,7 +94,9 @@ export default function Referee() {
           }
 
           results.push(piece)
-        } else if (!samePosition(piece.position, { x, y })) {
+        } else if (
+          !samePosition(piece.position, { x: destination.x, y: destination.y })
+        ) {
           if (piece.type === PieceType.PAWN) {
             piece.enPassant = false
           }
@@ -191,9 +196,75 @@ export default function Referee() {
         return []
     }
   }
+  function promotePawn(pieceType: PieceType) {
+    if (promotionPawn === undefined) {
+      return
+    }
+    const updatedPieces = pieces.reduce((results, piece) => {
+      if (samePosition(piece.position, promotionPawn.position)) {
+        piece.type = pieceType
+        const teamType = piece.team === TeamType.OUR ? 'white' : 'black'
+        let image = ''
+        switch (pieceType) {
+          case PieceType.ROOK: {
+            image = 'rook'
+            break
+          }
+          case PieceType.KNIGHT: {
+            image = 'knight'
+            break
+          }
+          case PieceType.BISHOP: {
+            image = 'bishop'
+            break
+          }
+          case PieceType.QUEEN: {
+            image = 'queen'
+            break
+          }
+        }
+
+        piece.image = `assets/images/${teamType}-${image}.png`
+      }
+      results.push(piece)
+      return results
+    }, [] as Piece[])
+
+    setPieces(updatedPieces)
+
+    modalRef.current?.classList.add('hidden')
+  }
+
+  function promotionTeamType() {
+    return promotionPawn?.team === TeamType.OUR ? 'white' : 'black'
+  }
 
   return (
     <>
+      <div id="pawn-promotion-modal" className="hidden" ref={modalRef}>
+        <div className="modal-body">
+          <img
+            onClick={() => promotePawn(PieceType.ROOK)}
+            src={`/assets/images/${promotionTeamType()}-rook.png`}
+            alt="Rook piece"
+          />
+          <img
+            onClick={() => promotePawn(PieceType.KNIGHT)}
+            src={`/assets/images/${promotionTeamType()}-knight.png`}
+            alt="Knight piece"
+          />
+          <img
+            onClick={() => promotePawn(PieceType.BISHOP)}
+            src={`/assets/images/${promotionTeamType()}-bishop.png`}
+            alt="Bishop piece"
+          />
+          <img
+            onClick={() => promotePawn(PieceType.QUEEN)}
+            src={`/assets/images/${promotionTeamType()}-queen.png`}
+            alt="Queen piece"
+          />
+        </div>
+      </div>
       <Chessboard
         updatePossibleMoves={updatePossibleMoves}
         playMove={playMove}
