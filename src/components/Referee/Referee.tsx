@@ -37,24 +37,24 @@ export default function Referee() {
     })
   }
 
-  function playMove(piece: Piece, destination: Position): boolean {
+  function playMove(playedPiece: Piece, destination: Position): boolean {
     const validMove = isValidMove(
-      piece.position,
+      playedPiece.position,
       destination,
-      piece.type,
-      piece.team
+      playedPiece.type,
+      playedPiece.team
     )
     const enPassantMove = isEnPassantMove(
-      piece.position,
+      playedPiece.position,
       destination,
-      piece.type,
-      piece.team
+      playedPiece.type,
+      playedPiece.team
     )
-    const pawnDirection = piece.team === TeamType.OUR ? 1 : -1
+    const pawnDirection = playedPiece.team === TeamType.OUR ? 1 : -1
 
     if (enPassantMove) {
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (samePosition(piece.position, destination)) {
+        if (samePosition(piece.position, playedPiece.position)) {
           piece.enPassant = false
           piece.position.x = destination.x
           piece.position.y = destination.y
@@ -77,10 +77,10 @@ export default function Referee() {
       // UPDATES THE PIECE POSITION
       // AND IF A PIECE IS ATTACKED, REMOVES IT
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (samePosition(piece.position, piece.position)) {
+        if (samePosition(piece.position, playedPiece.position)) {
           // SPECIAL MOVE
           piece.enPassant =
-            Math.abs(piece.position.y - destination.y) === 2 &&
+            Math.abs(playedPiece.position.y - destination.y) === 2 &&
             piece.type === PieceType.PAWN
 
           piece.position.x = destination.x
