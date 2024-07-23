@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Piece,
   PieceType,
@@ -27,6 +27,10 @@ export default function Referee() {
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
   const [promotionPawn, setPromotionPawn] = useState<Piece>()
   const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    updatePossibleMoves()
+  }, [])
 
   function updatePossibleMoves() {
     setPieces((currentPieces) => {
@@ -72,6 +76,8 @@ export default function Referee() {
         }
         return results
       }, [] as Piece[])
+
+      updatePossibleMoves()
       setPieces(updatedPieces)
     } else if (validMove) {
       // UPDATES THE PIECE POSITION
@@ -105,6 +111,8 @@ export default function Referee() {
 
         return results
       }, [] as Piece[])
+
+      updatePossibleMoves()
       setPieces(updatedPieces)
     } else {
       return false
