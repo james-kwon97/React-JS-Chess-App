@@ -238,6 +238,7 @@ export default function Referee() {
       return results
     }, [] as Piece[])
 
+    updatePossibleMoves()
     setPieces(updatedPieces)
 
     modalRef.current?.classList.add('hidden')
