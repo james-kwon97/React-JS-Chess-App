@@ -1,29 +1,21 @@
 import React, { useRef, useState } from 'react'
 import './Chessboard.css'
 import Tile from '../Tile/Tile'
-import Referee from '../../Referee/Referee'
 import {
   VERTICAL_AXIS,
   HORIZONTAL_AXIS,
   GRID_SIZE,
   Piece,
-  TeamType,
-  PieceType,
   Position,
   samePosition,
 } from '../../Constants'
 
 interface Props {
-  updatePossibleMoves: () => void
   playMove: (piece: Piece, position: Position) => boolean
   pieces: Piece[]
 }
 
-export default function Chessboard({
-  updatePossibleMoves,
-  playMove,
-  pieces,
-}: Props) {
+export default function Chessboard({ playMove, pieces }: Props) {
   const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
   const [grabPosition, setGrabPosition] = useState<Position>({ x: -1, y: -1 })
   const chessboardRef = useRef<HTMLDivElement>(null)

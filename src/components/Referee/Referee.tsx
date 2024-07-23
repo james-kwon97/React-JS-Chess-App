@@ -273,11 +273,7 @@ export default function Referee() {
           />
         </div>
       </div>
-      <Chessboard
-        updatePossibleMoves={updatePossibleMoves}
-        playMove={playMove}
-        pieces={pieces}
-      />
+      <Chessboard playMove={playMove} pieces={pieces} />
     </>
   )
 }
