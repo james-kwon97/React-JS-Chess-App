@@ -5,6 +5,7 @@ import {
   Position,
   TeamType,
   initialBoardState,
+  samePosition,
 } from '../../Constants'
 import Chessboard from '../Chessboard/Chessboard'
 import {
@@ -33,16 +34,16 @@ export default function Referee() {
     })
   }
 
-  function playMove(piece: Piece, position: Position) {
+  function playMove(piece: Piece, destination: Position): boolean {
     const validMove = isValidMove(
       piece.position,
-      position,
+      destination,
       piece.type,
       piece.team
     )
     const enPassantMove = isEnPassantMove(
       piece.position,
-      position,
+      destination,
       piece.type,
       piece.team
     )
@@ -50,12 +51,17 @@ export default function Referee() {
 
     if (enPassantMove) {
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (samePosition(piece.position, grabPosition)) {
+        if (samePosition(piece.position, destination)) {
           piece.enPassant = false
-          piece.position.x = x
-          piece.position.y = y
+          piece.position.x = destination.x
+          piece.position.y = destination.y
           results.push(piece)
-        } else if (!samePosition(piece.position, { x, y: y - pawnDirection })) {
+        } else if (
+          !samePosition(piece.position, {
+            x: destination.x,
+            y: destination.y - pawnDirection,
+          })
+        ) {
           if (piece.type === PieceType.PAWN) {
             piece.enPassant = false
           }
@@ -68,17 +74,18 @@ export default function Referee() {
       // UPDATES THE PIECE POSITION
       // AND IF A PIECE IS ATTACKED, REMOVES IT
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (samePosition(piece.position, grabPosition)) {
+        if (samePosition(piece.position, piece.position)) {
           // SPECIAL MOVE
           piece.enPassant =
-            Math.abs(grabPosition.y - y) === 2 && piece.type === PieceType.PAWN
+            Math.abs(piece.position.y - destination.y) === 2 &&
+            piece.type === PieceType.PAWN
 
-          piece.position.x = x
-          piece.position.y = y
+          piece.position.x = destination.x
+          piece.position.y = destination.y
 
           let promotionRow = piece.team === TeamType.OUR ? 7 : 0
 
-          if (y === promotionRow && piece.type === PieceType.PAWN) {
+          if (destination.y === promotionRow && piece.type === PieceType.PAWN) {
             modalRef.current?.classList.remove('hidden')
             setPromotionPawn(piece)
           }
