@@ -15,7 +15,7 @@ import {
 
 interface Props {
   updatePossibleMoves: () => void
-  playMove: (piece: Piece, position: Position) => void
+  playMove: (piece: Piece, position: Position) => boolean
   pieces: Piece[]
 }
 
@@ -102,10 +102,16 @@ export default function Chessboard({
       )
 
       if (currentPiece) {
-        playMove(currentPiece, { x, y })
-
-        setActivePiece(null)
+        var success = playMove(currentPiece, { x, y })
+        if (!success) {
+          // RESETS THE PIECE POSITION
+          activePiece.style.position = 'relative'
+          activePiece.style.removeProperty('top')
+          activePiece.style.removeProperty('left')
+        }
       }
+
+      setActivePiece(null)
     }
   }
 

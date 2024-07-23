@@ -102,11 +102,9 @@ export default function Referee() {
       }, [] as Piece[])
       setPieces(updatedPieces)
     } else {
-      // RESETS THE PIECE POSITION
-      activePiece.style.position = 'relative'
-      activePiece.style.removeProperty('top')
-      activePiece.style.removeProperty('left')
+      return false
     }
+    return true
   }
 
   function isEnPassantMove(
