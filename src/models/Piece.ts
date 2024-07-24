@@ -7,12 +7,7 @@ export class Piece {
   team: TeamType
   enPassant?: boolean
   possibleMoves?: Position[]
-  constructor(
-    image: string,
-    position: Position,
-    type: PieceType,
-    team: TeamType
-  ) {
+  constructor(position: Position, type: PieceType, team: TeamType) {
     this.image = `assets/images/${team}-${type}.png`
     this.position = position
     this.type = type
