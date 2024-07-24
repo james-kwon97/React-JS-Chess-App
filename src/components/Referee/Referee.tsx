@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  Piece,
   PieceType,
   Position,
   TeamType,
@@ -22,6 +21,7 @@ import {
   queenMove,
   rookMove,
 } from '../../Referee/rules'
+import { Piece } from '../../models/Piece'
 
 export default function Referee() {
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
