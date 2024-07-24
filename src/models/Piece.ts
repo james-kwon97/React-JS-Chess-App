@@ -7,10 +7,15 @@ export class Piece {
   team: TeamType
   enPassant?: boolean
   possibleMoves?: Position[]
-  constructor() {
-    this.image = ''
-    this.position = { x: 0, y: 0 }
-    this.type = PieceType.PAWN
-    this.team = TeamType.OUR
+  constructor(
+    image: string,
+    position: Position,
+    type: PieceType,
+    team: TeamType
+  ) {
+    this.image = image
+    this.position = position
+    this.type = type
+    this.team = team
   }
 }
