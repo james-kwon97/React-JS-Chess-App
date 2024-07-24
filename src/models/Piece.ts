@@ -13,7 +13,7 @@ export class Piece {
     type: PieceType,
     team: TeamType
   ) {
-    this.image = image
+    this.image = `assets/images/${team}-${type}.png`
     this.position = position
     this.type = type
     this.team = team
