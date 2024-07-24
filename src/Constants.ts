@@ -29,15 +29,13 @@ export enum TeamType {
 }
 
 export const initialBoardState: Piece[] = [
-  {
-    image: `assets/images/black-rook.png`,
-    position: {
-      x: 0,
-      y: 7,
-    },
-    type: PieceType.ROOK,
-    team: TeamType.OPPONENT,
-  },
+  new Piece(
+    `assets/images/black-rook.png`,
+    { x: 0, y: 7 },
+    PieceType.ROOK,
+    TeamType.OPPONENT
+  ),
+
   {
     image: `assets/images/black-knight.png`,
     position: {
