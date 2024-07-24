@@ -13,7 +13,7 @@ export class Piece {
     type: PieceType,
     team: TeamType
   ) {
-    this.image = `assets/images/black-rook.png`
+    this.image = image
     this.position = position
     this.type = type
     this.team = team
