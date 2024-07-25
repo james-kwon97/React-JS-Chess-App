@@ -16,7 +16,9 @@ interface Props {
 
 export default function Chessboard({ playMove, pieces }: Props) {
   const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
-  const [grabPosition, setGrabPosition] = useState<Position>({ x: -1, y: -1 })
+  const [grabPosition, setGrabPosition] = useState<Position>(
+    new Position(-1, -1)
+  )
   const chessboardRef = useRef<HTMLDivElement>(null)
 
   function grabPiece(e: React.MouseEvent) {
@@ -27,10 +29,7 @@ export default function Chessboard({ playMove, pieces }: Props) {
       const grabY = Math.abs(
         Math.ceil((e.clientY - chessboard.offsetTop - 640) / GRID_SIZE)
       )
-      setGrabPosition({
-        x: grabX,
-        y: grabY,
-      })
+      setGrabPosition(new Position(grabX, grabY))
 
       const x = e.clientX - GRID_SIZE / 2
       const y = e.clientY - GRID_SIZE / 2
@@ -90,7 +89,7 @@ export default function Chessboard({ playMove, pieces }: Props) {
       )
 
       if (currentPiece) {
-        var success = playMove(currentPiece, { x, y })
+        var success = playMove(currentPiece, new Position(x, y))
         if (!success) {
           // RESETS THE PIECE POSITION
           activePiece.style.position = 'relative'
@@ -108,7 +107,9 @@ export default function Chessboard({ playMove, pieces }: Props) {
   for (let j = VERTICAL_AXIS.length - 1; j >= 0; j--) {
     for (let i = 0; i < HORIZONTAL_AXIS.length; i++) {
       const number = j + i + 2
-      const piece = pieces.find((p) => samePosition(p.position, { x: i, y: j }))
+      const piece = pieces.find((p) =>
+        samePosition(p.position, new Position(i, j))
+      )
       let image = piece ? piece.image : undefined
 
       let currentPiece =
@@ -118,7 +119,7 @@ export default function Chessboard({ playMove, pieces }: Props) {
 
       let highlight = currentPiece?.possibleMoves
         ? currentPiece.possibleMoves.some((p) =>
-            samePosition(p, { x: i, y: j })
+            samePosition(p, new Position(i, j))
           )
         : false
 
