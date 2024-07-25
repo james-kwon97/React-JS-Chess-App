@@ -31,22 +31,8 @@ export enum TeamType {
 export const initialBoardState: Piece[] = [
   new Piece({ x: 0, y: 7 }, PieceType.ROOK, TeamType.OPPONENT),
   new Piece({ x: 1, y: 7 }, PieceType.KNIGHT, TeamType.OPPONENT),
-  new Piece(
-    {
-      x: 2,
-      y: 7,
-    },
-    PieceType.BISHOP,
-    TeamType.OPPONENT
-  ),
-  new Piece(
-    {
-      x: 3,
-      y: 7,
-    },
-    PieceType.QUEEN,
-    TeamType.OPPONENT
-  ),
+  new Piece({ x: 2, y: 7 }, PieceType.BISHOP, TeamType.OPPONENT),
+  new Piece({ x: 3, y: 7 }, PieceType.QUEEN, TeamType.OPPONENT),
   new Piece({ x: 4, y: 7 }, PieceType.KING, TeamType.OPPONENT),
   new Piece({ x: 5, y: 7 }, PieceType.BISHOP, TeamType.OPPONENT),
   new Piece({ x: 6, y: 7 }, PieceType.KNIGHT, TeamType.OPPONENT),
