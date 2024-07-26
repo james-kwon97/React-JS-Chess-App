@@ -1,10 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import {
-  PieceType,
-  TeamType,
-  initialBoardState,
-  samePosition,
-} from '../../Constants'
+import { PieceType, TeamType, initialBoardState } from '../../Constants'
 import Chessboard from '../Chessboard/Chessboard'
 import {
   bishopMove,
@@ -57,14 +52,13 @@ export default function Referee() {
 
     if (enPassantMove) {
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (samePosition(piece.position, playedPiece.position)) {
+        if (piece.position.samePosition(playedPiece.position)) {
           piece.enPassant = false
           piece.position.x = destination.x
           piece.position.y = destination.y
           results.push(piece)
         } else if (
-          !samePosition(
-            piece.position,
+          !piece.position.samePosition(
             new Position(destination.x, destination.y - pawnDirection)
           )
         ) {
@@ -82,7 +76,7 @@ export default function Referee() {
       // UPDATES THE PIECE POSITION
       // AND IF A PIECE IS ATTACKED, REMOVES IT
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (samePosition(piece.position, playedPiece.position)) {
+        if (piece.position.samePosition(playedPiece.position)) {
           // SPECIAL MOVE
           piece.enPassant =
             Math.abs(playedPiece.position.y - destination.y) === 2 &&
@@ -100,8 +94,7 @@ export default function Referee() {
 
           results.push(piece)
         } else if (
-          !samePosition(
-            piece.position,
+          !piece.position.samePosition(
             new Position(destination.x, destination.y)
           )
         ) {
@@ -211,7 +204,7 @@ export default function Referee() {
       return
     }
     const updatedPieces = pieces.reduce((results, piece) => {
-      if (samePosition(piece.position, promotionPawn.position)) {
+      if (piece.position.samePosition(promotionPawn.position)) {
         piece.type = pieceType
         const teamType = piece.team === TeamType.OUR ? 'white' : 'black'
         let image = ''
