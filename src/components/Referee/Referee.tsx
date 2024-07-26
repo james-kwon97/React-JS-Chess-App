@@ -52,7 +52,7 @@ export default function Referee() {
 
     if (enPassantMove) {
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (piece.position.samePosition(playedPiece.position)) {
+        if (piece.samePosition(playedPiece)) {
           piece.enPassant = false
           piece.position.x = destination.x
           piece.position.y = destination.y

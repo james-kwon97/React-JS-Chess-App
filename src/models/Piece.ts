@@ -15,7 +15,10 @@ export class Piece {
     this.team = team
   }
 
-  samePosition(otherPiece: Piece): boolean {
+  samePiecePosition(otherPiece: Piece): boolean {
     return this.position.samePosition(otherPiece.position)
+  }
+  samePosition(otherPosition: Position): boolean {
+    return this.position.samePosition(otherPosition)
   }
 }
