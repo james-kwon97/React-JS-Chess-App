@@ -52,13 +52,13 @@ export default function Referee() {
 
     if (enPassantMove) {
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (piece.samePosition(playedPiece)) {
+        if (piece.samePiecePosition(playedPiece)) {
           piece.enPassant = false
           piece.position.x = destination.x
           piece.position.y = destination.y
           results.push(piece)
         } else if (
-          !piece.position.samePosition(
+          !piece.samePosition(
             new Position(destination.x, destination.y - pawnDirection)
           )
         ) {
@@ -76,7 +76,7 @@ export default function Referee() {
       // UPDATES THE PIECE POSITION
       // AND IF A PIECE IS ATTACKED, REMOVES IT
       const updatedPieces = pieces.reduce((results, piece) => {
-        if (piece.position.samePosition(playedPiece.position)) {
+        if (piece.samePiecePosition(playedPiece)) {
           // SPECIAL MOVE
           piece.enPassant =
             Math.abs(playedPiece.position.y - destination.y) === 2 &&
@@ -94,9 +94,7 @@ export default function Referee() {
 
           results.push(piece)
         } else if (
-          !piece.position.samePosition(
-            new Position(destination.x, destination.y)
-          )
+          !piece.samePosition(new Position(destination.x, destination.y))
         ) {
           if (piece.type === PieceType.PAWN) {
             piece.enPassant = false
@@ -204,7 +202,7 @@ export default function Referee() {
       return
     }
     const updatedPieces = pieces.reduce((results, piece) => {
-      if (piece.position.samePosition(promotionPawn.position)) {
+      if (piece.samePiecePosition(promotionPawn)) {
         piece.type = pieceType
         const teamType = piece.team === TeamType.OUR ? 'white' : 'black'
         let image = ''

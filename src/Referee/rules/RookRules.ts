@@ -21,10 +21,7 @@ export const rookMove = (
         initialPosition.y + i * multiplier
       )
 
-      if (
-        passedPosition.x === desiredPosition.x &&
-        passedPosition.y === desiredPosition.y
-      ) {
+      if (passedPosition.samePosition(desiredPosition)) {
         if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
         }
@@ -44,10 +41,7 @@ export const rookMove = (
         initialPosition.y
       )
 
-      if (
-        passedPosition.x === desiredPosition.x &&
-        passedPosition.y === desiredPosition.y
-      ) {
+      if (passedPosition.samePosition(desiredPosition)) {
         if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
         }

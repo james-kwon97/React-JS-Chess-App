@@ -25,10 +25,7 @@ export const bishopMove = (
         initialPosition.y + i
       )
       // CHECK IF THE TILE IS THE DESTINATION TILE
-      if (
-        passedPosition.x === desiredPosition.x &&
-        passedPosition.y === desiredPosition.y
-      ) {
+      if (passedPosition.samePosition(desiredPosition)) {
         // DEALING WITH DESTINATION TILE
         if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
@@ -50,10 +47,7 @@ export const bishopMove = (
         initialPosition.y - i
       )
       // CHECK IF THE TILE IS THE DESTINATION TILE
-      if (
-        passedPosition.x === desiredPosition.x &&
-        passedPosition.y === desiredPosition.y
-      ) {
+      if (passedPosition.samePosition(desiredPosition)) {
         // DEALING WITH DESTINATION TILE
         if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
@@ -76,10 +70,7 @@ export const bishopMove = (
         initialPosition.y - i
       )
       // CHECK IF THE TILE IS THE DESTINATION TILE
-      if (
-        passedPosition.x === desiredPosition.x &&
-        passedPosition.y === desiredPosition.y
-      ) {
+      if (passedPosition.samePosition(desiredPosition)) {
         // DEALING WITH DESTINATION TILE
         if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
@@ -102,10 +93,7 @@ export const bishopMove = (
         initialPosition.y + i
       )
       // CHECK IF THE TILE IS THE DESTINATION TILE
-      if (
-        passedPosition.x === desiredPosition.x &&
-        passedPosition.y === desiredPosition.y
-      ) {
+      if (passedPosition.samePosition(desiredPosition)) {
         // DEALING WITH DESTINATION TILE
         if (tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
           return true
