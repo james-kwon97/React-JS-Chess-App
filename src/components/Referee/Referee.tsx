@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { PieceType, TeamType, initialBoardState } from '../../Constants'
+import { initialBoardState } from '../../Constants'
 import Chessboard from '../Chessboard/Chessboard'
 import {
   bishopMove,
@@ -16,6 +16,7 @@ import {
   rookMove,
 } from '../../Referee/rules'
 import { Piece, Position } from '../../models'
+import { PieceType, TeamType } from '../../Types'
 
 export default function Referee() {
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)

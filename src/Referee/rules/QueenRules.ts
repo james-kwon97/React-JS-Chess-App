@@ -1,4 +1,5 @@
-import { TeamType } from '../../Constants'
+
+import { TeamType } from '../../Types'
 import { Piece, Position } from '../../models'
 import {
   tileIsEmptyOrOccupiedByOpponent,
