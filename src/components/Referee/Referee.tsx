@@ -55,7 +55,7 @@ export default function Referee() {
     if (enPassantMove) {
       const updatedPieces = pieces.reduce((results, piece) => {
         if (piece.samePiecePosition(playedPiece)) {
-          if (piece.isPawn()) (piece as Pawn).enPassant = false
+          if (piece.isPawn) (piece as Pawn).enPassant = false
           piece.position.x = destination.x
           piece.position.y = destination.y
           results.push(piece)
@@ -64,8 +64,8 @@ export default function Referee() {
             new Position(destination.x, destination.y - pawnDirection)
           )
         ) {
-          if (piece.type === PieceType.PAWN) {
-            piece.enPassant = false
+          if (piece.isPawn) {
+            ;(piece as Pawn).enPassant = false
           }
           results.push(piece)
         }
@@ -80,9 +80,10 @@ export default function Referee() {
       const updatedPieces = pieces.reduce((results, piece) => {
         if (piece.samePiecePosition(playedPiece)) {
           // SPECIAL MOVE
-          piece.enPassant =
-            Math.abs(playedPiece.position.y - destination.y) === 2 &&
-            piece.type === PieceType.PAWN
+          if (piece.isPawn)
+            (piece as Pawn).enPassant =
+              Math.abs(playedPiece.position.y - destination.y) === 2 &&
+              piece.type === PieceType.PAWN
 
           piece.position.x = destination.x
           piece.position.y = destination.y
@@ -98,8 +99,8 @@ export default function Referee() {
         } else if (
           !piece.samePosition(new Position(destination.x, destination.y))
         ) {
-          if (piece.type === PieceType.PAWN) {
-            piece.enPassant = false
+          if (piece.isPawn) {
+            ;(piece as Pawn).enPassant = false
           }
           results.push(piece)
         }
@@ -133,7 +134,8 @@ export default function Referee() {
           (p) =>
             p.position.x === desiredPosition.x &&
             p.position.y === desiredPosition.y - pawnDirection &&
-            p.enPassant
+            p.isPawn &&
+            (p as Pawn).enPassant
         )
         if (piece) {
           return true

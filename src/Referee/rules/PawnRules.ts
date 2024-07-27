@@ -96,16 +96,16 @@ export const getPossiblePawnMoves = (
     possibleMoves.push(upperLeftAttack)
   } else if (!tileIsOccupied(upperLeftAttack, boardState)) {
     const leftPiece = boardState.find((p) => p.samePosition(leftPosition))
-    if (leftPiece != null && leftPiece.enPassant) {
-      possibleMoves.push(upperLeftAttack)
+    if (leftPiece != null) {
+      //} && leftPiece.enPassant) {
     }
   }
   if (tileIsOccupiedByOpponent(upperRightAttack, boardState, pawn.team)) {
     possibleMoves.push(upperRightAttack)
   } else if (!tileIsOccupied(upperRightAttack, boardState)) {
     const rightPiece = boardState.find((p) => p.samePosition(rightPosition))
-    if (rightPiece != null && rightPiece.enPassant) {
-      possibleMoves.push(upperRightAttack)
+    if (rightPiece != null) {
+      //} && rightPiece.enPassant) {
     }
   }
   return possibleMoves
