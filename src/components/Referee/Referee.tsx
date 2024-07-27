@@ -17,6 +17,7 @@ import {
 } from '../../Referee/rules'
 import { Piece, Position } from '../../models'
 import { PieceType, TeamType } from '../../Types'
+import { Pawn } from '../../models/Pawn'
 
 export default function Referee() {
   const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
@@ -54,7 +55,7 @@ export default function Referee() {
     if (enPassantMove) {
       const updatedPieces = pieces.reduce((results, piece) => {
         if (piece.samePiecePosition(playedPiece)) {
-          piece.enPassant = false
+          if (piece.isPawn()) (piece as Pawn).enPassant = false
           piece.position.x = destination.x
           piece.position.y = destination.y
           results.push(piece)
