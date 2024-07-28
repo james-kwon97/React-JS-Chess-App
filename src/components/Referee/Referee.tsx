@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { initialBoardState } from '../../Constants'
+import { initialBoard } from '../../Constants'
 import Chessboard from '../Chessboard/Chessboard'
 import {
   bishopMove,
@@ -18,9 +18,10 @@ import {
 import { Piece, Position } from '../../models'
 import { PieceType, TeamType } from '../../Types'
 import { Pawn } from '../../models/Pawn'
+import { Board } from '../../models/Board'
 
 export default function Referee() {
-  const [pieces, setPieces] = useState<Piece[]>(initialBoardState)
+  const [board, setBoard] = useState<Board>(initialBoard)
   const [promotionPawn, setPromotionPawn] = useState<Piece>()
   const modalRef = useRef<HTMLDivElement>(null)
 
