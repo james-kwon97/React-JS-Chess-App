@@ -47,8 +47,12 @@ export default function Referee() {
       playedPiece.team
     )
 
-    // Playing the move
-    board.playMove(enPassantMove, validMove, playedPiece, destination)
+    // playMove modifies the board thus we need to call setBoard
+    setBoard((previousBoard) => {
+      // Playing the move
+      board.playMove(enPassantMove, validMove, playedPiece, destination)
+      return board
+    })
 
     // This is for promoting a pawn
     let promotionRow = playedPiece.team === TeamType.OUR ? 7 : 0

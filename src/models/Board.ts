@@ -77,6 +77,7 @@ export class Board {
       // UPDATES THE PIECE POSITION
       // AND IF A PIECE IS ATTACKED, REMOVES IT
       this.pieces = this.pieces.reduce((results, piece) => {
+        // Piece that we are currently moving
         if (piece.samePiecePosition(playedPiece)) {
           // SPECIAL MOVE
           if (piece.isPawn)
@@ -88,14 +89,15 @@ export class Board {
           piece.position.y = destination.y
 
           results.push(piece)
-        } else if (
-          !piece.samePosition(new Position(destination.x, destination.y))
-        ) {
+        } else if (!piece.samePosition(destination)) {
           if (piece.isPawn) {
             ;(piece as Pawn).enPassant = false
           }
           results.push(piece)
         }
+
+        // The piece at the destination location
+        // Won't be pushed in the results
 
         return results
       }, [] as Piece[])
