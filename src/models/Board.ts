@@ -1,3 +1,11 @@
+import {
+  getPossibleBishopMoves,
+  getPossibleKingMoves,
+  getPossibleKnightMoves,
+  getPossiblePawnMoves,
+  getPossibleQueenMoves,
+  getPossibleRookMoves,
+} from '../Referee/rules'
 import { PieceType, TeamType } from '../Types'
 import { Pawn } from './Pawn'
 import { Piece } from './Piece'
@@ -12,17 +20,38 @@ export class Board {
 
   calculateAllMoves() {
     for (const piece of this.pieces) {
-      piece.possibleMoves = []
+      piece.possibleMoves = this.getValidMoves(piece, this.pieces)
+    }
+  }
+
+  getValidMoves(piece: Piece, boardState: Piece[]): Position[] {
+    switch (piece.type) {
+      case PieceType.PAWN:
+        return getPossiblePawnMoves(piece, boardState)
+      case PieceType.KNIGHT:
+        return getPossibleKnightMoves(piece, boardState)
+      case PieceType.BISHOP:
+        return getPossibleBishopMoves(piece, boardState)
+      case PieceType.ROOK:
+        return getPossibleRookMoves(piece, boardState)
+      case PieceType.QUEEN:
+        return getPossibleQueenMoves(piece, boardState)
+      case PieceType.KING:
+        return getPossibleKingMoves(piece, boardState)
+
+      default:
+        return []
     }
   }
 
   playMove(
     enPassantMove: boolean,
     validMove: boolean,
-    destination: Position,
-    playedPiece: Piece
+    playedPiece: Piece,
+    destination: Position
   ): boolean {
     const pawnDirection = playedPiece.team === TeamType.OUR ? 1 : -1
+
     if (enPassantMove) {
       this.pieces = this.pieces.reduce((results, piece) => {
         if (piece.samePiecePosition(playedPiece)) {
