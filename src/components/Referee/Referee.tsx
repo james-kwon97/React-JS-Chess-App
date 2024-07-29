@@ -34,6 +34,7 @@ export default function Referee() {
   }
 
   function playMove(playedPiece: Piece, destination: Position): boolean {
+    let playedMoveIsValid = false
     const validMove = isValidMove(
       playedPiece.position,
       destination,
@@ -50,7 +51,12 @@ export default function Referee() {
     // playMove modifies the board thus we need to call setBoard
     setBoard((previousBoard) => {
       // Playing the move
-      board.playMove(enPassantMove, validMove, playedPiece, destination)
+      playedMoveIsValid = board.playMove(
+        enPassantMove,
+        validMove,
+        playedPiece,
+        destination
+      )
 
       return board.copy()
     })
