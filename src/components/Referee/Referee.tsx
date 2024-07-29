@@ -58,7 +58,7 @@ export default function Referee() {
         destination
       )
 
-      return board.copy()
+      return board.clone()
     })
 
     // This is for promoting a pawn

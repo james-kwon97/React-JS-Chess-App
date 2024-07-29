@@ -108,7 +108,7 @@ export class Board {
     }
     return true
   }
-  copy(): Board {
+  clone(): Board {
     return new Board(this.pieces.map((p) => p.clone()))
   }
 }
