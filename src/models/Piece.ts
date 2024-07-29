@@ -52,6 +52,6 @@ export class Piece {
   }
 
   clone(): Piece {
-    return new Piece(this.position, this.type, this.team)
+    return new Piece(this.position, this.type, this.team, this.possibleMoves)
   }
 }
