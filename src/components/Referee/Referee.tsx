@@ -51,7 +51,9 @@ export default function Referee() {
     setBoard((previousBoard) => {
       // Playing the move
       board.playMove(enPassantMove, validMove, playedPiece, destination)
-      return board
+
+      const boardClone = board.copy()
+      return boardClone
     })
 
     // This is for promoting a pawn

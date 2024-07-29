@@ -108,4 +108,7 @@ export class Board {
     }
     return true
   }
+  copy(): Board {
+    return new Board(this.pieces)
+  }
 }

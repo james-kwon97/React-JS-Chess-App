@@ -44,4 +44,8 @@ export class Piece {
   samePosition(otherPosition: Position): boolean {
     return this.position.samePosition(otherPosition)
   }
+
+  clone(): Piece {
+    return new Piece(this.position, this.type, this.team)
+  }
 }
