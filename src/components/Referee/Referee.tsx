@@ -168,35 +168,39 @@ export default function Referee() {
       return
     }
 
-    board.pieces = board.pieces.reduce((results, piece) => {
-      if (piece.samePiecePosition(promotionPawn)) {
-        piece.type = pieceType
-        const teamType = piece.team === TeamType.OUR ? 'white' : 'black'
-        let image = ''
-        switch (pieceType) {
-          case PieceType.ROOK: {
-            image = 'rook'
-            break
+    setBoard((previousBoard) => {
+      const clonedBoard = board.clone()
+      clonedBoard.pieces = clonedBoard.pieces.reduce((results, piece) => {
+        if (piece.samePiecePosition(promotionPawn)) {
+          piece.type = pieceType
+          const teamType = piece.team === TeamType.OUR ? 'white' : 'black'
+          let image = ''
+          switch (pieceType) {
+            case PieceType.ROOK: {
+              image = 'rook'
+              break
+            }
+            case PieceType.KNIGHT: {
+              image = 'knight'
+              break
+            }
+            case PieceType.BISHOP: {
+              image = 'bishop'
+              break
+            }
+            case PieceType.QUEEN: {
+              image = 'queen'
+              break
+            }
           }
-          case PieceType.KNIGHT: {
-            image = 'knight'
-            break
-          }
-          case PieceType.BISHOP: {
-            image = 'bishop'
-            break
-          }
-          case PieceType.QUEEN: {
-            image = 'queen'
-            break
-          }
-        }
 
-        piece.image = `assets/images/${teamType}-${image}.png`
-      }
-      results.push(piece)
-      return results
-    }, [] as Piece[])
+          piece.image = `assets/images/${teamType}-${image}.png`
+        }
+        results.push(piece)
+        return results
+      }, [] as Piece[])
+      return clonedBoard
+    })
 
     updatePossibleMoves()
 
