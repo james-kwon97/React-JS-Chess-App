@@ -3,12 +3,6 @@ import { initialBoard } from '../../Constants'
 import Chessboard from '../Chessboard/Chessboard'
 import {
   bishopMove,
-  getPossibleBishopMoves,
-  getPossibleKingMoves,
-  getPossibleKnightMoves,
-  getPossiblePawnMoves,
-  getPossibleQueenMoves,
-  getPossibleRookMoves,
   kingMove,
   knightMove,
   pawnMove,
@@ -35,6 +29,7 @@ export default function Referee() {
 
   function playMove(playedPiece: Piece, destination: Position): boolean {
     let playedMoveIsValid = false
+
     const validMove = isValidMove(
       playedPiece.position,
       destination,
@@ -172,6 +167,7 @@ export default function Referee() {
     if (promotionPawn === undefined) {
       return
     }
+
     board.pieces = board.pieces.reduce((results, piece) => {
       if (piece.samePiecePosition(promotionPawn)) {
         piece.type = pieceType
