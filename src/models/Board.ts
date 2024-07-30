@@ -41,8 +41,17 @@ export class Board {
       // Determine if the move is safe
       for (const p of this.pieces) {
         if (p.team === TeamType.OPPONENT) continue
-        if (p.isPawn) continue
-        if (p.possibleMoves?.some((p) => p.samePosition(move))) {
+        if (p.isPawn) {
+          const possiblePawnMoves = this.getValidMoves(p, this.pieces)
+
+          if (
+            possiblePawnMoves?.some(
+              (ppm) => ppm.x !== p.position.x && ppm.samePosition(move)
+            )
+          ) {
+            safe = false
+          }
+        } else if (p.possibleMoves?.some((p) => p.samePosition(move))) {
           safe = false
         }
       }
