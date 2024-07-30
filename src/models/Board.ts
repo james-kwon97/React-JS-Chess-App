@@ -34,6 +34,13 @@ export class Board {
 
     // Simulate king moves
     for (const move of king.possibleMoves) {
+      const pieceAtDestination = this.pieces.find((p) => p.samePosition(move))
+
+      // If there is a piece at the destination remove it
+      if (pieceAtDestination !== undefined) {
+        this.pieces = this.pieces.filter((p) => !p.samePosition(move))
+      }
+
       king.position = move
 
       let safe = true
