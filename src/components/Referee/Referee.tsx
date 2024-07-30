@@ -61,10 +61,14 @@ export default function Referee() {
 
     if (destination.y === promotionRow && playedPiece.isPawn) {
       modalRef.current?.classList.remove('hidden')
-      setPromotionPawn(playedPiece)
+      setPromotionPawn((previousPromotionPawn) => {
+        const clonedPlayedPiece = playedPiece.clone()
+        clonedPlayedPiece.position = destination.clone()
+        return clonedPlayedPiece
+      })
     }
 
-    return true
+    return playedMoveIsValid
   }
 
   function isEnPassantMove(
