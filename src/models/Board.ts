@@ -39,9 +39,19 @@ export class Board {
       let safe = true
 
       // Determine if the move is safe
+      for (const p of this.pieces) {
+        if (p.team === TeamType.OPPONENT) continue
+        if (p.isPawn) continue
+        if (p.possibleMoves?.some((p) => p.samePosition(move))) {
+          safe = false
+        }
+      }
 
+      // Remove the move from possibleMoves
       if (!safe) {
-        // Remove the move from possibleMoves
+        king.possibleMoves = king.possibleMoves?.filter(
+          (m) => !m.samePosition(move)
+        )
       }
     }
     king.position = originalKingPosition
