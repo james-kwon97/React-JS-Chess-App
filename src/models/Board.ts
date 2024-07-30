@@ -34,22 +34,43 @@ export class Board {
 
     // Simulate king moves
     for (const move of king.possibleMoves) {
-      const pieceAtDestination = this.pieces.find((p) => p.samePosition(move))
+      const simulatedBoard = this.clone()
+
+      const pieceAtDestination = simulatedBoard.pieces.find((p) =>
+        p.samePosition(move)
+      )
 
       // If there is a piece at the destination remove it
       if (pieceAtDestination !== undefined) {
-        this.pieces = this.pieces.filter((p) => !p.samePosition(move))
+        simulatedBoard.pieces = simulatedBoard.pieces.filter(
+          (p) => !p.samePosition(move)
+        )
       }
+      const simulatedKing = simulatedBoard.pieces.find(
+        (p) => p.isKing && p.team === TeamType.OPPONENT
+      )
+      if (simulatedKing === undefined) continue
+      simulatedKing.position = move
 
-      king.position = move
+      for (const queen of simulatedBoard.pieces.filter(
+        (p) => p.isQueen && p.team === TeamType.OUR
+      )) {
+        queen.possibleMoves = simulatedBoard.getValidMoves(
+          queen,
+          simulatedBoard.pieces
+        )
+      }
 
       let safe = true
 
       // Determine if the move is safe
-      for (const p of this.pieces) {
+      for (const p of simulatedBoard.pieces) {
         if (p.team === TeamType.OPPONENT) continue
         if (p.isPawn) {
-          const possiblePawnMoves = this.getValidMoves(p, this.pieces)
+          const possiblePawnMoves = simulatedBoard.getValidMoves(
+            p,
+            simulatedBoard.pieces
+          )
 
           if (
             possiblePawnMoves?.some(
