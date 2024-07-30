@@ -19,9 +19,32 @@ export class Board {
   }
 
   calculateAllMoves() {
+    // Calculate the moves of all the pieces
     for (const piece of this.pieces) {
       piece.possibleMoves = this.getValidMoves(piece, this.pieces)
     }
+
+    const king = this.pieces.find(
+      (p) => p.isKing && p.team === TeamType.OPPONENT
+    )
+
+    if (king?.possibleMoves === undefined) return
+
+    const originalKingPosition = king.position.clone()
+
+    // Simulate king moves
+    for (const move of king.possibleMoves) {
+      king.position = move
+
+      let safe = true
+
+      // Determine if the move is safe
+
+      if (!safe) {
+        // Remove the move from possibleMoves
+      }
+    }
+    king.position = originalKingPosition
   }
 
   getValidMoves(piece: Piece, boardState: Piece[]): Position[] {
