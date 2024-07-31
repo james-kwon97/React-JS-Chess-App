@@ -23,14 +23,15 @@ export class Board {
     for (const piece of this.pieces) {
       piece.possibleMoves = this.getValidMoves(piece, this.pieces)
     }
+    this.checkKingMoves()
+  }
 
+  checkKingMoves() {
     const king = this.pieces.find(
       (p) => p.isKing && p.team === TeamType.OPPONENT
     )
 
     if (king?.possibleMoves === undefined) return
-
-    const originalKingPosition = king.position.clone()
 
     // Simulate king moves
     for (const move of king.possibleMoves) {
@@ -46,17 +47,18 @@ export class Board {
           (p) => !p.samePosition(move)
         )
       }
+      // We tell the complier that the simulated king is always present
       const simulatedKing = simulatedBoard.pieces.find(
         (p) => p.isKing && p.team === TeamType.OPPONENT
       )
-      if (simulatedKing === undefined) continue
-      simulatedKing.position = move
 
-      for (const queen of simulatedBoard.pieces.filter(
-        (p) => p.isQueen && p.team === TeamType.OUR
+      simulatedKing!.position = move
+
+      for (const enemy of simulatedBoard.pieces.filter(
+        (p) => p.team === TeamType.OUR
       )) {
-        queen.possibleMoves = simulatedBoard.getValidMoves(
-          queen,
+        enemy.possibleMoves = simulatedBoard.getValidMoves(
+          enemy,
           simulatedBoard.pieces
         )
       }
@@ -78,9 +80,11 @@ export class Board {
             )
           ) {
             safe = false
+            break
           }
         } else if (p.possibleMoves?.some((p) => p.samePosition(move))) {
           safe = false
+          break
         }
       }
 
@@ -91,7 +95,6 @@ export class Board {
         )
       }
     }
-    king.position = originalKingPosition
   }
 
   getValidMoves(piece: Piece, boardState: Piece[]): Position[] {
