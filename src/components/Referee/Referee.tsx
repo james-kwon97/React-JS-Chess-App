@@ -35,6 +35,7 @@ export default function Referee() {
     const validMove = playedPiece.possibleMoves?.some((m) =>
       m.samePosition(destination)
     )
+    if (!validMove) return false
 
     const enPassantMove = isEnPassantMove(
       playedPiece.position,
