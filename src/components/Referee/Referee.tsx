@@ -28,14 +28,14 @@ export default function Referee() {
   }
 
   function playMove(playedPiece: Piece, destination: Position): boolean {
+    // If the playing piece doesn't have any moves return
     if (playedPiece.possibleMoves === undefined) return false
-    if (playedPiece.team === TeamType.OUR && board.totalTurns % 2 !== 1) {
-      console.log('Invalid turn white')
-    }
 
-    if (playedPiece.team === TeamType.OPPONENT && board.totalTurns % 2 !== 0) {
-      console.log('Invalid turn black')
-    }
+    // Prevent the inactive team from playing
+    if (playedPiece.team === TeamType.OUR && board.totalTurns % 2 !== 1)
+      return false
+    if (playedPiece.team === TeamType.OPPONENT && board.totalTurns % 2 !== 0)
+      return false
 
     let playedMoveIsValid = false
 
