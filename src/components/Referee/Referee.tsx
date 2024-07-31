@@ -198,6 +198,7 @@ export default function Referee() {
 
   return (
     <>
+      <p style={{ color: 'white', fontSize: '24px' }}>{board.totalTurns}</p>
       <div id="pawn-promotion-modal" className="hidden" ref={modalRef}>
         <div className="modal-body">
           <img
