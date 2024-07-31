@@ -29,6 +29,9 @@ export default function Referee() {
 
   function playMove(playedPiece: Piece, destination: Position): boolean {
     if (playedPiece.possibleMoves === undefined) return false
+    if (playedPiece.team === TeamType.OUR && board.totalTurns % 2 === 1) {
+      console.log('valid turn')
+    }
 
     let playedMoveIsValid = false
 
@@ -195,6 +198,8 @@ export default function Referee() {
   function promotionTeamType() {
     return promotionPawn?.team === TeamType.OUR ? 'white' : 'black'
   }
+
+  // 1 is white team, 2 is black team
 
   return (
     <>
