@@ -13,9 +13,11 @@ import { Position } from './Position'
 
 export class Board {
   pieces: Piece[]
+  totalTurns: number
 
-  constructor(pieces: Piece[]) {
+  constructor(pieces: Piece[], totalTurns: number) {
     this.pieces = pieces
+    this.totalTurns = totalTurns
   }
 
   calculateAllMoves() {
@@ -182,6 +184,9 @@ export class Board {
     return true
   }
   clone(): Board {
-    return new Board(this.pieces.map((p) => p.clone()))
+    return new Board(
+      this.pieces.map((p) => p.clone()),
+      this.totalTurns
+    )
   }
 }
