@@ -53,15 +53,17 @@ export default function Referee() {
 
     // playMove modifies the board thus we need to call setBoard
     setBoard((previousBoard) => {
+      const clonedBoard = board.clone()
       // Playing the move
-      playedMoveIsValid = board.playMove(
+      playedMoveIsValid = clonedBoard.playMove(
         enPassantMove,
         validMove,
         playedPiece,
         destination
       )
+      clonedBoard.totalTurns += 1
 
-      return board.clone()
+      return clonedBoard
     })
 
     // This is for promoting a pawn
