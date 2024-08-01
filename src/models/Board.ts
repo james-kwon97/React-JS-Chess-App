@@ -51,19 +51,24 @@ export class Board {
       for (const move of piece.possibleMoves) {
         const simulatedBoard = this.clone()
 
+        // Remove the piece at the destination position
         simulatedBoard.pieces = simulatedBoard.pieces.filter(
           (p) => !p.samePosition(move)
         )
 
+        // Get the piece on the cloned board
         const clonedPiece = simulatedBoard.pieces.find((p) =>
           p.samePiecePosition(piece)
         )!
         clonedPiece.position = move.clone()
 
+        // Get the king of the cloned board
         const clonedKing = simulatedBoard.pieces.find(
           (p) => p.isKing && p.team === simulatedBoard.currentTeam
         )!
 
+        // Loop through all enemy pieces, update their possible moves
+        // And check if the current team's king will be in danger
         for (const enemy of simulatedBoard.pieces.filter(
           (p) => p.team !== simulatedBoard.currentTeam
         )) {
