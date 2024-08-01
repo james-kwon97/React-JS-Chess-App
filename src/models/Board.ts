@@ -29,8 +29,7 @@ export class Board {
     for (const piece of this.pieces) {
       piece.possibleMoves = this.getValidMoves(piece, this.pieces)
     }
-    // Check if the king moves are valid
-    // this.checkKingMoves()
+    // Check if the current team moves are valid
     this.checkCurrentTeamMoves()
 
     // Remove the possible moves for the team that is not playing
@@ -38,77 +37,6 @@ export class Board {
       (p) => p.team !== this.currentTeam
     )) {
       piece.possibleMoves = []
-    }
-  }
-
-  checkKingMoves() {
-    // King of the currently playing team
-    const king = this.pieces.find(
-      (p) => p.isKing && p.team === this.currentTeam
-    )
-
-    if (king?.possibleMoves === undefined) return
-
-    // Simulate king moves
-    for (const move of king.possibleMoves) {
-      const simulatedBoard = this.clone()
-
-      const pieceAtDestination = simulatedBoard.pieces.find((p) =>
-        p.samePosition(move)
-      )
-
-      // If there is a piece at the destination remove it
-      if (pieceAtDestination !== undefined) {
-        simulatedBoard.pieces = simulatedBoard.pieces.filter(
-          (p) => !p.samePosition(move)
-        )
-      }
-      // We tell the complier that the simulated king is always present
-      const simulatedKing = simulatedBoard.pieces.find(
-        (p) => p.isKing && p.team === simulatedBoard.currentTeam
-      )
-      simulatedKing!.position = move
-
-      for (const enemy of simulatedBoard.pieces.filter(
-        (p) => p.team !== simulatedBoard.currentTeam
-      )) {
-        enemy.possibleMoves = simulatedBoard.getValidMoves(
-          enemy,
-          simulatedBoard.pieces
-        )
-      }
-
-      let safe = true
-
-      // Determine if the move is safe
-      for (const p of simulatedBoard.pieces) {
-        if (p.team === simulatedBoard.currentTeam) continue
-        if (p.isPawn) {
-          const possiblePawnMoves = simulatedBoard.getValidMoves(
-            p,
-            simulatedBoard.pieces
-          )
-
-          if (
-            possiblePawnMoves?.some(
-              (ppm) => ppm.x !== p.position.x && ppm.samePosition(move)
-            )
-          ) {
-            safe = false
-            break
-          }
-        } else if (p.possibleMoves?.some((p) => p.samePosition(move))) {
-          safe = false
-          break
-        }
-      }
-
-      // Remove the move from possibleMoves
-      if (!safe) {
-        king.possibleMoves = king.possibleMoves?.filter(
-          (m) => !m.samePosition(move)
-        )
-      }
     }
   }
 
