@@ -20,12 +20,8 @@ export default function Referee() {
   const modalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    updatePossibleMoves()
-  }, [])
-
-  function updatePossibleMoves() {
     board.calculateAllMoves()
-  }
+  }, [])
 
   function playMove(playedPiece: Piece, destination: Position): boolean {
     // If the playing piece doesn't have any moves return

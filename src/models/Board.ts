@@ -29,7 +29,15 @@ export class Board {
     for (const piece of this.pieces) {
       piece.possibleMoves = this.getValidMoves(piece, this.pieces)
     }
+    // Check if the king moves are valid
     this.checkKingMoves()
+
+    // Remove the possible moves for the team that is not playing
+    for (const piece of this.pieces.filter(
+      (p) => p.team !== this.currentTeam
+    )) {
+      piece.possibleMoves = []
+    }
   }
 
   checkKingMoves() {
