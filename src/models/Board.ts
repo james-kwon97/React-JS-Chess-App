@@ -132,7 +132,6 @@ export class Board {
           (p) => p.isKing && p.team === simulatedBoard.currentTeam
         )!
 
-        let safe = true
         for (const enemy of simulatedBoard.pieces.filter(
           (p) => p.team !== simulatedBoard.currentTeam
         )) {
@@ -149,8 +148,9 @@ export class Board {
                   m.samePosition(clonedKing.position)
               )
             ) {
-              safe = false
-              return
+              piece.possibleMoves = piece.possibleMoves?.filter(
+                (m) => !m.samePosition(move)
+              )
             }
           } else {
             if (
@@ -158,15 +158,10 @@ export class Board {
                 m.samePosition(clonedKing.position)
               )
             ) {
-              safe = false
-              return
+              piece.possibleMoves = piece.possibleMoves?.filter(
+                (m) => !m.samePosition(move)
+              )
             }
-          }
-
-          if (!safe) {
-            piece.possibleMoves = piece.possibleMoves?.filter(
-              (m) => !m.samePosition(move)
-            )
           }
         }
       }
