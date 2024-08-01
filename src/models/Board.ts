@@ -30,7 +30,7 @@ export class Board {
       piece.possibleMoves = this.getValidMoves(piece, this.pieces)
     }
     // Check if the king moves are valid
-    this.checkKingMoves()
+    // this.checkKingMoves()
     this.checkCurrentTeamMoves()
 
     // Remove the possible moves for the team that is not playing
@@ -119,7 +119,7 @@ export class Board {
     )) {
       if (piece.possibleMoves === undefined) continue
 
-      // Simulate all the piece omves
+      // Simulate all the piece moves
       for (const move of piece.possibleMoves) {
         const simulatedBoard = this.clone()
 
@@ -127,6 +127,48 @@ export class Board {
           p.samePiecePosition(piece)
         )!
         clonedPiece.position = move.clone()
+
+        const clonedKing = simulatedBoard.pieces.find(
+          (p) => p.isKing && p.team === simulatedBoard.currentTeam
+        )!
+
+        let safe = true
+        for (const enemy of simulatedBoard.pieces.filter(
+          (p) => p.team !== simulatedBoard.currentTeam
+        )) {
+          enemy.possibleMoves = simulatedBoard.getValidMoves(
+            enemy,
+            simulatedBoard.pieces
+          )
+
+          if (enemy.isPawn) {
+            if (
+              enemy.possibleMoves.some(
+                (m) =>
+                  m.x !== enemy.position.x &&
+                  m.samePosition(clonedKing.position)
+              )
+            ) {
+              safe = false
+              return
+            }
+          } else {
+            if (
+              enemy.possibleMoves.some((m) =>
+                m.samePosition(clonedKing.position)
+              )
+            ) {
+              safe = false
+              return
+            }
+          }
+
+          if (!safe) {
+            piece.possibleMoves = piece.possibleMoves?.filter(
+              (m) => !m.samePosition(move)
+            )
+          }
+        }
       }
     }
   }
