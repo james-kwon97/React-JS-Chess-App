@@ -33,8 +33,9 @@ export class Board {
   }
 
   checkKingMoves() {
+    // King of the currently playing team
     const king = this.pieces.find(
-      (p) => p.isKing && p.team === TeamType.OPPONENT
+      (p) => p.isKing && p.team === this.currentTeam
     )
 
     if (king?.possibleMoves === undefined) return
@@ -55,13 +56,12 @@ export class Board {
       }
       // We tell the complier that the simulated king is always present
       const simulatedKing = simulatedBoard.pieces.find(
-        (p) => p.isKing && p.team === TeamType.OPPONENT
+        (p) => p.isKing && p.team === simulatedBoard.currentTeam
       )
-
       simulatedKing!.position = move
 
       for (const enemy of simulatedBoard.pieces.filter(
-        (p) => p.team === TeamType.OUR
+        (p) => p.team !== simulatedBoard.currentTeam
       )) {
         enemy.possibleMoves = simulatedBoard.getValidMoves(
           enemy,
@@ -73,7 +73,7 @@ export class Board {
 
       // Determine if the move is safe
       for (const p of simulatedBoard.pieces) {
-        if (p.team === TeamType.OPPONENT) continue
+        if (p.team === simulatedBoard.currentTeam) continue
         if (p.isPawn) {
           const possiblePawnMoves = simulatedBoard.getValidMoves(
             p,
