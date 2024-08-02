@@ -171,5 +171,21 @@ export const getCastlingMoves = (
   boardstate: Piece[]
 ): Position[] => {
   const possibleMoves: Position[] = []
+
+  if (king.hasMoved) return possibleMoves
+
+  // We get the rooks from the king's team which haven't moved
+  const rooks = boardstate.filter(
+    (p) => p.isRook && p.team === king.team && !p.hasMoved
+  )
+  // Loop through the rooks
+  for (const rook of rooks) {
+    // Determine if we need to go to the right or the left side
+    const direction = king.position.x - rook.position.x > 0 ? 1 : -1
+
+    const adjacentPosition = king.position.clone()
+    adjacentPosition.x += direction
+  }
+
   return possibleMoves
 }
