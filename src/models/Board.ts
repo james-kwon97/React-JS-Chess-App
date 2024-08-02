@@ -139,6 +139,7 @@ export class Board {
           if (piece.isPawn) (piece as Pawn).enPassant = false
           piece.position.x = destination.x
           piece.position.y = destination.y
+          piece.hasMoved = true
           results.push(piece)
         } else if (
           !piece.samePosition(
@@ -168,6 +169,7 @@ export class Board {
 
           piece.position.x = destination.x
           piece.position.y = destination.y
+          piece.hasMoved = true
 
           results.push(piece)
         } else if (!piece.samePosition(destination)) {
