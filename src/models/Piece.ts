@@ -7,6 +7,8 @@ export class Piece {
   type: PieceType
   team: TeamType
   possibleMoves?: Position[]
+  hasMoved: boolean
+
   constructor(
     position: Position,
     type: PieceType,
@@ -18,6 +20,7 @@ export class Piece {
     this.type = type
     this.team = team
     this.possibleMoves = possibleMoves
+    this.hasMoved = false
   }
 
   get isPawn(): boolean {
