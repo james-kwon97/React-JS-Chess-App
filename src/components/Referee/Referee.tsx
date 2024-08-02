@@ -58,8 +58,6 @@ export default function Referee() {
         playedPiece,
         destination
       )
-      console.log(clonedBoard.pieces.filter((p) => p.hasMoved).length)
-
       return clonedBoard
     })
 

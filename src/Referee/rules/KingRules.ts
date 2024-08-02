@@ -164,3 +164,12 @@ export const getPossibleKingMoves = (
 
   return possibleMoves
 }
+
+// In this method the enemy moves have already been calculated
+export const getCastlingMoves = (
+  king: Piece,
+  boardstate: Piece[]
+): Position[] => {
+  const possibleMoves: Position[] = []
+  return possibleMoves
+}
