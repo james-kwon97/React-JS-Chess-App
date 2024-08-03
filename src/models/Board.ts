@@ -33,7 +33,11 @@ export class Board {
 
     // Calculate castling moves
     for (const king of this.pieces.filter((p) => p.isKing)) {
-      king.possibleMoves = getCastlingMoves(king, this.pieces)
+      if (king.possibleMoves === undefined) continue
+      king.possibleMoves = [
+        ...king.possibleMoves,
+        ...getCastlingMoves(king, this.pieces),
+      ]
     }
 
     // Check if the current team moves are valid

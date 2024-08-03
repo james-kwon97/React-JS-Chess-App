@@ -197,6 +197,8 @@ export const getCastlingMoves = (
 
     const enemyPieces = boardState.filter((p) => p.team !== king.team)
 
+    // Checking if any of the enemy pieces can attack the space between
+    // The rook and the king
     let valid = true
 
     for (const enemy of enemyPieces) {
@@ -206,11 +208,15 @@ export const getCastlingMoves = (
         if (concerningTiles.some((t) => t.samePosition(move))) {
           valid = false
         }
+        if (!valid) break
       }
       if (!valid) break
     }
 
-    if (!valid) break
+    if (!valid) continue
+
+    // We now want to add it as a possible move
+    possibleMoves.push(rook.position.clone())
   }
 
   return possibleMoves
