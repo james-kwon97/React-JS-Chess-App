@@ -186,9 +186,30 @@ export const getCastlingMoves = (
     const adjacentPosition = king.position.clone()
     adjacentPosition.x += direction
 
-    // if(!rook.possibleMoves?.some(m => m.samePosition(adjacentPosition)))continue
+    if (!rook.possibleMoves?.some((m) => m.samePosition(adjacentPosition)))
+      continue
 
     // We know that the rook can move to the adjacent side of the king
+
+    const concerningTiles = rook.possibleMoves.filter(
+      (m) => m.y === king.position.y
+    )
+
+    const enemyPieces = boardState.filter((p) => p.team !== king.team)
+
+    let valid = true
+
+    for (const enemy of enemyPieces) {
+      if (
+        enemy.possibleMoves?.some((m) =>
+          concerningTiles.some((t) => t.samePosition(m))
+        )
+      ) {
+        valid = false
+      }
+    }
+
+    if (!valid) continue
   }
 
   return possibleMoves
