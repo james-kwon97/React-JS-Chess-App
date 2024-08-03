@@ -200,16 +200,17 @@ export const getCastlingMoves = (
     let valid = true
 
     for (const enemy of enemyPieces) {
-      if (
-        enemy.possibleMoves?.some((m) =>
-          concerningTiles.some((t) => t.samePosition(m))
-        )
-      ) {
-        valid = false
+      if (enemy.possibleMoves === undefined) continue
+
+      for (const move of enemy.possibleMoves) {
+        if (concerningTiles.some((t) => t.samePosition(move))) {
+          valid = false
+        }
       }
+      if (!valid) break
     }
 
-    if (!valid) continue
+    if (!valid) break
   }
 
   return possibleMoves
