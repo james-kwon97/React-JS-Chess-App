@@ -181,10 +181,14 @@ export const getCastlingMoves = (
   // Loop through the rooks
   for (const rook of rooks) {
     // Determine if we need to go to the right or the left side
-    const direction = king.position.x - rook.position.x > 0 ? 1 : -1
+    const direction = rook.position.x - king.position.x > 0 ? 1 : -1
 
     const adjacentPosition = king.position.clone()
     adjacentPosition.x += direction
+
+    // if(!rook.possibleMoves?.some(m => m.samePosition(adjacentPosition)))continue
+
+    // We know that the rook can move to the adjacent side of the king
   }
 
   return possibleMoves
