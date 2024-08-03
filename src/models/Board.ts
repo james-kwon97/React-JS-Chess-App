@@ -1,3 +1,4 @@
+import { symbolName } from 'typescript'
 import {
   getCastlingMoves,
   getPossibleBishopMoves,
@@ -143,6 +144,19 @@ export class Board {
     destination: Position
   ): boolean {
     const pawnDirection = playedPiece.team === TeamType.OUR ? 1 : -1
+    const destinationPiece = this.pieces.find((p) =>
+      p.samePosition(destination)
+    )
+
+    // If the move is a castling move do this
+    if (
+      playedPiece.isKing &&
+      destinationPiece?.isRook &&
+      destinationPiece.team === playedPiece.team
+    ) {
+      const direction =
+        destinationPiece.position.x - playedPiece.position.x > 0 ? 1 : -1
+    }
 
     if (enPassantMove) {
       this.pieces = this.pieces.reduce((results, piece) => {
