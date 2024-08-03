@@ -168,14 +168,14 @@ export const getPossibleKingMoves = (
 // In this method the enemy moves have already been calculated
 export const getCastlingMoves = (
   king: Piece,
-  boardstate: Piece[]
+  boardState: Piece[]
 ): Position[] => {
   const possibleMoves: Position[] = []
 
   if (king.hasMoved) return possibleMoves
 
   // We get the rooks from the king's team which haven't moved
-  const rooks = boardstate.filter(
+  const rooks = boardState.filter(
     (p) => p.isRook && p.team === king.team && !p.hasMoved
   )
   // Loop through the rooks
