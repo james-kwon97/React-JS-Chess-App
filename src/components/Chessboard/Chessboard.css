@@ -52,4 +52,14 @@
 }
 
 .modal > .modal-body > .checkmate-body > button {
+  background-color: cyan;
+  border: none;
+  border-radius: 7px;
+  padding: 20px 40px;
+  font-size: 30px;
+  color: black;
+}
+
+.modal > .modal-body > .checkmate-body > button:hover {
+  cursor: pointer;
 }
