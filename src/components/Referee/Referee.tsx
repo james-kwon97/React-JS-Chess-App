@@ -18,6 +18,7 @@ export default function Referee() {
   const [board, setBoard] = useState<Board>(initialBoard)
   const [promotionPawn, setPromotionPawn] = useState<Piece>()
   const modalRef = useRef<HTMLDivElement>(null)
+  const checkmateModalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     board.calculateAllMoves()
@@ -106,10 +107,6 @@ export default function Referee() {
   }
 
   // TO DOS
-  // Pawn needs to be promoted
-  // Prevent the king from moving into danger
-  // King castling
-  // Add checks
   // Add checkmate
   // Add stalemate
 
@@ -231,6 +228,7 @@ export default function Referee() {
           />
         </div>
       </div>
+      <div ref={checkmateModalRef}></div>
       <Chessboard playMove={playMove} pieces={board.pieces} />
     </>
   )
