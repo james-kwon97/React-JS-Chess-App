@@ -27,7 +27,6 @@ export default function Referee() {
   function playMove(playedPiece: Piece, destination: Position): boolean {
     // If the playing piece doesn't have any moves return
     if (playedPiece.possibleMoves === undefined) return false
-
     // Prevent the inactive team from playing
     if (playedPiece.team === TeamType.OUR && board.totalTurns % 2 !== 1)
       return false
@@ -228,7 +227,12 @@ export default function Referee() {
           />
         </div>
       </div>
-      <div ref={checkmateModalRef}></div>
+      <div id="checkmate-modal" ref={checkmateModalRef}>
+        <div className="modal-body">
+          <span>The winning team is ...!</span>
+          <button>Play again!</button>
+        </div>
+      </div>
       <Chessboard playMove={playMove} pieces={board.pieces} />
     </>
   )
