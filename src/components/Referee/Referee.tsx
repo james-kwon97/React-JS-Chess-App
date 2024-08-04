@@ -203,7 +203,7 @@ export default function Referee() {
   return (
     <>
       <p style={{ color: 'white', fontSize: '24px' }}>{board.totalTurns}</p>
-      <div id="pawn-promotion-modal" className="hidden" ref={modalRef}>
+      <div className="modal hidden" ref={modalRef}>
         <div className="modal-body">
           <img
             onClick={() => promotePawn(PieceType.ROOK)}
@@ -227,10 +227,12 @@ export default function Referee() {
           />
         </div>
       </div>
-      <div id="checkmate-modal" ref={checkmateModalRef}>
+      <div className="modal" ref={checkmateModalRef}>
         <div className="modal-body">
-          <span>The winning team is ...!</span>
-          <button>Play again!</button>
+          <div className="checkmate-body">
+            <span>The winning team is ...!</span>
+            <button>Play again!</button>
+          </div>
         </div>
       </div>
       <Chessboard playMove={playMove} pieces={board.pieces} />
