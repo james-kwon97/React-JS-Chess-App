@@ -156,6 +156,10 @@ export class Board {
     ) {
       const direction =
         destinationPiece.position.x - playedPiece.position.x > 0 ? 1 : -1
+
+      this.pieces = this.pieces.map((p) => {
+        return p
+      })
     }
 
     if (enPassantMove) {
