@@ -156,8 +156,14 @@ export class Board {
     ) {
       const direction =
         destinationPiece.position.x - playedPiece.position.x > 0 ? 1 : -1
+      const newKingXPosition = playedPiece.position.x + direction * 2
 
       this.pieces = this.pieces.map((p) => {
+        if (p.samePiecePosition(playedPiece)) {
+          p.position.x = newKingXPosition
+        } else if (p.samePiecePosition(destinationPiece)) {
+          p.position.x = newKingXPosition - direction
+        }
         return p
       })
     }
