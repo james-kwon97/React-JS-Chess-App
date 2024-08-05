@@ -57,7 +57,9 @@ export class Board {
     if (
       this.pieces
         .filter((p) => p.team === this.currentTeam)
-        .some((p) => p.possibleMoves)
+        .some(
+          (p) => p.possibleMoves !== undefined && p.possibleMoves.length > 0
+        )
     )
       return
 
