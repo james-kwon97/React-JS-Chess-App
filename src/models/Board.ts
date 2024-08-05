@@ -51,6 +51,18 @@ export class Board {
     )) {
       piece.possibleMoves = []
     }
+
+    // Check if the playing team still has moves left
+    // Otherwise, checkmate
+    if (
+      this.pieces
+        .filter((p) => p.team === this.currentTeam)
+        .some((p) => p.possibleMoves)
+    )
+      return
+
+    this.winningTeam =
+      this.currentTeam === TeamType.OUR ? TeamType.OPPONENT : TeamType.OUR
   }
 
   checkCurrentTeamMoves() {

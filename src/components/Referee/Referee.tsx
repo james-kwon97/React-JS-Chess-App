@@ -198,8 +198,6 @@ export default function Referee() {
     return promotionPawn?.team === TeamType.OUR ? 'white' : 'black'
   }
 
-  // 1 is white team, 2 is black team
-
   return (
     <>
       <p style={{ color: 'white', fontSize: '24px' }}>{board.totalTurns}</p>
