@@ -105,10 +105,6 @@ export default function Referee() {
     return false
   }
 
-  // TO DOS
-  // Add checkmate
-  // Add stalemate
-
   function isValidMove(
     initialPosition: Position,
     desiredPosition: Position,
@@ -205,7 +201,9 @@ export default function Referee() {
 
   return (
     <>
-      <p style={{ color: 'white', fontSize: '24px' }}>{board.totalTurns}</p>
+      <p style={{ color: 'white', fontSize: '24px', textAlign: 'center' }}>
+        Total turns: {board.totalTurns}
+      </p>
       <div className="modal hidden" ref={modalRef}>
         <div className="modal-body">
           <img
